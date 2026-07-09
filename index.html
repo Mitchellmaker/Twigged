@@ -5,7 +5,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Twigged - Voice-First Memory App</title>
-  <meta name="description" content="Twigged is a premium voice-first memory app. Tell Twigged where something is, then ask naturally later.">
+  <meta name="description" content="Twigged is a premium voice-first memory app. Tell Twigged where something is. Ask naturally later.">
   <meta name="theme-color" content="#111214">
 
   <meta property="og:title" content="Twigged - Remember where things are">
@@ -22,8 +22,9 @@
       --text: #F5F5F7;
       --muted: #B6B6BD;
       --accent: #F9B70A;
-      --line: rgba(255, 255, 255, 0.1);
-      --max: 1120px;
+      --line: rgba(255,255,255,0.10);
+      --soft-line: rgba(255,255,255,0.07);
+      --max: 1080px;
       --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
@@ -41,8 +42,9 @@
       background: var(--bg);
       color: var(--text);
       font-family: var(--font);
-      -webkit-font-smoothing: antialiased;
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: geometricPrecision;
     }
 
     body.lightbox-open {
@@ -69,34 +71,15 @@
       border-radius: 10px;
     }
 
-    .skip-link {
-      position: fixed;
-      top: 14px;
-      left: 14px;
-      z-index: 999;
-      padding: 10px 14px;
-      background: var(--accent);
-      color: #111214;
-      border-radius: 999px;
-      font-weight: 700;
-      transform: translateY(-140%);
-    }
-
-    .skip-link:focus {
-      transform: translateY(0);
-    }
-
     .nav {
       position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
+      inset: 0 0 auto 0;
       z-index: 100;
       height: 68px;
-      background: rgba(17, 18, 20, 0.78);
-      border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
+      background: rgba(17,18,20,0.78);
+      border-bottom: 1px solid var(--soft-line);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
 
     .nav-inner {
@@ -109,22 +92,22 @@
     }
 
     .brand {
-      display: flex;
+      display: inline-flex;
       align-items: center;
       gap: 10px;
+      font-size: 17px;
       font-weight: 750;
       letter-spacing: -0.02em;
     }
 
     .brand img {
-      width: 34px;
-      height: 34px;
-      border-radius: 10px;
+      width: 32px;
+      height: 32px;
     }
 
     .nav-links {
       display: flex;
-      gap: 26px;
+      gap: 28px;
       color: var(--muted);
       font-size: 14px;
       font-weight: 650;
@@ -138,81 +121,44 @@
       overflow: hidden;
     }
 
-    .section {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-      padding: 78px 0;
-    }
-
-    .eyebrow {
-      margin: 0 0 14px;
-      color: var(--accent);
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .section-title {
-      margin: 0;
-      max-width: 760px;
-      font-size: clamp(36px, 6vw, 66px);
-      line-height: 0.98;
-      letter-spacing: -0.07em;
-    }
-
-    .section-copy {
-      margin: 18px 0 0;
-      max-width: 590px;
-      color: var(--muted);
-      font-size: clamp(17px, 2vw, 20px);
-      line-height: 1.45;
-      letter-spacing: -0.02em;
-    }
-
     .hero {
       min-height: 100svh;
-      padding: 116px 0 70px;
-      display: flex;
-      align-items: center;
+      padding: 116px 0 74px;
+      display: grid;
+      place-items: center;
       position: relative;
     }
 
-    .hero::before {
+    .hero::after {
       content: "";
       position: absolute;
       left: 50%;
       top: 56%;
-      width: min(520px, 80vw);
-      height: min(520px, 80vw);
-      background: radial-gradient(circle, rgba(249, 183, 10, 0.12), rgba(249, 183, 10, 0) 68%);
+      width: min(520px, 82vw);
+      height: min(520px, 82vw);
       transform: translate(-50%, -50%);
+      background: radial-gradient(circle, rgba(249,183,10,0.13), rgba(249,183,10,0) 68%);
       pointer-events: none;
     }
 
     .hero-inner {
       width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
-      gap: clamp(44px, 8vw, 90px);
-      align-items: center;
       position: relative;
       z-index: 1;
+      text-align: center;
     }
 
     .hero-icon {
-      width: 86px;
-      height: 86px;
-      margin-bottom: 28px;
-      border-radius: 24px;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
+      width: 92px;
+      height: 92px;
+      margin: 0 auto 30px;
     }
 
     h1 {
-      margin: 0;
-      font-size: clamp(54px, 8vw, 100px);
-      line-height: 0.9;
+      margin: 0 auto;
+      max-width: 900px;
+      font-size: clamp(58px, 9vw, 112px);
+      line-height: 0.88;
       letter-spacing: -0.085em;
       font-weight: 850;
     }
@@ -221,21 +167,22 @@
       color: var(--accent);
     }
 
-    .hero-copy p {
-      margin: 28px 0 0;
-      max-width: 470px;
+    .hero-subtitle {
+      margin: 28px auto 0;
+      max-width: 520px;
       color: var(--muted);
-      font-size: clamp(18px, 2.2vw, 23px);
+      font-size: clamp(18px, 2.1vw, 23px);
       line-height: 1.35;
       letter-spacing: -0.025em;
     }
 
     .hero-actions {
-      display: flex;
-      align-items: center;
-      gap: 18px;
-      flex-wrap: wrap;
       margin-top: 34px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
     }
 
     .button {
@@ -252,38 +199,66 @@
     .button-primary {
       background: var(--accent);
       color: #111214;
-      box-shadow: 0 14px 36px rgba(249, 183, 10, 0.18);
+      box-shadow: 0 14px 34px rgba(249,183,10,0.18);
     }
 
-    .button-secondary {
+    .button-link {
       color: var(--text);
-      border-bottom: 1px solid rgba(245, 245, 247, 0.36);
+      border-bottom: 1px solid rgba(245,245,247,0.35);
       border-radius: 0;
-      padding-left: 0;
-      padding-right: 0;
+      padding: 0;
+      min-height: auto;
     }
 
     .hero-phone {
-      position: relative;
-      width: min(360px, 78vw);
-      justify-self: center;
-    }
-
-    .phone {
+      width: min(330px, 78vw);
+      margin: 56px auto 0;
+      border-radius: 42px;
       overflow: hidden;
-      border-radius: 44px;
-      background: #08090B;
-      border: 1px solid rgba(255, 255, 255, 0.14);
-      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.48);
+      background: #090A0C;
+      border: 1px solid rgba(255,255,255,0.14);
+      box-shadow: 0 34px 90px rgba(0,0,0,0.46);
     }
 
-    .phone img {
-      width: 100%;
-      height: auto;
+    .section {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+      padding: 82px 0;
     }
 
-        .how {
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    .section-small {
+      padding: 68px 0;
+    }
+
+    .section-label {
+      margin: 0 0 14px;
+      color: var(--accent);
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .section-title {
+      margin: 0;
+      max-width: 720px;
+      font-size: clamp(38px, 6vw, 66px);
+      line-height: 0.98;
+      letter-spacing: -0.07em;
+      font-weight: 850;
+    }
+
+    .section-copy {
+      margin: 18px 0 0;
+      max-width: 560px;
+      color: var(--muted);
+      font-size: clamp(17px, 2vw, 20px);
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+    }
+
+    .how {
+      border-top: 1px solid var(--soft-line);
     }
 
     .steps {
@@ -295,374 +270,95 @@
 
     .step {
       padding: 26px;
-      border-radius: 26px;
-      background: rgba(29, 31, 35, 0.72);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: 28px;
+      background: rgba(29,31,35,0.72);
+      border: 1px solid rgba(255,255,255,0.08);
     }
 
     .step h3 {
       margin: 0;
-      font-size: clamp(36px, 5vw, 56px);
-      line-height: 0.95;
-      letter-spacing: -0.07em;
+      font-size: clamp(40px, 5vw, 58px);
+      line-height: 0.94;
+      letter-spacing: -0.075em;
     }
 
     .step p {
-      margin: 16px 0 0;
+      margin: 14px 0 0;
       color: var(--muted);
       font-size: 17px;
       letter-spacing: -0.02em;
     }
 
-    .screenshots {
-      padding: 78px 0;
+    .screens {
+      padding: 80px 0 88px;
     }
 
-    .screenshots-header {
+    .screens-head {
       width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto 34px;
+      margin: 0 auto 36px;
     }
 
-    .screenshot-rail {
+    .rail {
       display: flex;
-      gap: 22px;
+      gap: 20px;
       overflow-x: auto;
-      padding: 8px max(20px, calc((100vw - var(--max)) / 2)) 34px;
+      padding: 4px max(20px, calc((100vw - var(--max)) / 2)) 34px;
       scroll-snap-type: x proximity;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(249, 183, 10, 0.45) rgba(255, 255, 255, 0.06);
+      scrollbar-width: none;
     }
 
-    .screenshot-rail::-webkit-scrollbar {
-      height: 10px;
-    }
-
-    .screenshot-rail::-webkit-scrollbar-track {
-      background: rgba(255, 255, 255, 0.06);
-      border-radius: 999px;
-    }
-
-    .screenshot-rail::-webkit-scrollbar-thumb {
-      background: rgba(249, 183, 10, 0.42);
-      border-radius: 999px;
+    .rail::-webkit-scrollbar {
+      display: none;
     }
 
     .shot {
-      flex: 0 0 min(245px, 68vw);
+      flex: 0 0 220px;
       margin: 0;
       scroll-snap-align: start;
     }
 
     .shot button {
-      display: block;
       width: 100%;
       padding: 0;
-      margin: 0;
       border: 0;
       background: transparent;
       color: inherit;
-      text-align: left;
       cursor: zoom-in;
+      text-align: left;
     }
 
-    .shot-frame {
+    .shot-img {
+      display: block;
       overflow: hidden;
-      border-radius: 34px;
-      background: #08090B;
-      border: 1px solid rgba(255, 255, 255, 0.13);
-      box-shadow: 0 24px 65px rgba(0, 0, 0, 0.34);
-      transition: transform 200ms ease, border-color 200ms ease;
+      border-radius: 32px;
+      background: #090A0C;
+      border: 1px solid rgba(255,255,255,0.13);
+      box-shadow: 0 24px 58px rgba(0,0,0,0.30);
+      transition: transform 180ms ease, border-color 180ms ease;
     }
 
-    .shot button:hover .shot-frame {
-      transform: translateY(-4px);
-      border-color: rgba(249, 183, 10, 0.24);
-    }
-
-    .shot img {
-      width: 100%;
-      height: auto;
+    .shot button:hover .shot-img {
+      transform: translateY(-3px);
+      border-color: rgba(249,183,10,0.24);
     }
 
     .caption {
-      margin-top: 13px;
-      color: rgba(182, 182, 189, 0.72);
-      font-size: 13px;
+      margin-top: 12px;
+      color: rgba(182,182,189,0.72);
+      font-size: 12px;
       font-weight: 750;
-      letter-spacing: 0.04em;
+      letter-spacing: 0.05em;
       text-transform: uppercase;
     }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 14px;
-      margin-top: 34px;
-    }
-
-    .feature {
-      min-height: 142px;
-      padding: 22px;
-      border-radius: 24px;
-      background: rgba(29, 31, 35, 0.68);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-    }
-
-    .feature h3 {
-      margin: 0;
-      font-size: 18px;
-      line-height: 1.1;
-      letter-spacing: -0.035em;
-    }
-
-    .feature p {
-      margin: 12px 0 0;
-      color: var(--muted);
-      font-size: 14px;
-      line-height: 1.45;
-    }
-
-    .privacy-panel {
-      padding: clamp(32px, 6vw, 56px);
-      border-radius: 34px;
-      background: var(--panel);
-      border: 1px solid rgba(255, 255, 255, 0.09);
-      box-shadow: 0 26px 80px rgba(0, 0, 0, 0.22);
-    }
-
-    .privacy-list {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      gap: 10px;
-      margin: 32px 0 0;
-      padding: 0;
-      list-style: none;
-    }
-
-    .privacy-list li {
-      padding: 14px 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.055);
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 750;
-      text-align: center;
-    }
-
-    .tech-list {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 32px;
-    }
-
-    .tech-list span {
-      display: inline-flex;
-      align-items: center;
-      min-height: 40px;
-      padding: 0 16px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.055);
-      border: 1px solid rgba(255, 255, 255, 0.075);
-      color: var(--muted);
-      font-size: 14px;
-      font-weight: 700;
-    }
-
-    .faq {
-      display: grid;
-      gap: 12px;
-      margin-top: 32px;
-    }
-
-    details {
-      border-radius: 22px;
-      background: rgba(29, 31, 35, 0.68);
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      overflow: hidden;
-    }
-
-    summary {
-      cursor: pointer;
-      padding: 20px 22px;
-      color: var(--text);
-      font-weight: 750;
-      letter-spacing: -0.02em;
-      list-style: none;
-    }
-
-    summary::-webkit-details-marker {
-      display: none;
-    }
-
-    summary::after {
-      content: "+";
-      float: right;
-      color: var(--accent);
-      font-weight: 850;
-    }
-
-    details[open] summary::after {
-      content: "−";
-    }
-
-    details p {
-      margin: 0;
-      padding: 0 22px 22px;
-      max-width: 760px;
-      color: var(--muted);
-    }
-
-        .support {
-      text-align: center;
-    }
-
-    .support .section-title,
-    .support .section-copy {
-      margin-left: auto;
-      margin-right: auto;
-    }
-
-    .support-links {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 28px;
-    }
-
-    .support-links a {
-      min-height: 42px;
-      padding: 10px 18px;
-      border-radius: 999px;
-      background: rgba(255, 255, 255, 0.055);
-      border: 1px solid rgba(255, 255, 255, 0.085);
-      font-size: 14px;
-      font-weight: 750;
-    }
-
-    .closing-line {
-      margin: 44px 0 0;
-      color: var(--accent);
-      font-size: clamp(30px, 4vw, 48px);
-      line-height: 1;
-      letter-spacing: -0.065em;
-      font-weight: 850;
-    }
-
-    .footer {
-      padding: 28px 0;
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
-      color: rgba(182, 182, 189, 0.72);
-      font-size: 13px;
-      font-weight: 650;
-    }
-
-    .footer-inner {
-      width: min(var(--max), calc(100% - 40px));
-      margin: 0 auto;
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 18px;
-    }
-
-    .footer-links {
-      display: flex;
-      gap: 18px;
-      flex-wrap: wrap;
-    }
-
-    .footer a:hover {
-      color: var(--text);
-    }
-
-    .lightbox {
-      position: fixed;
-      inset: 0;
-      z-index: 500;
-      display: none;
-      align-items: center;
-      justify-content: center;
-      padding: 24px;
-      background: rgba(0, 0, 0, 0.76);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-    }
-
-    .lightbox[aria-hidden="false"] {
-      display: flex;
-    }
-
-    .lightbox-panel {
-      position: relative;
-      width: min(420px, 88vw);
-      max-height: 90svh;
-    }
-
-    .lightbox-frame {
-      overflow: hidden;
-      border-radius: 42px;
-      background: #08090B;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      box-shadow: 0 40px 110px rgba(0, 0, 0, 0.62);
-    }
-
-    .lightbox img {
-      width: 100%;
-      height: auto;
-      max-height: 86svh;
-      object-fit: contain;
-    }
-
-    .lightbox-close {
-      position: absolute;
-      top: -14px;
-      right: -14px;
-      width: 44px;
-      height: 44px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      border-radius: 999px;
-      background: rgba(29, 31, 35, 0.94);
-      color: var(--text);
-      cursor: pointer;
-      font-size: 24px;
-      line-height: 1;
-      box-shadow: 0 12px 34px rgba(0, 0, 0, 0.34);
-    }
-
-    @media (max-width: 980px) {
-      .hero-inner {
-        grid-template-columns: 1fr;
-        text-align: center;
-      }
-
-      .hero-icon,
-      .hero-copy p {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero-actions {
-        justify-content: center;
-      }
-
-      .steps,
-      .features,
-      .privacy-list {
-        grid-template-columns: 1fr;
-      }
-    }
-
-    @media (max-width: 720px) {
+    @media (max-width: 760px) {
       .nav {
         height: 64px;
       }
 
       .nav-inner,
       .section,
-      .screenshots-header,
-      .footer-inner {
+      .screens-head {
         width: min(100% - 28px, var(--max));
       }
 
@@ -672,31 +368,41 @@
 
       .hero {
         min-height: auto;
-        padding: 104px 0 56px;
+        padding: 104px 0 58px;
       }
 
       h1 {
-        font-size: clamp(50px, 15vw, 76px);
+        font-size: clamp(52px, 15vw, 78px);
+      }
+
+      .hero-icon {
+        width: 82px;
+        height: 82px;
+      }
+
+      .hero-phone {
+        width: min(300px, 82vw);
+        margin-top: 44px;
       }
 
       .section,
-      .screenshots {
+      .section-small,
+      .screens {
         padding: 58px 0;
       }
 
-      .shot {
-        flex-basis: min(230px, 72vw);
+      .steps {
+        grid-template-columns: 1fr;
       }
 
-      .screenshot-rail {
+      .shot {
+        flex-basis: 205px;
+      }
+
+      .rail {
         gap: 16px;
         padding-left: 14px;
         padding-right: 14px;
-      }
-
-      .footer-inner {
-        align-items: flex-start;
-        flex-direction: column;
       }
     }
 
@@ -715,12 +421,10 @@
 </head>
 
 <body>
-  <a class="skip-link" href="#main">Skip to content</a>
-
   <header class="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a class="brand" href="#" aria-label="Twigged home">
-        <img src="assets/icon.png" alt="" width="34" height="34">
+        <img src="assets/icon.png" alt="" width="32" height="32">
         <span>Twigged</span>
       </a>
 
@@ -733,39 +437,38 @@
     </div>
   </header>
 
-  <main id="main">
+  <main>
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-inner">
-        <div class="hero-copy">
-          <img class="hero-icon" src="assets/icon.png" alt="Twigged app icon" width="86" height="86">
+        <img class="hero-icon" src="assets/icon.png" alt="Twigged app icon" width="92" height="92">
 
-          <h1 id="hero-title">
-            Remember where<br>
-            the things that<br>
-            <span>matter</span> are.
-          </h1>
+        <h1 id="hero-title">
+          Remember where<br>
+          the things that<br>
+          <span>matter</span> are.
+        </h1>
 
-          <p>Tell Twigged where something is. Ask naturally later.</p>
+        <p class="hero-subtitle">
+          Tell Twigged where something is. Ask naturally later.
+        </p>
 
-          <div class="hero-actions">
-            <a class="button button-primary" href="#support">Coming Soon</a>
-            <a class="button button-secondary" href="#screenshots">See it in action</a>
-          </div>
+        <div class="hero-actions">
+          <a class="button button-primary" href="#support">Coming Soon</a>
+          <a class="button button-link" href="#screenshots">See it in action</a>
         </div>
 
         <div class="hero-phone">
-          <div class="phone">
-            <img src="assets/1.png" alt="Twigged home screen showing the main voice memory interface" width="900" height="1800">
-          </div>
+          <img src="assets/1.png" alt="Twigged home screen showing the main voice memory interface" width="900" height="1800">
         </div>
       </div>
     </section>
-    <section class="section how" id="how" aria-labelledby="how-title">
-      <p class="eyebrow">How it works</p>
-      <h2 class="section-title" id="how-title">Tell. Ask. Find.</h2>
-      <p class="section-copy">A calm way to remember where the everyday things are.</p>
 
-      <div class="steps" aria-label="Three simple steps">
+    <section class="section section-small how" id="how" aria-labelledby="how-title">
+      <p class="section-label">How it works</p>
+      <h2 class="section-title" id="how-title">Tell. Ask. Find.</h2>
+      <p class="section-copy">Three simple moments. No system to learn.</p>
+
+      <div class="steps">
         <article class="step">
           <h3>Tell.</h3>
           <p>Tell Twigged where something is.</p>
@@ -783,55 +486,158 @@
       </div>
     </section>
 
-    <section class="screenshots" id="screenshots" aria-labelledby="screenshots-title">
-      <div class="screenshots-header">
-        <p class="eyebrow">Screenshots</p>
-        <h2 class="section-title" id="screenshots-title">See Twigged in action.</h2>
+    <section class="screens" id="screenshots" aria-labelledby="screens-title">
+      <div class="screens-head">
+        <p class="section-label">Screenshots</p>
+        <h2 class="section-title" id="screens-title">See Twigged in action.</h2>
         <p class="section-copy">Ten simple moments. One calm way to remember.</p>
       </div>
 
-      <div class="screenshot-rail" aria-label="Twigged screenshot gallery">
+      <div class="rail" aria-label="Twigged screenshot gallery">
         <figure class="shot">
           <button type="button" data-full="assets/1.png" data-alt="Twigged home screen">
-            <span class="shot-frame">
-              <img src="assets/1.png" alt="Twigged home screen" width="900" height="1800">
-            </span>
+            <span class="shot-img"><img src="assets/1.png" alt="Twigged home screen" width="900" height="1800"></span>
             <figcaption class="caption">01 Home</figcaption>
           </button>
         </figure>
 
         <figure class="shot">
           <button type="button" data-full="assets/2.png" data-alt="Twigged listening screen">
-            <span class="shot-frame">
-              <img src="assets/2.png" alt="Twigged listening screen" width="900" height="1800" loading="lazy">
-            </span>
+            <span class="shot-img"><img src="assets/2.png" alt="Twigged listening screen" width="900" height="1800" loading="lazy"></span>
             <figcaption class="caption">02 Listening</figcaption>
           </button>
         </figure>
 
         <figure class="shot">
           <button type="button" data-full="assets/3.png" data-alt="Twigged saved confirmation screen">
-            <span class="shot-frame">
-              <img src="assets/3.png" alt="Twigged saved confirmation screen" width="900" height="1800" loading="lazy">
-            </span>
+            <span class="shot-img"><img src="assets/3.png" alt="Twigged saved confirmation screen" width="900" height="1800" loading="lazy"></span>
             <figcaption class="caption">03 Saved</figcaption>
           </button>
         </figure>
 
         <figure class="shot">
           <button type="button" data-full="assets/4.png" data-alt="Twigged ask screen">
-            <span class="shot-frame">
-              <img src="assets/4.png" alt="Twigged ask screen" width="900" height="1800" loading="lazy">
-            </span>
+            <span class="shot-img"><img src="assets/4.png" alt="Twigged ask screen" width="900" height="1800" loading="lazy"></span>
             <figcaption class="caption">04 Ask</figcaption>
           </button>
         </figure>
 
         <figure class="shot">
           <button type="button" data-full="assets/5.png" data-alt="Twigged answer screen">
-            <span class="shot-frame">
-              <img src="assets/5.png" alt="Twigged answer screen" width="900" height="1800" loading="lazy">
-            </span>
+            <span class="shot-img"><img src="assets/5.png" alt="Twigged answer screen" width="900" height="1800" loading="lazy"></span>
             <figcaption class="caption">05 Answer</figcaption>
           </button>
-        </figure>    
+        </figure>
+
+                <figure class="shot">
+          <button type="button" data-full="assets/6.png" data-alt="Twigged saved items screen">
+            <span class="shot-img"><img src="assets/6.png" alt="Twigged saved items screen" width="900" height="1800" loading="lazy"></span>
+            <figcaption class="caption">06 Saved Items</figcaption>
+          </button>
+        </figure>
+
+        <figure class="shot">
+          <button type="button" data-full="assets/7.png" data-alt="Twigged review screen">
+            <span class="shot-img"><img src="assets/7.png" alt="Twigged review screen" width="900" height="1800" loading="lazy"></span>
+            <figcaption class="caption">07 Review</figcaption>
+          </button>
+        </figure>
+
+        <figure class="shot">
+          <button type="button" data-full="assets/8.png" data-alt="Twigged edit screen">
+            <span class="shot-img"><img src="assets/8.png" alt="Twigged edit screen" width="900" height="1800" loading="lazy"></span>
+            <figcaption class="caption">08 Edit</figcaption>
+          </button>
+        </figure>
+
+        <figure class="shot">
+          <button type="button" data-full="assets/9.png" data-alt="Twigged manage screen">
+            <span class="shot-img"><img src="assets/9.png" alt="Twigged manage screen" width="900" height="1800" loading="lazy"></span>
+            <figcaption class="caption">09 Manage</figcaption>
+          </button>
+        </figure>
+
+        <figure class="shot">
+          <button type="button" data-full="assets/10.png" data-alt="Twigged done screen">
+            <span class="shot-img"><img src="assets/10.png" alt="Twigged done screen" width="900" height="1800" loading="lazy"></span>
+            <figcaption class="caption">10 Done</figcaption>
+          </button>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section section-small" id="privacy" aria-labelledby="privacy-title">
+      <p class="section-label">Privacy</p>
+      <h2 class="section-title" id="privacy-title">Your memories belong to you.</h2>
+      <p class="section-copy">
+        No accounts. No advertising. No subscriptions. Everything stays on your device.
+        Twigged works offline after information has been saved.
+      </p>
+    </section>
+
+    <section class="section section-small" id="support" aria-labelledby="support-title">
+      <p class="section-label">Support</p>
+      <h2 class="section-title" id="support-title">Remember once. Find it later.</h2>
+      <p class="section-copy">
+        Need help or want to ask a question? Email
+        <a href="mailto:mitchellmaker.apps@gmail.com">mitchellmaker.apps@gmail.com</a>.
+      </p>
+      <p class="section-copy">
+        <a href="privacy.html">Privacy Policy</a>
+      </p>
+    </section>
+  </main>
+
+  <footer style="width:min(1080px,calc(100% - 40px));margin:0 auto;padding:28px 0 34px;border-top:1px solid rgba(255,255,255,0.07);color:rgba(182,182,189,0.72);font-size:13px;">
+    © 2026 Twigged. All rights reserved.
+  </footer>
+
+  <div class="lightbox" id="lightbox" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Screenshot preview" style="position:fixed;inset:0;z-index:500;display:none;place-items:center;padding:24px;background:rgba(0,0,0,0.76);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);">
+    <button type="button" id="closeLightbox" aria-label="Close preview" style="position:absolute;top:22px;right:22px;width:44px;height:44px;border:1px solid rgba(255,255,255,0.16);border-radius:999px;background:#1D1F23;color:#F5F5F7;font-size:26px;cursor:pointer;">×</button>
+    <img id="lightboxImage" src="" alt="" style="width:min(390px,88vw);max-height:88svh;border-radius:42px;background:#090A0C;box-shadow:0 40px 110px rgba(0,0,0,0.62);">
+  </div>
+
+  <script>
+    (() => {
+      const lightbox = document.getElementById('lightbox');
+      const lightboxImage = document.getElementById('lightboxImage');
+      const closeButton = document.getElementById('closeLightbox');
+      let lastButton = null;
+
+      function openLightbox(button) {
+        lastButton = button;
+        lightboxImage.src = button.dataset.full;
+        lightboxImage.alt = button.dataset.alt || '';
+        lightbox.style.display = 'grid';
+        lightbox.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('lightbox-open');
+        closeButton.focus();
+      }
+
+      function closeLightbox() {
+        lightbox.style.display = 'none';
+        lightbox.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('lightbox-open');
+        lightboxImage.src = '';
+        if (lastButton) lastButton.focus();
+      }
+
+      document.querySelectorAll('.shot button').forEach(button => {
+        button.addEventListener('click', () => openLightbox(button));
+      });
+
+      closeButton.addEventListener('click', closeLightbox);
+
+      lightbox.addEventListener('click', event => {
+        if (event.target === lightbox) closeLightbox();
+      });
+
+      document.addEventListener('keydown', event => {
+        if (event.key === 'Escape' && lightbox.getAttribute('aria-hidden') === 'false') {
+          closeLightbox();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>

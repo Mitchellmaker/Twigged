@@ -3,33 +3,18 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-  <title>Twigged - Remember Where Things Are</title>
-  <meta name="description" content="Twigged is a calm voice-first memory app. Tell Twigged where something is. Ask naturally later." />
-  <meta name="theme-color" content="#111214" />
-
-  <meta property="og:title" content="Twigged" />
-  <meta property="og:description" content="Remember where the things that matter are." />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/icon.png" />
-
-  <link rel="icon" href="assets/icon.png" />
-
-  <!-- =========================
-  SECTION 1 - FOUNDATION + HERO
-  ========================= -->
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Twigged</title>
 
   <style>
     :root {
       --bg: #111214;
-      --text: #f5f5f7;
-      --muted: #aaa49b;
-      --quiet: #746f68;
-      --yellow: #f9b70a;
-      --line: rgba(255, 255, 255, .09);
-      --max: 1120px;
-      --ease: cubic-bezier(.2, .8, .2, 1);
+      --text: #F5F5F7;
+      --muted: #A7A29A;
+      --soft: #D8D2C8;
+      --yellow: #F9B70A;
+      --line: rgba(245,245,247,0.10);
+      --glass: rgba(255,255,255,0.045);
     }
 
     * {
@@ -37,29 +22,16 @@
     }
 
     html {
-      scroll-behavior: smooth;
-      background: var(--bg);
+      scroll-behaviour: smooth;
     }
 
     body {
       margin: 0;
-      background:
-        radial-gradient(circle at 70% 18%, rgba(249, 183, 10, .07), transparent 28rem),
-        var(--bg);
+      background: var(--bg);
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Helvetica Neue", Arial, sans-serif;
       -webkit-font-smoothing: antialiased;
-      overflow-x: hidden;
-    }
-
-    body.no-scroll {
-      overflow: hidden;
-    }
-
-    img {
-      display: block;
-      max-width: 100%;
-      height: auto;
+      text-rendering: optimizeLegibility;
     }
 
     a {
@@ -67,807 +39,565 @@
       text-decoration: none;
     }
 
-    button {
-      font: inherit;
+    img {
+      max-width: 100%;
+      display: block;
     }
 
-    .section {
-      width: min(calc(100% - 40px), var(--max));
-      margin-inline: auto;
+    .page {
+      overflow: hidden;
     }
 
-    .nav {
+    .nav-wrap {
       position: fixed;
-      top: 18px;
-      left: 50%;
-      z-index: 50;
-      width: min(calc(100% - 32px), var(--max));
-      height: 50px;
-      transform: translateX(-50%);
+      top: 22px;
+      left: 0;
+      right: 0;
+      z-index: 20;
+      display: flex;
+      justify-content: center;
+      pointer-events: none;
+    }
+
+    nav {
+      pointer-events: auto;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 16px;
-      border: 1px solid rgba(255,255,255,.09);
+      width: min(720px, calc(100% - 32px));
+      padding: 9px 14px;
+      border: 1px solid var(--line);
       border-radius: 999px;
-      background: rgba(17,18,20,.72);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
+      background: rgba(17,18,20,0.72);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
     }
 
     .brand {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 10px;
-      font-size: 15px;
-      font-weight: 650;
-      letter-spacing: -.02em;
+      gap: 9px;
+      font-size: 14px;
+      letter-spacing: -0.01em;
     }
 
     .brand img {
-      width: 28px;
-      height: 28px;
-      object-fit: contain;
+      width: 25px;
+      height: 25px;
     }
 
     .nav-links {
       display: flex;
-      gap: 24px;
-      color: var(--muted);
+      align-items: center;
+      gap: 20px;
       font-size: 13px;
-      font-weight: 550;
-    }
-
-    .nav-links a {
-      transition: color 220ms var(--ease);
+      color: rgba(245,245,247,0.72);
     }
 
     .nav-links a:hover {
       color: var(--text);
     }
 
+    section {
+      position: relative;
+    }
+
+    .tiny-label {
+      color: var(--yellow);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 20px;
+      border-radius: 999px;
+      font-size: 15px;
+      font-weight: 500;
+      letter-spacing: -0.01em;
+      border: 1px solid rgba(245,245,247,0.14);
+      background: rgba(245,245,247,0.08);
+      color: var(--text);
+    }
+
+    .btn.primary {
+      background: var(--text);
+      color: var(--bg);
+      border-color: var(--text);
+    }
+
+    .btn:hover {
+      transform: translateY(-1px);
+    }
+
+    /* =========================
+       SECTION 1 - HERO
+    ========================= */
+
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
       align-items: center;
-      gap: clamp(50px, 8vw, 110px);
-      padding-top: 116px;
-      padding-bottom: 90px;
+      padding: 150px 7vw 90px;
+    }
+
+    .hero-inner {
+      width: min(1180px, 100%);
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 1fr 0.82fr;
+      gap: 80px;
+      align-items: center;
     }
 
     .hero-copy {
-      max-width: 690px;
-    }
-
-    .hero-icon {
-      width: 64px;
-      margin-bottom: 42px;
-      filter: drop-shadow(0 18px 34px rgba(0,0,0,.28));
-    }
-
-    .eyebrow {
-      margin: 0 0 22px;
-      color: var(--muted);
-      font-size: 16px;
-      line-height: 1.4;
-      letter-spacing: -.02em;
+      max-width: 640px;
     }
 
     h1 {
       margin: 0;
-      max-width: 700px;
-      font-size: clamp(52px, 7.2vw, 92px);
-      line-height: .96;
-      letter-spacing: -.064em;
-      font-weight: 720;
+      font-size: clamp(58px, 8vw, 116px);
+      line-height: 0.94;
+      letter-spacing: -0.07em;
+      font-weight: 700;
     }
 
-    .accent {
+    h1 span {
       color: var(--yellow);
     }
 
-    .hero-subtitle {
-      max-width: 470px;
-      margin: 34px 0 0;
-      color: var(--muted);
-      font-size: clamp(19px, 2vw, 24px);
-      line-height: 1.38;
-      letter-spacing: -.034em;
+    .hero-copy p {
+      margin: 34px 0 32px;
+      max-width: 440px;
+      font-size: clamp(20px, 2vw, 28px);
+      line-height: 1.25;
+      letter-spacing: -0.035em;
+      color: var(--soft);
     }
 
-    .hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-      margin-top: 40px;
-    }
-
-    .button {
-      display: inline-flex;
-      min-height: 44px;
-      align-items: center;
-      justify-content: center;
-      padding: 0 21px;
-      border: 1px solid rgba(255,255,255,.12);
-      border-radius: 999px;
-      background: rgba(255,255,255,.055);
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 650;
-      letter-spacing: -.01em;
-      transition:
-        transform 220ms var(--ease),
-        background 220ms var(--ease);
-    }
-
-    .button:hover {
-      transform: translateY(-1px);
-      background: rgba(255,255,255,.085);
-    }
-
-    .button.primary {
-      background: var(--yellow);
-      border-color: var(--yellow);
-      color: #151006;
-    }
-
-    .hero-visual {
+    .hero-phone {
       position: relative;
       display: flex;
       justify-content: center;
       align-items: center;
     }
 
-    .hero-visual::before {
+    .hero-phone::before {
       content: "";
       position: absolute;
-      width: 360px;
-      height: 360px;
+      width: 380px;
+      height: 380px;
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(249,183,10,.13), transparent 68%);
-      filter: blur(18px);
+      background: rgba(249,183,10,0.12);
+      filter: blur(75px);
+      z-index: 0;
     }
 
-    .hero-shot {
+    .phone {
       position: relative;
-      width: min(100%, 330px);
+      z-index: 1;
+      width: min(390px, 78vw);
+      border-radius: 46px;
+    }
+
+    /* =========================
+       SECTION 2 - SCREENSHOTS
+    ========================= */
+
+    .screenshots {
+      padding: 80px 0 130px;
+    }
+
+    .screenshots .tiny-label {
+      width: min(1180px, calc(100% - 44px));
+      margin: 0 auto 28px;
+    }
+
+    .shot-row {
+      display: flex;
+      gap: 28px;
+      overflow-x: auto;
+      padding: 0 7vw 30px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+    }
+
+    .shot-row::-webkit-scrollbar {
+      display: none;
+    }
+
+    .shot-row img {
+      flex: 0 0 auto;
+      width: clamp(245px, 22vw, 360px);
+      border-radius: 38px;
+      scroll-snap-align: center;
+    }
+
+    /* =========================
+       SECTION 3 - EXPERIENCE
+    ========================= */
+
+    .experience {
+      padding: 50px 7vw 120px;
+    }
+
+    .moment {
+      width: min(1040px, 100%);
+      min-height: 76vh;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: 0.82fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+
+    .moment.reverse {
+      grid-template-columns: 1fr 0.82fr;
+    }
+
+    .moment-copy {
+      max-width: 460px;
+    }
+
+    .moment-copy h2 {
+      margin: 0 0 18px;
+      font-size: clamp(54px, 7vw, 96px);
+      line-height: 0.95;
+      letter-spacing: -0.065em;
+      font-weight: 700;
+    }
+
+    .moment-copy p {
+      margin: 0;
+      font-size: clamp(22px, 2.1vw, 32px);
+      line-height: 1.18;
+      letter-spacing: -0.04em;
+      color: var(--soft);
+    }
+
+    .moment-phone {
+      display: flex;
+      justify-content: center;
+    }
+
+    .moment-phone img {
+      width: min(330px, 74vw);
       border-radius: 42px;
-      overflow: hidden;
-      background: #0f1012;
-      box-shadow:
-        0 34px 100px rgba(0,0,0,.46),
-        0 0 0 1px rgba(255,255,255,.08);
+    }
+
+    /* =========================
+       SECTION 4 - PRIVACY
+    ========================= */
+
+    .privacy {
+      padding: 120px 7vw 150px;
+    }
+
+    .privacy-inner {
+      width: min(880px, 100%);
+      margin: 0 auto;
+    }
+
+    .privacy h2 {
+      margin: 18px 0 24px;
+      font-size: clamp(56px, 8vw, 112px);
+      line-height: 0.95;
+      letter-spacing: -0.07em;
+    }
+
+    .privacy .lead {
+      margin: 0 0 48px;
+      font-size: clamp(24px, 3vw, 42px);
+      line-height: 1.12;
+      letter-spacing: -0.045em;
+      color: var(--soft);
+    }
+
+    .privacy-list {
+      display: grid;
+      gap: 18px;
+      font-size: clamp(22px, 2.5vw, 34px);
+      line-height: 1.1;
+      letter-spacing: -0.045em;
+      color: var(--text);
+    }
+
+    .privacy-list div {
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    /* =========================
+       SECTION 5 - SUPPORT
+    ========================= */
+
+    .support {
+      padding: 90px 7vw 110px;
+    }
+
+    .support-inner {
+      width: min(760px, 100%);
+      margin: 0 auto;
+      text-align: center;
+      padding: 54px 28px;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background: rgba(255,255,255,0.025);
+    }
+
+    .support h2 {
+      margin: 0 0 16px;
+      font-size: clamp(42px, 6vw, 76px);
+      line-height: 1;
+      letter-spacing: -0.06em;
+    }
+
+    .support p {
+      margin: 0 auto 30px;
+      max-width: 460px;
+      color: var(--muted);
+      font-size: 19px;
+      line-height: 1.45;
+      letter-spacing: -0.02em;
+    }
+
+    .support .button-row {
+      justify-content: center;
+    }
+
+    footer {
+      padding: 0 7vw 38px;
+      text-align: center;
+      color: rgba(245,245,247,0.38);
+      font-size: 13px;
     }
 
     @media (max-width: 860px) {
       .nav-links {
+        gap: 13px;
+        font-size: 12px;
+      }
+
+      .hero-inner,
+      .moment,
+      .moment.reverse {
+        grid-template-columns: 1fr;
+        gap: 54px;
+      }
+
+      .hero {
+        padding-top: 130px;
+        text-align: left;
+      }
+
+      .hero-phone {
+        order: -1;
+      }
+
+      .hero-copy p {
+        max-width: 360px;
+      }
+
+      .moment {
+        min-height: auto;
+        padding: 80px 0;
+      }
+
+      .moment.reverse .moment-phone {
+        order: -1;
+      }
+
+      .shot-row img {
+        width: 270px;
+      }
+    }
+
+    @media (max-width: 520px) {
+      nav {
+        padding: 8px 11px;
+      }
+
+      .brand span {
         display: none;
       }
 
-      .hero {
-        min-height: auto;
-        grid-template-columns: 1fr;
-        gap: 58px;
-      }
-
-      .hero-shot {
-        width: min(78vw, 320px);
-      }
-    }
-
-    @media (max-width: 560px) {
-      .section {
-        width: min(calc(100% - 28px), var(--max));
-      }
-
-      .nav {
-        top: 12px;
-        width: calc(100% - 24px);
-      }
-
-      .hero {
-        padding-top: 110px;
-      }
-
-      .hero-icon {
-        width: 58px;
-        margin-bottom: 34px;
+      .nav-links {
+        gap: 12px;
       }
 
       h1 {
-        font-size: clamp(48px, 14vw, 68px);
+        font-size: 58px;
       }
 
-      .hero-actions {
-        flex-direction: column;
-        align-items: stretch;
-        max-width: 260px;
+      .hero {
+        padding-left: 24px;
+        padding-right: 24px;
       }
 
-      .hero-shot {
-        border-radius: 36px;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      html {
-        scroll-behavior: auto;
+      .btn {
+        width: 100%;
       }
 
-      *,
-      *::before,
-      *::after {
-        transition-duration: 1ms !important;
-        animation-duration: 1ms !important;
+      .button-row {
+        width: 100%;
+      }
+
+      .support-inner {
+        border-radius: 28px;
       }
     }
   </style>
 </head>
 
 <body>
-  <header class="nav">
-    <a class="brand" href="#" aria-label="Twigged home">
-      <img src="assets/icon.png" alt="" />
-      <span>Twigged</span>
-    </a>
-
-    <nav class="nav-links" aria-label="Main navigation">
-      <a href="#screenshots">Screenshots</a>
-      <a href="#experience">How it Works</a>
-      <a href="#privacy">Privacy</a>
-      <a href="#support">Support</a>
-    </nav>
-  </header>
-
-  <main>
-    <section class="section hero" aria-label="Twigged introduction">
-      <div class="hero-copy">
-        <img class="hero-icon" src="assets/icon.png" alt="" />
-
-        <p class="eyebrow">A quiet way to remember everyday things.</p>
-
-        <h1>
-          Remember where<br />
-          the things that<br />
-          <span class="accent">matter</span> are.
-        </h1>
-
-        <p class="hero-subtitle">
-          Tell Twigged where something is. Ask naturally later.
-        </p>
-
-        <div class="hero-actions">
-          <a class="button primary" href="#support">Coming Soon</a>
-          <a class="button" href="#screenshots">See it in action</a>
-        </div>
-      </div>
-
-      <div class="hero-visual" aria-hidden="true">
-        <div class="hero-shot">
-          <img src="assets/1.png" alt="" />
-        </div>
-      </div>
-    </section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- =========================
-    SECTION 2 - SCREENSHOTS + EXPERIENCE + PRIVACY
-    ========================= -->
-
-    <section class="screenshots" id="screenshots" aria-label="Twigged screenshots">
-      <div class="section">
-        <p class="kicker">Screenshots</p>
-      </div>
-
-      <div class="rail-wrap">
-        <div class="rail">
-          <button class="shot" type="button" data-src="assets/1.png" data-alt="Twigged home screen">
-            <img src="assets/1.png" alt="Twigged home screen" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/2.png" data-alt="Twigged listening screen">
-            <img src="assets/2.png" alt="Twigged listening screen" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/3.png" data-alt="Twigged saved confirmation">
-            <img src="assets/3.png" alt="Twigged saved confirmation" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/4.png" data-alt="Twigged answer screen">
-            <img src="assets/4.png" alt="Twigged answer screen" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/5.png" data-alt="Twigged find result">
-            <img src="assets/5.png" alt="Twigged find result" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/6.png" data-alt="Twigged type instead screen">
-            <img src="assets/6.png" alt="Twigged type instead screen" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/7.png" data-alt="Twigged saved items screen">
-            <img src="assets/7.png" alt="Twigged saved items screen" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/8.png" data-alt="Twigged saved item screen">
-            <img src="assets/8.png" alt="Twigged saved item screen" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/9.png" data-alt="Twigged empty state">
-            <img src="assets/9.png" alt="Twigged empty state" loading="lazy" />
-          </button>
-
-          <button class="shot" type="button" data-src="assets/10.png" data-alt="Twigged help screen">
-            <img src="assets/10.png" alt="Twigged help screen" loading="lazy" />
-          </button>
-        </div>
-      </div>
-    </section>
-
-    <section class="section experience" id="experience" aria-label="How Twigged works">
-      <div class="experience-item">
-        <h2>Tell.</h2>
-        <p>Tell Twigged where something is.</p>
-      </div>
-
-      <div class="experience-item">
-        <h2>Ask.</h2>
-        <p>Ask naturally when you need it.</p>
-      </div>
-
-      <div class="experience-item">
-        <h2>Find.</h2>
-        <p>Twigged gives you a clear answer.</p>
-      </div>
-    </section>
-
-    <section class="section privacy" id="privacy" aria-label="Twigged privacy">
-      <p class="kicker">Privacy</p>
-
-      <h2>Your memories belong to you.</h2>
-
-      <div class="privacy-lines">
-        <p>No accounts.</p>
-        <p>No advertising.</p>
-        <p>No subscriptions.</p>
-        <p>Everything stays on your device.</p>
-        <p>Works offline after information has been saved.</p>
-      </div>
-    </section>
-
-    <style>
-      .kicker {
-        margin: 0;
-        color: var(--yellow);
-        font-size: 12px;
-        font-weight: 750;
-        letter-spacing: .08em;
-        text-transform: uppercase;
-      }
-
-      .screenshots {
-        padding: 90px 0 120px;
-        overflow: hidden;
-      }
-
-      .rail-wrap {
-        margin-top: 58px;
-        width: 100%;
-        overflow-x: auto;
-        overflow-y: hidden;
-        scroll-snap-type: x mandatory;
-        scroll-padding-inline: max(20px, calc((100vw - var(--max)) / 2));
-        -webkit-overflow-scrolling: touch;
-        scrollbar-width: none;
-      }
-
-      .rail-wrap::-webkit-scrollbar {
-        display: none;
-      }
-
-      .rail {
-        display: flex;
-        gap: clamp(22px, 3vw, 38px);
-        width: max-content;
-        padding:
-          10px
-          max(20px, calc((100vw - var(--max)) / 2))
-          28px;
-      }
-
-      .shot {
-        flex: 0 0 auto;
-        padding: 0;
-        border: 0;
-        border-radius: 42px;
-        background: transparent;
-        cursor: pointer;
-        scroll-snap-align: center;
-      }
-
-      .shot img {
-        height: clamp(520px, 72vh, 760px);
-        width: auto;
-        border-radius: 42px;
-        background: #0f1012;
-        box-shadow:
-          0 34px 100px rgba(0,0,0,.42),
-          0 0 0 1px rgba(255,255,255,.08);
-      }
-
-      .experience {
-        padding: 90px 0 120px;
-      }
-
-      .experience-item {
-        min-height: 54vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        border-top: 1px solid var(--line);
-      }
-
-      .experience-item:last-child {
-        border-bottom: 1px solid var(--line);
-      }
-
-      .experience h2 {
-        margin: 0;
-        font-size: clamp(58px, 8vw, 108px);
-        line-height: .94;
-        letter-spacing: -.07em;
-        font-weight: 720;
-      }
-
-      .experience p {
-        max-width: 420px;
-        margin: 24px 0 0;
-        color: var(--muted);
-        font-size: clamp(19px, 2vw, 24px);
-        line-height: 1.38;
-        letter-spacing: -.034em;
-      }
-
-      .privacy {
-        padding: 120px 0 150px;
-      }
-
-      .privacy h2 {
-        max-width: 720px;
-        margin: 24px 0 58px;
-        font-size: clamp(42px, 5.8vw, 76px);
-        line-height: 1;
-        letter-spacing: -.064em;
-        font-weight: 720;
-      }
-
-      .privacy-lines {
-        max-width: 760px;
-        border-top: 1px solid var(--line);
-      }
-
-      .privacy-lines p {
-        margin: 0;
-        padding: 22px 0;
-        border-bottom: 1px solid var(--line);
-        color: var(--text);
-        font-size: clamp(22px, 2.5vw, 34px);
-        line-height: 1.14;
-        letter-spacing: -.05em;
-        font-weight: 650;
-      }
-
-      @media (max-width: 760px) {
-        .screenshots {
-          padding: 70px 0 90px;
-        }
-
-        .rail-wrap {
-          margin-top: 42px;
-        }
-
-        .shot img {
-          height: min(510px, 70vh);
-          border-radius: 36px;
-        }
-
-        .shot {
-          border-radius: 36px;
-        }
-
-        .experience-item {
-          min-height: 42vh;
-        }
-
-        .privacy {
-          padding: 90px 0 120px;
-        }
-      }
-    </style>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        <!-- =========================
-    SECTION 3 - SUPPORT + FOOTER + LIGHTBOX + JAVASCRIPT
-    ========================= -->
-
-    <section class="section support" id="support" aria-label="Support">
-      <p class="kicker">Support</p>
-
-      <h2>Remember once.<br>Find it later.</h2>
-
-      <div class="support-links">
-        <a href="mailto:mitchellmaker.apps@gmail.com">
-          mitchellmaker.apps@gmail.com
+  <div class="page">
+
+    <div class="nav-wrap">
+      <nav aria-label="Main navigation">
+        <a class="brand" href="#top" aria-label="Twigged home">
+          <img src="assets/icon.png" alt="" />
+          <span>Twigged</span>
         </a>
 
-        <a href="privacy.html">
-          Privacy Policy
-        </a>
+        <div class="nav-links">
+          <a href="#screenshots">Screenshots</a>
+          <a href="#privacy">Privacy</a>
+          <a href="#support">Support</a>
+        </div>
+      </nav>
+    </div>
+
+    <!-- =========================
+    SECTION 1 - HERO
+    ========================= -->
+    <main id="top" class="hero">
+      <div class="hero-inner">
+        <div class="hero-copy">
+          <h1>Remember where<br>the things that<br><span>matter</span> are.</h1>
+          <p>Tell Twigged where something is.<br>Ask naturally later.</p>
+
+          <div class="button-row">
+            <a class="btn primary" href="#support">Coming Soon</a>
+            <a class="btn" href="#screenshots">See it in action</a>
+          </div>
+        </div>
+
+        <div class="hero-phone" aria-hidden="true">
+          <img class="phone" src="assets/1.png" alt="" />
+        </div>
+      </div>
+    </main>
+
+    <!-- =========================
+    SECTION 2 - SCREENSHOTS
+    ========================= -->
+    <section id="screenshots" class="screenshots" aria-label="Twigged screenshots">
+      <div class="tiny-label">Screenshots</div>
+
+      <div class="shot-row">
+        <img src="assets/1.png" alt="Twigged home screen" />
+        <img src="assets/2.png" alt="Twigged listening screen" />
+        <img src="assets/3.png" alt="Twigged saved confirmation" />
+        <img src="assets/4.png" alt="Twigged answer screen" />
+        <img src="assets/5.png" alt="Twigged saved items screen" />
+        <img src="assets/6.png" alt="Twigged screenshot" />
+        <img src="assets/7.png" alt="Twigged screenshot" />
+        <img src="assets/8.png" alt="Twigged screenshot" />
+        <img src="assets/9.png" alt="Twigged screenshot" />
+        <img src="assets/10.png" alt="Twigged screenshot" />
       </div>
     </section>
 
-  </main>
+    <!-- =========================
+    SECTION 3 - EXPERIENCE
+    ========================= -->
+    <section class="experience" aria-label="Twigged experience">
+      <div class="moment">
+        <div class="moment-phone">
+          <img src="assets/2.png" alt="Tell Twigged where something is" />
+        </div>
 
-  <footer class="section footer">
-      <p>© 2026 Twigged.</p>
-  </footer>
+        <div class="moment-copy">
+          <div class="tiny-label">Tell</div>
+          <h2>Say it once.</h2>
+          <p>Tell Twigged where something is.</p>
+        </div>
+      </div>
 
-  <div class="lightbox" id="lightbox" hidden>
+      <div class="moment reverse">
+        <div class="moment-copy">
+          <div class="tiny-label">Ask</div>
+          <h2>Ask naturally.</h2>
+          <p>When you need it, just ask.</p>
+        </div>
 
-      <button
-        class="lightbox-close"
-        id="lightboxClose"
-        aria-label="Close">
+        <div class="moment-phone">
+          <img src="assets/4.png" alt="Ask Twigged where something is" />
+        </div>
+      </div>
 
-        Close
+      <div class="moment">
+        <div class="moment-phone">
+          <img src="assets/5.png" alt="Twigged gives a clear answer" />
+        </div>
 
-      </button>
+        <div class="moment-copy">
+          <div class="tiny-label">Find</div>
+          <h2>Get the answer.</h2>
+          <p>Twigged gives you a clear answer.</p>
+        </div>
+      </div>
+    </section>
 
-      <img
-        id="lightboxImage"
-        src=""
-        alt="">
+    <!-- =========================
+    SECTION 4 - PRIVACY
+    ========================= -->
+    <section id="privacy" class="privacy">
+      <div class="privacy-inner">
+        <div class="tiny-label">Privacy</div>
+        <h2>Your memories belong to you.</h2>
+        <p class="lead">Twigged is quiet by design.</p>
+
+        <div class="privacy-list">
+          <div>No accounts.</div>
+          <div>No advertising.</div>
+          <div>No subscriptions.</div>
+          <div>Everything stays on your device.</div>
+          <div>Works offline after information has been saved.</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- =========================
+    SECTION 5 - SUPPORT
+    ========================= -->
+    <section id="support" class="support">
+      <div class="support-inner">
+        <h2>Support</h2>
+        <p>Need help with Twigged, or want to contact the maker?</p>
+
+        <div class="button-row">
+          <a class="btn primary" href="mailto:Mitchellmaker.apps@gmail.com">Email Support</a>
+          <a class="btn" href="#top">Back to top</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      © 2026 MitchellMaker. Twigged.
+    </footer>
 
   </div>
-
-<style>
-
-.support{
-
-    padding:120px 0 170px;
-
-}
-
-.support h2{
-
-    margin:22px 0 44px;
-
-    font-size:clamp(42px,5.8vw,76px);
-    line-height:1;
-    letter-spacing:-.065em;
-    font-weight:720;
-
-}
-
-.support-links{
-
-    display:flex;
-    flex-wrap:wrap;
-    gap:14px;
-
-}
-
-.support-links a{
-
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-
-    min-height:44px;
-
-    padding:0 20px;
-
-    border:1px solid var(--line);
-
-    border-radius:999px;
-
-    background:rgba(255,255,255,.03);
-
-    transition:.22s;
-
-}
-
-.support-links a:hover{
-
-    background:rgba(255,255,255,.08);
-
-}
-
-.footer{
-
-    padding:0 0 40px;
-
-    text-align:center;
-
-    color:var(--quiet);
-
-    font-size:12px;
-
-}
-
-.lightbox{
-
-    position:fixed;
-    inset:0;
-
-    display:flex;
-    justify-content:center;
-    align-items:center;
-
-    background:rgba(0,0,0,.84);
-
-    backdrop-filter:blur(16px);
-
-    z-index:500;
-
-}
-
-.lightbox img{
-
-    max-width:92vw;
-    max-height:92vh;
-
-    border-radius:34px;
-
-    box-shadow:0 40px 120px rgba(0,0,0,.6);
-
-}
-
-.lightbox-close{
-
-    position:fixed;
-
-    top:24px;
-    right:24px;
-
-    height:42px;
-
-    padding:0 18px;
-
-    border:1px solid rgba(255,255,255,.14);
-
-    border-radius:999px;
-
-    background:rgba(17,18,20,.75);
-
-    color:white;
-
-    cursor:pointer;
-
-}
-
-@media(max-width:700px){
-
-.support{
-
-padding:90px 0 120px;
-
-}
-
-.support-links{
-
-flex-direction:column;
-
-align-items:flex-start;
-
-}
-
-.support-links a{
-
-width:100%;
-max-width:320px;
-
-}
-
-}
-
-</style>
-
-<script>
-
-const gallery=document.querySelectorAll(".shot");
-
-const lightbox=document.getElementById("lightbox");
-
-const image=document.getElementById("lightboxImage");
-
-const close=document.getElementById("lightboxClose");
-
-gallery.forEach(item=>{
-
-item.addEventListener("click",()=>{
-
-image.src=item.dataset.src;
-
-image.alt=item.dataset.alt;
-
-lightbox.hidden=false;
-
-document.body.classList.add("no-scroll");
-
-});
-
-});
-
-function closeViewer(){
-
-lightbox.hidden=true;
-
-image.src="";
-
-document.body.classList.remove("no-scroll");
-
-}
-
-close.addEventListener("click",closeViewer);
-
-lightbox.addEventListener("click",e=>{
-
-if(e.target===lightbox){
-
-closeViewer();
-
-}
-
-});
-
-document.addEventListener("keydown",e=>{
-
-if(e.key==="Escape" && !lightbox.hidden){
-
-closeViewer();
-
-}
-
-});
-
-</script>
-
 </body>
 </html>

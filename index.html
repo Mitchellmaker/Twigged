@@ -3,7 +3,7 @@
 <html lang="en-GB">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
   <title>Twigged - Remember Where Things Are</title>
   <meta name="description" content="Twigged is a calm, voice-first memory app. Tell Twigged where something is. Ask naturally later." />
@@ -23,14 +23,12 @@
   <style>
     :root {
       --bg: #111214;
-      --panel: #17181b;
-      --panel-soft: rgba(255, 255, 255, 0.035);
       --text: #f5f5f7;
-      --muted: #a7a29a;
-      --muted-soft: #77736d;
+      --muted: #aaa49b;
+      --muted-soft: #766f66;
       --yellow: #f9b70a;
-      --line: rgba(255, 255, 255, 0.08);
-      --shadow: 0 28px 80px rgba(0, 0, 0, 0.38);
+      --line: rgba(255, 255, 255, 0.085);
+      --glass: rgba(17, 18, 20, 0.66);
       --max: 1200px;
       --ease: cubic-bezier(.2, .8, .2, 1);
     }
@@ -40,19 +38,18 @@
     }
 
     html {
-      scroll-behaviour: smooth;
+      scroll-behavior: smooth;
       background: var(--bg);
     }
 
     body {
       margin: 0;
+      min-height: 100vh;
       background:
-        radial-gradient(circle at 72% 18%, rgba(249, 183, 10, 0.075), transparent 34rem),
+        radial-gradient(circle at 72% 18%, rgba(249, 183, 10, 0.075), transparent 31rem),
         var(--bg);
       color: var(--text);
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Arial, sans-serif;
-      font-size: 16px;
-      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
       text-rendering: geometricPrecision;
       overflow-x: hidden;
@@ -63,8 +60,9 @@
     }
 
     img {
-      max-width: 100%;
       display: block;
+      max-width: 100%;
+      height: auto;
     }
 
     a {
@@ -77,24 +75,42 @@
     }
 
     ::selection {
-      background: rgba(249, 183, 10, 0.28);
+      background: rgba(249, 183, 10, 0.26);
       color: var(--text);
     }
 
-    .page {
-      min-height: 100vh;
+    :focus-visible {
+      outline: 3px solid rgba(249, 183, 10, 0.58);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: -120px;
+      left: 20px;
+      z-index: 999;
+      padding: 12px 16px;
+      border-radius: 999px;
+      background: var(--text);
+      color: var(--bg);
+      font-weight: 700;
+      transition: top 220ms var(--ease);
+    }
+
+    .skip-link:focus {
+      top: 20px;
     }
 
     .site-header {
       position: fixed;
       top: 18px;
       left: 50%;
-      z-index: 50;
+      z-index: 100;
       width: min(calc(100% - 32px), var(--max));
       transform: translateX(-50%);
       border: 1px solid rgba(255, 255, 255, 0.075);
       border-radius: 999px;
-      background: rgba(17, 18, 20, 0.62);
+      background: var(--glass);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       transition:
@@ -104,9 +120,9 @@
     }
 
     .site-header.is-scrolled {
-      background: rgba(17, 18, 20, 0.76);
-      border-color: rgba(255, 255, 255, 0.11);
-      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.24);
+      background: rgba(17, 18, 20, 0.82);
+      border-color: rgba(255, 255, 255, 0.12);
+      box-shadow: 0 18px 60px rgba(0, 0, 0, 0.26);
     }
 
     .nav {
@@ -131,10 +147,10 @@
     }
 
     .brand span {
-      font-size: 15px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
       color: var(--text);
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: -0.025em;
     }
 
     .nav-links {
@@ -144,9 +160,10 @@
     }
 
     .nav-links a {
-      font-size: 13px;
-      font-weight: 500;
       color: rgba(245, 245, 247, 0.76);
+      font-size: 13px;
+      font-weight: 550;
+      letter-spacing: -0.01em;
       transition: color 220ms var(--ease);
     }
 
@@ -155,69 +172,53 @@
       color: var(--text);
     }
 
-    .skip-link {
-      position: absolute;
-      top: -120px;
-      left: 20px;
-      z-index: 100;
-      padding: 12px 16px;
-      border-radius: 999px;
-      background: var(--text);
-      color: var(--bg);
-      font-weight: 600;
-      transition: top 200ms var(--ease);
-    }
-
-    .skip-link:focus {
-      top: 20px;
-    }
-
-    main {
-      width: 100%;
-    }
-
     .section {
       width: min(calc(100% - 40px), var(--max));
-      margin: 0 auto;
+      margin-inline: auto;
     }
 
     .hero {
       min-height: 100vh;
       display: grid;
-      grid-template-columns: minmax(0, 1.03fr) minmax(280px, 0.72fr);
+      grid-template-columns: minmax(0, 1.05fr) minmax(260px, 0.72fr);
       align-items: center;
-      gap: clamp(48px, 7vw, 108px);
-      padding-top: 96px;
-      padding-bottom: clamp(70px, 9vw, 130px);
+      gap: clamp(52px, 8vw, 118px);
+      padding-top: 112px;
+      padding-bottom: clamp(76px, 10vw, 140px);
     }
 
     .hero-copy {
-      max-width: 720px;
+      max-width: 760px;
     }
 
     .hero-icon {
       width: 68px;
-      height: 68px;
       margin-bottom: 42px;
-      object-fit: contain;
-      filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.24));
+      filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.28));
     }
 
     .eyebrow {
       margin: 0 0 18px;
       color: var(--muted);
       font-size: 14px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
+      font-weight: 650;
+      letter-spacing: 0.01em;
+    }
+
+    h1,
+    h2,
+    h3,
+    p {
+      margin-top: 0;
     }
 
     h1 {
-      margin: 0;
-      max-width: 760px;
+      margin-bottom: 0;
+      max-width: 770px;
       font-size: clamp(58px, 8.8vw, 112px);
       line-height: 0.93;
-      letter-spacing: -0.075em;
-      font-weight: 700;
+      letter-spacing: -0.076em;
+      font-weight: 720;
     }
 
     .accent {
@@ -237,8 +238,8 @@
       display: flex;
       align-items: center;
       gap: 14px;
-      margin-top: 42px;
       flex-wrap: wrap;
+      margin-top: 42px;
     }
 
     .button {
@@ -247,13 +248,13 @@
       align-items: center;
       justify-content: center;
       padding: 0 22px;
+      border: 1px solid rgba(255, 255, 255, 0.105);
       border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: rgba(255, 255, 255, 0.055);
+      background: rgba(255, 255, 255, 0.052);
       color: var(--text);
       font-size: 14px;
-      font-weight: 600;
-      letter-spacing: -0.01em;
+      font-weight: 650;
+      letter-spacing: -0.015em;
       transition:
         transform 250ms var(--ease),
         background 250ms var(--ease),
@@ -263,7 +264,7 @@
     .button:hover,
     .button:focus-visible {
       transform: translateY(-1px);
-      background: rgba(255, 255, 255, 0.085);
+      background: rgba(255, 255, 255, 0.084);
       border-color: rgba(255, 255, 255, 0.16);
     }
 
@@ -279,76 +280,65 @@
       border-color: #ffc12d;
     }
 
-    .hero-device-wrap {
+    .hero-visual {
       position: relative;
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 640px;
+      min-height: 620px;
     }
 
-    .hero-device-wrap::before {
+    .hero-visual::before {
       content: "";
       position: absolute;
-      width: 440px;
-      height: 440px;
+      width: min(42vw, 430px);
+      height: min(42vw, 430px);
       border-radius: 999px;
-      background: radial-gradient(circle, rgba(249, 183, 10, 0.15), rgba(249, 183, 10, 0.035) 38%, transparent 68%);
-      filter: blur(12px);
-      opacity: 0.78;
+      background: radial-gradient(circle, rgba(249, 183, 10, 0.14), rgba(249, 183, 10, 0.035) 42%, transparent 70%);
+      filter: blur(14px);
+      opacity: 0.82;
     }
 
-    .phone-frame {
+    .hero-shot {
       position: relative;
       width: min(100%, 348px);
-      aspect-ratio: 390 / 844;
-      padding: 10px;
-      border-radius: 52px;
-      background:
-        linear-gradient(145deg, rgba(255, 255, 255, 0.28), rgba(255, 255, 255, 0.055) 38%, rgba(0, 0, 0, 0.4)),
-        #202126;
+      border-radius: 44px;
+      background: #0f1012;
       box-shadow:
-        var(--shadow),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.12);
+        0 34px 100px rgba(0, 0, 0, 0.46),
+        0 0 0 1px rgba(255, 255, 255, 0.095);
+      overflow: hidden;
     }
 
-    .phone-screen {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
+    .hero-shot img {
+      width: 100%;
+      height: auto;
+    }
 
-.phone-screen img {
-    width: 100%;
-    height: auto;
-    object-fit: contain;
-}
-
-    .intro-space {
-      padding: clamp(80px, 12vw, 150px) 0;
+    .quiet-section {
+      padding: clamp(88px, 13vw, 170px) 0;
     }
 
     .section-kicker {
       margin: 0 0 24px;
       color: var(--yellow);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 720;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
     .section-title {
-      margin: 0;
-      max-width: 780px;
+      margin-bottom: 0;
+      max-width: 800px;
       font-size: clamp(42px, 6vw, 78px);
       line-height: 0.98;
-      letter-spacing: -0.065em;
-      font-weight: 700;
+      letter-spacing: -0.066em;
+      font-weight: 720;
     }
 
     .section-lede {
-      max-width: 610px;
+      max-width: 620px;
       margin: 26px 0 0;
       color: var(--muted);
       font-size: clamp(18px, 2vw, 23px);
@@ -359,7 +349,7 @@
     .how-steps {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: clamp(26px, 5vw, 72px);
+      gap: clamp(30px, 5vw, 76px);
       margin-top: clamp(70px, 10vw, 120px);
     }
 
@@ -369,20 +359,20 @@
     }
 
     .step h3 {
-      margin: 0;
+      margin-bottom: 0;
       font-size: clamp(42px, 5vw, 68px);
       line-height: 1;
-      letter-spacing: -0.065em;
-      font-weight: 700;
+      letter-spacing: -0.066em;
+      font-weight: 720;
     }
 
     .step p {
-      max-width: 280px;
+      max-width: 285px;
       margin: 20px 0 0;
       color: var(--muted);
       font-size: 18px;
       line-height: 1.45;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.026em;
     }
 
     @media (max-width: 900px) {
@@ -393,16 +383,15 @@
       .hero {
         min-height: auto;
         grid-template-columns: 1fr;
-        padding-top: 130px;
+        padding-top: 132px;
       }
 
-      .hero-device-wrap {
+      .hero-visual {
         min-height: auto;
-        padding-top: 12px;
       }
 
-      .phone-frame {
-        width: min(78vw, 330px);
+      .hero-shot {
+        width: min(78vw, 340px);
       }
 
       .how-steps {
@@ -411,7 +400,7 @@
       }
 
       .step p {
-        max-width: 420px;
+        max-width: 430px;
       }
     }
 
@@ -432,34 +421,36 @@
 
       .hero {
         padding-top: 112px;
-        gap: 54px;
+        gap: 56px;
       }
 
       .hero-icon {
         width: 58px;
-        height: 58px;
         margin-bottom: 32px;
       }
 
       h1 {
         font-size: clamp(52px, 15vw, 76px);
-        letter-spacing: -0.075em;
       }
 
       .hero-actions {
-        align-items: stretch;
         flex-direction: column;
+        align-items: stretch;
         max-width: 260px;
       }
 
       .button {
         width: 100%;
       }
+
+      .hero-shot {
+        border-radius: 38px;
+      }
     }
 
     @media (prefers-reduced-motion: reduce) {
       html {
-        scroll-behaviour: auto;
+        scroll-behavior: auto;
       }
 
       *,
@@ -476,530 +467,464 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <div class="page">
-    <header class="site-header" id="siteHeader">
-      <nav class="nav" aria-label="Primary navigation">
-        <a class="brand" href="#" aria-label="Twigged home">
-          <img src="assets/Twigged Icon.png" alt="" />
-          <span>Twigged</span>
-        </a>
-
-        <div class="nav-links" aria-label="Page sections">
-          <a href="#how">How it Works</a>
-          <a href="#screenshots">Screenshots</a>
-          <a href="#privacy">Privacy</a>
-          <a href="#support">Support</a>
-        </div>
-      </nav>
-    </header>
-
-    <main id="main">
-      <section class="section hero" aria-labelledby="hero-title">
-        <div class="hero-copy">
-          <img class="hero-icon" src="assets/Twigged Icon.png" alt="" />
-
-          <p class="eyebrow">A calm memory assistant for everyday things.</p>
-
-          <h1 id="hero-title">
-            Remember where<br />
-            the things that<br />
-            <span class="accent">matter</span> are.
-          </h1>
-
-          <p class="hero-subtitle">
-            Tell Twigged where something is. Ask naturally later.
-          </p>
-
-          <div class="hero-actions" aria-label="Main actions">
-            <a class="button primary" href="#support">Coming Soon</a>
-            <a class="button" href="#screenshots">See it in action</a>
-          </div>
-        </div>
-
-        <div class="hero-device-wrap" aria-hidden="true">
-          <div class="phone-frame">
-            <div class="phone-screen">
-              <img src="assets/1.png" alt="" />
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <section class="section intro-space" id="how" aria-labelledby="how-title">
-        <p class="section-kicker">How it works</p>
-
-        <h2 class="section-title" id="how-title">
-          Simple enough to use without thinking.
-        </h2>
-
-        <p class="section-lede">
-          Twigged keeps the interaction quiet. Save where something is, then ask for it later in normal language.
-        </p>
-
-        <div class="how-steps">
-          <article class="step">
-            <h3>Tell.</h3>
-            <p>Tell Twigged where something is.</p>
-          </article>
-
-          <article class="step">
-            <h3>Ask.</h3>
-            <p>Ask naturally when you need it.</p>
-          </article>
-
-          <article class="step">
-            <h3>Find.</h3>
-            <p>Twigged gives you a clear answer.</p>
-          </article>
-
-                  </div>
-      </section>
-
-      <section class="screenshots-section" id="screenshots" aria-labelledby="screenshots-title">
-        <div class="section screenshots-heading">
-          <p class="section-kicker">Screenshots</p>
-
-          <h2 class="section-title" id="screenshots-title">
-            Browse Twigged quietly.
-          </h2>
-
-          <p class="section-lede">
-            Ten simple moments from the app. No clutter. No noise. Just the answer you need.
-          </p>
-        </div>
-
-        <div class="screenshot-rail-wrap" aria-label="Twigged app screenshots">
-          <div class="screenshot-rail">
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/1.png" data-lightbox-alt="Twigged home screen">
-                <img src="assets/1.png" alt="Twigged home screen" />
-              </button>
-              <figcaption>Start with your voice.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/2.png" data-lightbox-alt="Twigged listening screen">
-                <img src="assets/2.png" alt="Twigged listening screen" loading="lazy" />
-              </button>
-              <figcaption>Tell Twigged once.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/3.png" data-lightbox-alt="Twigged saved confirmation">
-                <img src="assets/3.png" alt="Twigged saved confirmation" loading="lazy" />
-              </button>
-              <figcaption>Saved clearly.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/4.png" data-lightbox-alt="Twigged find result">
-                <img src="assets/4.png" alt="Twigged find result" loading="lazy" />
-              </button>
-              <figcaption>Ask later.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/5.png" data-lightbox-alt="Twigged clear answer">
-                <img src="assets/5.png" alt="Twigged clear answer" loading="lazy" />
-              </button>
-              <figcaption>Find the answer.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/6.png" data-lightbox-alt="Twigged type instead screen">
-                <img src="assets/6.png" alt="Twigged type instead screen" loading="lazy" />
-              </button>
-              <figcaption>Type instead.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/7.png" data-lightbox-alt="Twigged saved items">
-                <img src="assets/7.png" alt="Twigged saved items" loading="lazy" />
-              </button>
-              <figcaption>Review saved items.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/8.png" data-lightbox-alt="Twigged saved item detail">
-                <img src="assets/8.png" alt="Twigged saved item detail" loading="lazy" />
-              </button>
-              <figcaption>Keep it tidy.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/9.png" data-lightbox-alt="Twigged empty state">
-                <img src="assets/9.png" alt="Twigged empty state" loading="lazy" />
-              </button>
-              <figcaption>Calm empty states.</figcaption>
-            </figure>
-
-            <figure class="shot">
-              <button class="shot-button" type="button" data-lightbox-src="assets/10.png" data-lightbox-alt="Twigged help screen">
-                <img src="assets/10.png" alt="Twigged help screen" loading="lazy" />
-              </button>
-              <figcaption>Help when needed.</figcaption>
-            </figure>
-          </div>
-        </div>
-      </section>
-
-      <section class="section quiet-section" id="why" aria-labelledby="why-title">
-        <p class="section-kicker">Why Twigged</p>
-
-        <h2 class="section-title" id="why-title">
-          Built for the small things that interrupt your day.
-        </h2>
-
-        <div class="reason-list" aria-label="Twigged features">
-          <div class="reason-row">
-            <h3>Voice-first</h3>
-            <p>Save something in the moment without digging through menus.</p>
-          </div>
-
-          <div class="reason-row">
-            <h3>Natural language</h3>
-            <p>Ask in the way you would normally speak.</p>
-          </div>
-
-          <div class="reason-row">
-            <h3>Type instead</h3>
-            <p>Use the keyboard whenever speaking is not convenient.</p>
-          </div>
-
-          <div class="reason-row">
-            <h3>Simple interface</h3>
-            <p>One calm screen keeps the app easy to understand.</p>
-          </div>
-
-          <div class="reason-row">
-            <h3>Designed for accessibility</h3>
-            <p>Large text, clear states and simple interactions support everyday use.</p>
-          </div>
-        </div>
-      </section>
-
-      <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
-        <div class="privacy-copy">
-          <p class="section-kicker">Privacy</p>
-
-          <h2 class="section-title" id="privacy-title">
-            Your memories belong to you.
-          </h2>
-        </div>
-
-        <div class="privacy-points" aria-label="Privacy points">
-          <p>No accounts.</p>
-          <p>No advertising.</p>
-          <p>No subscriptions.</p>
-          <p>Everything stays on your device.</p>
-          <p>Works offline after information has been saved.</p>
-        </div>
-      </section>
-
-      <section class="section credits-section" aria-labelledby="credits-title">
-        <p class="section-kicker">Built with Apple technologies</p>
-
-        <h2 class="visually-hidden" id="credits-title">
-          Built with Apple technologies
-        </h2>
-
-        <ul class="credits-list">
-          <li>Apple Foundation Models</li>
-          <li>Apple Speech Recognition</li>
-          <li>SwiftData</li>
-          <li>SwiftUI</li>
-          <li>Siri App Intents</li>
-        </ul>
-      </section>
-
-      <style>
-        .screenshots-section {
-          padding: clamp(80px, 12vw, 160px) 0;
-          overflow: hidden;
-        }
-
-        .screenshots-heading {
-          margin-bottom: clamp(54px, 8vw, 92px);
-        }
-
-        .screenshot-rail-wrap {
-          width: 100%;
-          overflow-x: auto;
-          overflow-y: hidden;
-          scroll-snap-type: x mandatory;
-          scroll-padding-inline: max(20px, calc((100vw - var(--max)) / 2));
-          -webkit-overflow-scrolling: touch;
-          scrollbar-width: none;
-        }
-
-        .screenshot-rail-wrap::-webkit-scrollbar {
-          display: none;
-        }
-
-        .screenshot-rail {
-          display: flex;
-          align-items: flex-start;
-          gap: clamp(22px, 3.2vw, 42px);
-          width: max-content;
-          padding:
-            10px
-            max(20px, calc((100vw - var(--max)) / 2))
-            18px;
-        }
-
-        .shot {
-          width: clamp(230px, 24vw, 330px);
-          margin: 0;
-          scroll-snap-align: center;
-        }
-
-        .shot-button {
-          display: block;
-          width: 100%;
-          padding: 0;
-          border: 0;
-          border-radius: 42px;
-          background: transparent;
-          cursor: pointer;
-          transform: translateY(0) scale(1);
-          transition:
-            transform 320ms var(--ease),
-            filter 320ms var(--ease);
-        }
-
-        .shot-button:hover,
-        .shot-button:focus-visible {
-          transform: translateY(-4px) scale(1.02);
-          outline: none;
-        }
-
-        .shot-button:focus-visible {
-          box-shadow: 0 0 0 4px rgba(249, 183, 10, 0.32);
-        }
-
-        .shot img {
-          width: 100%;
-          border-radius: 42px;
-          background: #0f1012;
-          box-shadow:
-            0 34px 90px rgba(0, 0, 0, 0.44),
-            0 0 0 1px rgba(255, 255, 255, 0.085);
-        }
-
-        .shot figcaption {
-          margin-top: 18px;
-          text-align: center;
-          color: var(--muted-soft);
-          font-size: 13px;
-          line-height: 1.35;
-          letter-spacing: -0.01em;
-        }
-
-        .quiet-section {
-          padding: clamp(90px, 13vw, 170px) 0;
-        }
-
-        .reason-list {
-          margin-top: clamp(60px, 8vw, 100px);
-          border-top: 1px solid var(--line);
-        }
-
-        .reason-row {
-          display: grid;
-          grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1fr);
-          gap: clamp(28px, 5vw, 80px);
-          padding: 30px 0;
-          border-bottom: 1px solid var(--line);
-        }
-
-        .reason-row h3 {
-          margin: 0;
-          color: var(--text);
-          font-size: clamp(22px, 2.4vw, 32px);
-          line-height: 1.08;
-          letter-spacing: -0.045em;
-          font-weight: 650;
-        }
-
-        .reason-row p {
-          max-width: 600px;
-          margin: 0;
-          color: var(--muted);
-          font-size: clamp(17px, 1.7vw, 21px);
-          line-height: 1.45;
-          letter-spacing: -0.03em;
-        }
-
-        .privacy-section {
-          display: grid;
-          grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
-          gap: clamp(48px, 8vw, 110px);
-          align-items: start;
-          padding: clamp(90px, 13vw, 170px) 0;
-        }
-
-        .privacy-points {
-          margin-top: 8px;
-        }
-
-        .privacy-points p {
-          margin: 0;
-          padding: 20px 0;
-          border-bottom: 1px solid var(--line);
-          color: var(--text);
-          font-size: clamp(22px, 2.4vw, 32px);
-          line-height: 1.12;
-          letter-spacing: -0.05em;
-          font-weight: 650;
-        }
-
-        .privacy-points p:first-child {
-          border-top: 1px solid var(--line);
-        }
-
-        .credits-section {
-          padding: clamp(70px, 10vw, 130px) 0;
-        }
-
-        .credits-list {
-          display: flex;
-          flex-wrap: wrap;
-          gap: 12px;
-          max-width: 760px;
-          margin: 34px 0 0;
-          padding: 0;
-          list-style: none;
-        }
-
-        .credits-list li {
-          display: inline-flex;
-          align-items: center;
-          min-height: 36px;
-          padding: 0 15px;
-          border: 1px solid var(--line);
-          border-radius: 999px;
-          color: rgba(245, 245, 247, 0.78);
-          background: rgba(255, 255, 255, 0.025);
-          font-size: 13px;
-          font-weight: 600;
-          letter-spacing: -0.01em;
-        }
-
-        .visually-hidden {
-          position: absolute;
-          width: 1px;
-          height: 1px;
-          padding: 0;
-          margin: -1px;
-          overflow: hidden;
-          clip: rect(0, 0, 0, 0);
-          white-space: nowrap;
-          border: 0;
-        }
-
-        @media (max-width: 900px) {
-          .privacy-section {
-            grid-template-columns: 1fr;
-          }
-
-          .reason-row {
-            grid-template-columns: 1fr;
-            gap: 12px;
-          }
-        }
-
-        @media (max-width: 560px) {
-          .screenshots-section {
-            padding-top: 70px;
-          }
-
-          .shot {
-            width: min(74vw, 286px);
-          }
-
-          .shot img,
-          .shot-button {
-            border-radius: 36px;
-          }
-
-          .reason-row {
-            padding: 26px 0;
-          }
-
-          .privacy-points p {
-            padding: 18px 0;
-          }
-        }
-
-        @media (prefers-reduced-motion: reduce) {
-          .shot-button:hover,
-          .shot-button:focus-visible {
-            transform: none;
-          }
-        }
-      </style>
-
-            <section class="section faq-section" aria-labelledby="faq-title">
-        <p class="section-kicker">FAQ</p>
-
-        <h2 class="section-title" id="faq-title">
-          Clear answers.
-        </h2>
-
-        <div class="faq-list">
-          <details>
-            <summary>Does Twigged need an internet connection?</summary>
-            <p>No. Once information has been saved, Twigged can find it offline.</p>
-          </details>
-
-          <details>
-            <summary>Does Twigged store my information online?</summary>
-            <p>No. Saved information remains on your device.</p>
-          </details>
-
-          <details>
-            <summary>Can I type instead of speaking?</summary>
-            <p>Yes. Twigged includes Type Instead for quiet moments.</p>
-          </details>
-
-          <details>
-            <summary>Can I use Siri?</summary>
-            <p>Yes. Twigged supports Siri App Intents for saving and finding items.</p>
-          </details>
-
-          <details>
-            <summary>Does Twigged support other languages?</summary>
-            <p>Version 1 supports English. Other languages are planned.</p>
-          </details>
-        </div>
-      </section>
-
-      <section class="section support-section" id="support" aria-labelledby="support-title">
-        <p class="section-kicker">Support</p>
-
-        <h2 class="section-title" id="support-title">
-          Remember once.<br />
-          Find it later.
-        </h2>
-
-        <div class="support-links">
-          <a href="mailto:mitchellmaker.apps@gmail.com">mitchellmaker.apps@gmail.com</a>
-          <a href="privacy.html">Privacy Policy</a>
-        </div>
-      </section>
-    </main>
-
-    <footer class="section site-footer">
-      <p>Copyright © 2026 Twigged.</p>
-
-      <nav aria-label="Footer links">
+  <header class="site-header" id="siteHeader">
+    <nav class="nav" aria-label="Primary navigation">
+      <a class="brand" href="#" aria-label="Twigged home">
+        <img src="assets/Twigged Icon.png" alt="" />
+        <span>Twigged</span>
+      </a>
+
+      <div class="nav-links" aria-label="Page sections">
         <a href="#how">How it Works</a>
         <a href="#screenshots">Screenshots</a>
         <a href="#privacy">Privacy</a>
+        <a href="#support">Support</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="section hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <img class="hero-icon" src="assets/Twigged Icon.png" alt="" />
+
+        <p class="eyebrow">A calm memory assistant for everyday things.</p>
+
+        <h1 id="hero-title">
+          Remember where<br />
+          the things that<br />
+          <span class="accent">matter</span> are.
+        </h1>
+
+        <p class="hero-subtitle">
+          Tell Twigged where something is. Ask naturally later.
+        </p>
+
+        <div class="hero-actions" aria-label="Main actions">
+          <a class="button primary" href="#support">Coming Soon</a>
+          <a class="button" href="#screenshots">See it in action</a>
+        </div>
+      </div>
+
+      <div class="hero-visual" aria-hidden="true">
+        <div class="hero-shot">
+          <img src="assets/1.png" alt="" />
+        </div>
+      </div>
+    </section>
+
+    <section class="section quiet-section" id="how" aria-labelledby="how-title">
+      <p class="section-kicker">How it works</p>
+
+      <h2 class="section-title" id="how-title">
+        Simple enough to use without thinking.
+      </h2>
+
+      <p class="section-lede">
+        Twigged keeps the interaction quiet. Save where something is, then ask for it later in normal language.
+      </p>
+
+      <div class="how-steps">
+        <article class="step">
+          <h3>Tell.</h3>
+          <p>Tell Twigged where something is.</p>
+        </article>
+
+        <article class="step">
+          <h3>Ask.</h3>
+          <p>Ask naturally when you need it.</p>
+        </article>
+
+        <article class="step">
+          <h3>Find.</h3>
+          <p>Twigged gives you a clear answer.</p>
+        </article>
+
+
+
+
+
+
+
+
+
+              </div>
+    </section>
+
+    <section class="screenshots-section" id="screenshots" aria-labelledby="screenshots-title">
+      <div class="section screenshots-heading">
+        <p class="section-kicker">Screenshots</p>
+
+        <h2 class="section-title" id="screenshots-title">
+          See the app, not the website.
+        </h2>
+
+        <p class="section-lede">
+          Ten quiet moments from Twigged, shown exactly as they are.
+        </p>
+      </div>
+
+      <div class="screenshot-rail-wrap" aria-label="Twigged screenshots">
+        <div class="screenshot-rail">
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/1.png" data-lightbox-alt="Twigged home screen">
+              <img src="assets/1.png" alt="Twigged home screen" />
+            </button>
+            <figcaption>Start with your voice.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/2.png" data-lightbox-alt="Twigged listening screen">
+              <img src="assets/2.png" alt="Twigged listening screen" loading="lazy" />
+            </button>
+            <figcaption>Tell Twigged once.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/3.png" data-lightbox-alt="Twigged saved confirmation">
+              <img src="assets/3.png" alt="Twigged saved confirmation" loading="lazy" />
+            </button>
+            <figcaption>Saved clearly.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/4.png" data-lightbox-alt="Twigged answer screen">
+              <img src="assets/4.png" alt="Twigged answer screen" loading="lazy" />
+            </button>
+            <figcaption>Ask naturally.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/5.png" data-lightbox-alt="Twigged find result">
+              <img src="assets/5.png" alt="Twigged find result" loading="lazy" />
+            </button>
+            <figcaption>Get a clear answer.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/6.png" data-lightbox-alt="Twigged type instead screen">
+              <img src="assets/6.png" alt="Twigged type instead screen" loading="lazy" />
+            </button>
+            <figcaption>Type instead.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/7.png" data-lightbox-alt="Twigged saved items screen">
+              <img src="assets/7.png" alt="Twigged saved items screen" loading="lazy" />
+            </button>
+            <figcaption>Review saved items.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/8.png" data-lightbox-alt="Twigged saved item view">
+              <img src="assets/8.png" alt="Twigged saved item view" loading="lazy" />
+            </button>
+            <figcaption>Keep things tidy.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/9.png" data-lightbox-alt="Twigged empty state">
+              <img src="assets/9.png" alt="Twigged empty state" loading="lazy" />
+            </button>
+            <figcaption>Calm by default.</figcaption>
+          </figure>
+
+          <figure class="shot">
+            <button class="shot-button" type="button" data-lightbox-src="assets/10.png" data-lightbox-alt="Twigged help screen">
+              <img src="assets/10.png" alt="Twigged help screen" loading="lazy" />
+            </button>
+            <figcaption>Help when needed.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section quiet-section" id="why" aria-labelledby="why-title">
+      <p class="section-kicker">Why Twigged</p>
+
+      <h2 class="section-title" id="why-title">
+        Built for the small things that interrupt your day.
+      </h2>
+
+      <div class="reason-list" aria-label="Twigged features">
+        <div class="reason-row">
+          <h3>Voice-first</h3>
+          <p>Save something in the moment without digging through menus.</p>
+        </div>
+
+        <div class="reason-row">
+          <h3>Natural language</h3>
+          <p>Ask in the way you would normally speak.</p>
+        </div>
+
+        <div class="reason-row">
+          <h3>Type instead</h3>
+          <p>Use the keyboard whenever speaking is not convenient.</p>
+        </div>
+
+        <div class="reason-row">
+          <h3>Simple interface</h3>
+          <p>One calm screen keeps the app easy to understand.</p>
+        </div>
+
+        <div class="reason-row">
+          <h3>Designed for accessibility</h3>
+          <p>Large text, clear states and simple interactions support everyday use.</p>
+        </div>
+      </div>
+    </section>
+
+    <style>
+      .screenshots-section {
+        padding: clamp(88px, 13vw, 170px) 0;
+        overflow: hidden;
+      }
+
+      .screenshots-heading {
+        margin-bottom: clamp(56px, 8vw, 96px);
+      }
+
+      .screenshot-rail-wrap {
+        width: 100%;
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        scroll-padding-inline: max(20px, calc((100vw - var(--max)) / 2));
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+
+      .screenshot-rail-wrap::-webkit-scrollbar {
+        display: none;
+      }
+
+      .screenshot-rail {
+        display: flex;
+        align-items: flex-start;
+        gap: clamp(24px, 3.4vw, 46px);
+        width: max-content;
+        padding:
+          12px
+          max(20px, calc((100vw - var(--max)) / 2))
+          24px;
+      }
+
+      .shot {
+        flex: 0 0 auto;
+        margin: 0;
+        scroll-snap-align: center;
+      }
+
+      .shot-button {
+        display: block;
+        width: auto;
+        padding: 0;
+        border: 0;
+        border-radius: 44px;
+        background: transparent;
+        cursor: pointer;
+        transform: translateY(0) scale(1);
+        transition:
+          transform 320ms var(--ease),
+          filter 320ms var(--ease);
+      }
+
+      .shot-button:hover,
+      .shot-button:focus-visible {
+        transform: translateY(-4px) scale(1.018);
+        outline: none;
+      }
+
+      .shot-button:focus-visible {
+        box-shadow: 0 0 0 4px rgba(249, 183, 10, 0.32);
+      }
+
+      .shot img {
+        height: clamp(520px, 68vh, 760px);
+        width: auto;
+        border-radius: 44px;
+        background: #0f1012;
+        box-shadow:
+          0 36px 110px rgba(0, 0, 0, 0.46),
+          0 0 0 1px rgba(255, 255, 255, 0.09);
+      }
+
+      .shot figcaption {
+        margin-top: 18px;
+        text-align: center;
+        color: var(--muted-soft);
+        font-size: 13px;
+        line-height: 1.35;
+        letter-spacing: -0.01em;
+      }
+
+      .reason-list {
+        margin-top: clamp(60px, 8vw, 100px);
+        border-top: 1px solid var(--line);
+      }
+
+      .reason-row {
+        display: grid;
+        grid-template-columns: minmax(180px, 0.55fr) minmax(0, 1fr);
+        gap: clamp(28px, 5vw, 80px);
+        padding: 30px 0;
+        border-bottom: 1px solid var(--line);
+      }
+
+      .reason-row h3 {
+        margin-bottom: 0;
+        color: var(--text);
+        font-size: clamp(22px, 2.4vw, 32px);
+        line-height: 1.08;
+        letter-spacing: -0.045em;
+        font-weight: 680;
+      }
+
+      .reason-row p {
+        max-width: 600px;
+        margin: 0;
+        color: var(--muted);
+        font-size: clamp(17px, 1.7vw, 21px);
+        line-height: 1.45;
+        letter-spacing: -0.03em;
+      }
+
+      @media (max-width: 900px) {
+        .reason-row {
+          grid-template-columns: 1fr;
+          gap: 12px;
+        }
+      }
+
+      @media (max-width: 560px) {
+        .screenshots-section {
+          padding-top: 70px;
+        }
+
+        .shot img {
+          height: min(520px, 72vh);
+          border-radius: 38px;
+        }
+
+        .shot-button {
+          border-radius: 38px;
+        }
+
+        .reason-row {
+          padding: 26px 0;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .shot-button:hover,
+        .shot-button:focus-visible {
+          transform: none;
+        }
+      }
+    </style>
+
+
+
+
+
+
+
+
+
+        <section class="section privacy-section" id="privacy" aria-labelledby="privacy-title">
+      <div>
+        <p class="section-kicker">Privacy</p>
+
+        <h2 class="section-title" id="privacy-title">
+          Your memories belong to you.
+        </h2>
+      </div>
+
+      <div class="privacy-points" aria-label="Privacy points">
+        <p>No accounts.</p>
+        <p>No advertising.</p>
+        <p>No subscriptions.</p>
+        <p>Everything stays on your device.</p>
+        <p>Works offline after information has been saved.</p>
+      </div>
+    </section>
+
+    <section class="section credits-section" aria-labelledby="credits-title">
+      <p class="section-kicker">Built with Apple technologies</p>
+
+      <h2 class="visually-hidden" id="credits-title">
+        Built with Apple technologies
+      </h2>
+
+      <ul class="credits-list">
+        <li>Apple Foundation Models</li>
+        <li>Apple Speech Recognition</li>
+        <li>SwiftData</li>
+        <li>SwiftUI</li>
+        <li>Siri App Intents</li>
+      </ul>
+    </section>
+
+    <section class="section faq-section" aria-labelledby="faq-title">
+      <p class="section-kicker">FAQ</p>
+
+      <h2 class="section-title" id="faq-title">
+        Clear answers.
+      </h2>
+
+      <div class="faq-list">
+        <details>
+          <summary>Does Twigged need an internet connection?</summary>
+          <p>No. Once information has been saved, Twigged can find it offline.</p>
+        </details>
+
+        <details>
+          <summary>Does Twigged store my information online?</summary>
+          <p>No. Saved information remains on your device.</p>
+        </details>
+
+        <details>
+          <summary>Can I type instead of speaking?</summary>
+          <p>Yes. Twigged includes Type Instead for quiet moments.</p>
+        </details>
+
+        <details>
+          <summary>Can I use Siri?</summary>
+          <p>Yes. Twigged supports Siri App Intents for saving and finding items.</p>
+        </details>
+
+        <details>
+          <summary>Does Twigged support other languages?</summary>
+          <p>Version 1 supports English. Other languages are planned.</p>
+        </details>
+      </div>
+    </section>
+
+    <section class="section support-section" id="support" aria-labelledby="support-title">
+      <p class="section-kicker">Support</p>
+
+      <h2 class="section-title" id="support-title">
+        Remember once.<br />
+        Find it later.
+      </h2>
+
+      <div class="support-links">
+        <a href="mailto:mitchellmaker.apps@gmail.com">mitchellmaker.apps@gmail.com</a>
         <a href="privacy.html">Privacy Policy</a>
-      </nav>
-    </footer>
-  </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="section site-footer">
+    <p>Copyright © 2026 Twigged.</p>
+
+    <nav aria-label="Footer links">
+      <a href="#how">How it Works</a>
+      <a href="#screenshots">Screenshots</a>
+      <a href="#privacy">Privacy</a>
+      <a href="privacy.html">Privacy Policy</a>
+    </nav>
+  </footer>
 
   <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Screenshot preview" hidden>
     <button class="lightbox-close" type="button" aria-label="Close screenshot preview">
@@ -1012,8 +937,63 @@
   </div>
 
   <style>
+    .privacy-section {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.72fr);
+      gap: clamp(48px, 8vw, 110px);
+      align-items: start;
+      padding: clamp(92px, 13vw, 175px) 0;
+    }
+
+    .privacy-points {
+      margin-top: 8px;
+    }
+
+    .privacy-points p {
+      margin: 0;
+      padding: 20px 0;
+      border-bottom: 1px solid var(--line);
+      color: var(--text);
+      font-size: clamp(22px, 2.4vw, 32px);
+      line-height: 1.12;
+      letter-spacing: -0.052em;
+      font-weight: 680;
+    }
+
+    .privacy-points p:first-child {
+      border-top: 1px solid var(--line);
+    }
+
+    .credits-section {
+      padding: clamp(70px, 10vw, 132px) 0;
+    }
+
+    .credits-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      max-width: 780px;
+      margin: 34px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .credits-list li {
+      display: inline-flex;
+      min-height: 36px;
+      align-items: center;
+      padding: 0 15px;
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.025);
+      color: rgba(245, 245, 247, 0.78);
+      font-size: 13px;
+      font-weight: 650;
+      letter-spacing: -0.01em;
+    }
+
     .faq-section {
-      padding: clamp(90px, 13vw, 170px) 0;
+      padding: clamp(92px, 13vw, 175px) 0;
     }
 
     .faq-list {
@@ -1036,7 +1016,7 @@
       font-size: clamp(19px, 2vw, 24px);
       line-height: 1.25;
       letter-spacing: -0.04em;
-      font-weight: 650;
+      font-weight: 680;
       cursor: pointer;
       list-style: none;
     }
@@ -1054,7 +1034,9 @@
       color: var(--muted-soft);
       font-size: 24px;
       font-weight: 400;
-      transition: transform 240ms var(--ease), color 240ms var(--ease);
+      transition:
+        transform 240ms var(--ease),
+        color 240ms var(--ease);
     }
 
     details[open] summary::after {
@@ -1072,7 +1054,7 @@
     }
 
     .support-section {
-      padding: clamp(90px, 14vw, 190px) 0 clamp(110px, 16vw, 220px);
+      padding: clamp(92px, 14vw, 190px) 0 clamp(110px, 16vw, 220px);
     }
 
     .support-links {
@@ -1088,18 +1070,18 @@
       align-items: center;
       justify-content: center;
       padding: 0 18px;
-      border-radius: 999px;
       border: 1px solid var(--line);
+      border-radius: 999px;
       background: rgba(255, 255, 255, 0.025);
       color: rgba(245, 245, 247, 0.82);
       font-size: 14px;
-      font-weight: 600;
+      font-weight: 650;
       letter-spacing: -0.01em;
       transition:
+        transform 240ms var(--ease),
         background 240ms var(--ease),
         border-color 240ms var(--ease),
-        color 240ms var(--ease),
-        transform 240ms var(--ease);
+        color 240ms var(--ease);
     }
 
     .support-links a:hover,
@@ -1146,11 +1128,11 @@
     .lightbox {
       position: fixed;
       inset: 0;
-      z-index: 200;
+      z-index: 300;
       display: grid;
       place-items: center;
       padding: 28px;
-      background: rgba(3, 3, 4, 0.82);
+      background: rgba(3, 3, 4, 0.84);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
       opacity: 0;
@@ -1171,18 +1153,18 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      width: min(94vw, 520px);
+      width: min(94vw, 560px);
       max-height: 90vh;
     }
 
     .lightbox-panel img {
-      max-height: 90vh;
       width: auto;
       max-width: 100%;
+      max-height: 90vh;
       border-radius: 44px;
       background: #0f1012;
       box-shadow:
-        0 34px 110px rgba(0, 0, 0, 0.62),
+        0 34px 120px rgba(0, 0, 0, 0.64),
         0 0 0 1px rgba(255, 255, 255, 0.12);
     }
 
@@ -1190,7 +1172,7 @@
       position: fixed;
       top: 24px;
       right: 24px;
-      z-index: 210;
+      z-index: 310;
       min-height: 42px;
       padding: 0 16px;
       border: 1px solid rgba(255, 255, 255, 0.12);
@@ -1199,14 +1181,14 @@
       color: var(--text);
       cursor: pointer;
       font-size: 13px;
-      font-weight: 650;
+      font-weight: 680;
       letter-spacing: -0.01em;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
       transition:
+        transform 240ms var(--ease),
         background 240ms var(--ease),
-        border-color 240ms var(--ease),
-        transform 240ms var(--ease);
+        border-color 240ms var(--ease);
     }
 
     .lightbox-close:hover,
@@ -1216,9 +1198,22 @@
       border-color: rgba(255, 255, 255, 0.2);
     }
 
-    :focus-visible {
-      outline: 3px solid rgba(249, 183, 10, 0.58);
-      outline-offset: 4px;
+    .visually-hidden {
+      position: absolute;
+      width: 1px;
+      height: 1px;
+      padding: 0;
+      margin: -1px;
+      overflow: hidden;
+      clip: rect(0, 0, 0, 0);
+      white-space: nowrap;
+      border: 0;
+    }
+
+    @media (max-width: 900px) {
+      .privacy-section {
+        grid-template-columns: 1fr;
+      }
     }
 
     @media (max-width: 760px) {
@@ -1233,6 +1228,10 @@
     }
 
     @media (max-width: 560px) {
+      .privacy-points p {
+        padding: 18px 0;
+      }
+
       summary {
         min-height: 70px;
         padding-right: 34px;
@@ -1257,7 +1256,7 @@
       }
 
       .lightbox-panel img {
-        border-radius: 36px;
+        border-radius: 38px;
       }
 
       .lightbox-close {
@@ -1285,105 +1284,170 @@
     }
   </style>
 
-    <script>
-    const header = document.getElementById("siteHeader");
-    const lightbox = document.getElementById("lightbox");
-    const lightboxImage = document.getElementById("lightboxImage");
-    const closeButton = lightbox.querySelector(".lightbox-close");
-    const shotButtons = document.querySelectorAll(".shot-button");
 
-    let lastFocusedElement = null;
 
-    function updateHeader() {
-      if (window.scrollY > 12) {
-        header.classList.add("is-scrolled");
-      } else {
-        header.classList.remove("is-scrolled");
-      }
-    }
 
-    function openLightbox(button) {
-      lastFocusedElement = document.activeElement;
 
-      const src = button.getAttribute("data-lightbox-src");
-      const alt = button.getAttribute("data-lightbox-alt") || "Twigged screenshot";
 
-      lightboxImage.src = src;
-      lightboxImage.alt = alt;
 
-      lightbox.hidden = false;
-      document.body.classList.add("no-scroll");
 
-      requestAnimationFrame(() => {
+
+  <script>
+(() => {
+
+const header = document.getElementById("siteHeader");
+const lightbox = document.getElementById("lightbox");
+const lightboxImage = document.getElementById("lightboxImage");
+const closeButton = document.querySelector(".lightbox-close");
+const buttons = document.querySelectorAll(".shot-button");
+
+let previousFocus = null;
+
+function updateHeader() {
+    header.classList.toggle("is-scrolled", window.scrollY > 12);
+}
+
+window.addEventListener("scroll", updateHeader, { passive: true });
+window.addEventListener("load", updateHeader);
+
+function openLightbox(button) {
+
+    previousFocus = document.activeElement;
+
+    lightboxImage.src = button.dataset.lightboxSrc;
+    lightboxImage.alt = button.dataset.lightboxAlt;
+
+    lightbox.hidden = false;
+
+    requestAnimationFrame(() => {
+        document.body.classList.add("no-scroll");
         lightbox.classList.add("is-open");
         closeButton.focus();
-      });
-    }
+    });
 
-    function closeLightbox() {
-      lightbox.classList.remove("is-open");
-      document.body.classList.remove("no-scroll");
+}
 
-      window.setTimeout(() => {
+function closeLightbox() {
+
+    lightbox.classList.remove("is-open");
+    document.body.classList.remove("no-scroll");
+
+    setTimeout(() => {
+
         lightbox.hidden = true;
         lightboxImage.src = "";
         lightboxImage.alt = "";
 
-        if (lastFocusedElement) {
-          lastFocusedElement.focus();
+        if (previousFocus) {
+            previousFocus.focus();
         }
-      }, 300);
+
+    },300);
+
+}
+
+buttons.forEach(button => {
+
+    button.addEventListener("click", () => openLightbox(button));
+
+});
+
+closeButton.addEventListener("click", closeLightbox);
+
+lightbox.addEventListener("click", e => {
+
+    if (e.target === lightbox) {
+        closeLightbox();
     }
 
-    function trapFocus(event) {
-      if (!lightbox.classList.contains("is-open") || event.key !== "Tab") {
-        return;
-      }
+});
 
-      const focusableElements = lightbox.querySelectorAll(
-        "button, [href], input, select, textarea, [tabindex]:not([tabindex='-1'])"
-      );
+document.addEventListener("keydown", e => {
 
-      if (!focusableElements.length) {
-        return;
-      }
+    if (!lightbox.classList.contains("is-open")) return;
 
-      const firstElement = focusableElements[0];
-      const lastElement = focusableElements[focusableElements.length - 1];
-
-      if (event.shiftKey && document.activeElement === firstElement) {
-        event.preventDefault();
-        lastElement.focus();
-      }
-
-      if (!event.shiftKey && document.activeElement === lastElement) {
-        event.preventDefault();
-        firstElement.focus();
-      }
+    if (e.key === "Escape") {
+        closeLightbox();
     }
 
-    window.addEventListener("scroll", updateHeader, { passive: true });
-    window.addEventListener("load", updateHeader);
+    if (e.key !== "Tab") return;
 
-    shotButtons.forEach((button) => {
-      button.addEventListener("click", () => openLightbox(button));
+    const focusable = lightbox.querySelectorAll("button");
+
+    const first = focusable[0];
+    const last = focusable[focusable.length - 1];
+
+    if (e.shiftKey) {
+
+        if (document.activeElement === first) {
+            e.preventDefault();
+            last.focus();
+        }
+
+    } else {
+
+        if (document.activeElement === last) {
+            e.preventDefault();
+            first.focus();
+        }
+
+    }
+
+});
+
+const observer = new IntersectionObserver(entries => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.animate([
+                {
+                    opacity:0,
+                    transform:"translateY(24px)"
+                },
+                {
+                    opacity:1,
+                    transform:"translateY(0)"
+                }
+
+            ],{
+
+                duration:700,
+                easing:"cubic-bezier(.2,.8,.2,1)",
+                fill:"forwards"
+
+            });
+
+            observer.unobserve(entry.target);
+
+        }
+
     });
 
-    closeButton.addEventListener("click", closeLightbox);
+},{
+    threshold:0.15
+});
 
-    lightbox.addEventListener("click", (event) => {
-      if (event.target === lightbox) {
-        closeLightbox();
-      }
-    });
+document.querySelectorAll(
 
-    document.addEventListener("keydown", (event) => {
-      if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
-        closeLightbox();
-      }
+".section-title,\
+.hero-copy,\
+.reason-row,\
+.privacy-points,\
+.faq-list,\
+.support-section"
 
-      trapFocus(event);
-    });
-  </script>
+).forEach(el => observer.observe(el));
+
+if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+
+    observer.disconnect();
+
+}
+
+})();
+</script>
+
 </body>
 </html>

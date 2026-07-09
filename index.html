@@ -2,43 +2,29 @@
 <!DOCTYPE html>
 <html lang="en-GB">
 <head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Twigged - Voice-First Memory App</title>
-  <meta
-    name="description"
-    content="Twigged is a premium voice-first memory app. Tell Twigged where something is, then ask naturally later."
-  />
-  <meta name="theme-color" content="#111214" />
+  <meta name="description" content="Twigged is a premium voice-first memory app. Tell Twigged where something is, then ask naturally later.">
+  <meta name="theme-color" content="#111214">
 
-  <meta property="og:title" content="Twigged - Remember where things are" />
-  <meta
-    property="og:description"
-    content="Tell Twigged where something is. Ask naturally later."
-  />
-  <meta property="og:type" content="website" />
-  <meta property="og:image" content="assets/icon.png" />
+  <meta property="og:title" content="Twigged - Remember where things are">
+  <meta property="og:description" content="Tell Twigged where something is. Ask naturally later.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="assets/icon.png">
 
-  <link rel="icon" href="assets/icon.png" />
+  <link rel="icon" href="assets/icon.png">
 
   <style>
     :root {
       --bg: #111214;
-      --panel: #1d1f23;
-      --panel-soft: #181a1e;
-      --text: #f5f5f7;
-      --muted: #b6b6bd;
-      --muted-dark: #85858d;
-      --accent: #f9b70a;
-      --border: rgba(255, 255, 255, 0.1);
-      --border-strong: rgba(249, 183, 10, 0.24);
-      --shadow: 0 30px 90px rgba(0, 0, 0, 0.45);
-      --radius: 28px;
+      --panel: #1D1F23;
+      --text: #F5F5F7;
+      --muted: #B6B6BD;
+      --accent: #F9B70A;
+      --line: rgba(255, 255, 255, 0.1);
       --max: 1120px;
-      --nav-height: 72px;
-      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display",
-        "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
+      --font: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Helvetica Neue", Helvetica, Arial, sans-serif;
     }
 
     * {
@@ -46,19 +32,17 @@
     }
 
     html {
-      scroll-behaviour: smooth;
+      scroll-behavior: smooth;
       background: var(--bg);
     }
 
     body {
       margin: 0;
-      min-height: 100vh;
       background: var(--bg);
       color: var(--text);
       font-family: var(--font);
-      line-height: 1.5;
       -webkit-font-smoothing: antialiased;
-      text-rendering: geometricPrecision;
+      line-height: 1.5;
     }
 
     body.lightbox-open {
@@ -75,44 +59,44 @@
       text-decoration: none;
     }
 
-    button,
-    a {
-      -webkit-tap-highlight-color: transparent;
+    button {
+      font: inherit;
     }
 
     :focus-visible {
       outline: 2px solid var(--accent);
       outline-offset: 4px;
-      border-radius: 12px;
+      border-radius: 10px;
     }
 
     .skip-link {
       position: fixed;
-      top: 16px;
-      left: 16px;
-      z-index: 1000;
+      top: 14px;
+      left: 14px;
+      z-index: 999;
       padding: 10px 14px;
       background: var(--accent);
       color: #111214;
       border-radius: 999px;
       font-weight: 700;
       transform: translateY(-140%);
-      transition: transform 180ms ease;
     }
 
     .skip-link:focus {
       transform: translateY(0);
     }
 
-    .site-nav {
+    .nav {
       position: fixed;
-      inset: 0 0 auto 0;
+      top: 0;
+      left: 0;
+      right: 0;
       z-index: 100;
-      height: var(--nav-height);
+      height: 68px;
       background: rgba(17, 18, 20, 0.78);
       border-bottom: 1px solid rgba(255, 255, 255, 0.07);
-      backdrop-filter: blur(22px) saturate(140%);
-      -webkit-backdrop-filter: blur(22px) saturate(140%);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
     }
 
     .nav-inner {
@@ -122,14 +106,13 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 24px;
     }
 
     .brand {
-      display: inline-flex;
+      display: flex;
       align-items: center;
       gap: 10px;
-      font-weight: 700;
+      font-weight: 750;
       letter-spacing: -0.02em;
     }
 
@@ -139,21 +122,12 @@
       border-radius: 10px;
     }
 
-    .brand span {
-      font-size: 17px;
-    }
-
     .nav-links {
       display: flex;
-      align-items: center;
-      gap: 28px;
+      gap: 26px;
       color: var(--muted);
       font-size: 14px;
-      font-weight: 600;
-    }
-
-    .nav-links a {
-      transition: color 180ms ease;
+      font-weight: 650;
     }
 
     .nav-links a:hover {
@@ -167,11 +141,7 @@
     .section {
       width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
-      padding: 86px 0;
-    }
-
-    .section-compact {
-      padding: 66px 0;
+      padding: 78px 0;
     }
 
     .eyebrow {
@@ -183,17 +153,17 @@
       text-transform: uppercase;
     }
 
-    .section-heading {
+    .section-title {
       margin: 0;
-      max-width: 720px;
-      font-size: clamp(34px, 6vw, 64px);
+      max-width: 760px;
+      font-size: clamp(36px, 6vw, 66px);
       line-height: 0.98;
       letter-spacing: -0.07em;
     }
 
     .section-copy {
       margin: 18px 0 0;
-      max-width: 560px;
+      max-width: 590px;
       color: var(--muted);
       font-size: clamp(17px, 2vw, 20px);
       line-height: 1.45;
@@ -202,25 +172,20 @@
 
     .hero {
       min-height: 100svh;
-      padding: calc(var(--nav-height) + 54px) 0 74px;
-      position: relative;
+      padding: 116px 0 70px;
       display: flex;
       align-items: center;
+      position: relative;
     }
 
     .hero::before {
       content: "";
       position: absolute;
       left: 50%;
-      top: 54%;
-      width: min(560px, 82vw);
-      height: min(560px, 82vw);
-      background: radial-gradient(
-        circle,
-        rgba(249, 183, 10, 0.13) 0%,
-        rgba(249, 183, 10, 0.06) 34%,
-        rgba(249, 183, 10, 0) 70%
-      );
+      top: 56%;
+      width: min(520px, 80vw);
+      height: min(520px, 80vw);
+      background: radial-gradient(circle, rgba(249, 183, 10, 0.12), rgba(249, 183, 10, 0) 68%);
       transform: translate(-50%, -50%);
       pointer-events: none;
     }
@@ -228,39 +193,35 @@
     .hero-inner {
       width: min(var(--max), calc(100% - 40px));
       margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(280px, 390px);
+      gap: clamp(44px, 8vw, 90px);
+      align-items: center;
       position: relative;
       z-index: 1;
-      display: grid;
-      grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
-      align-items: center;
-      gap: clamp(40px, 8vw, 90px);
-    }
-
-    .hero-copy {
-      max-width: 650px;
     }
 
     .hero-icon {
-      width: 88px;
-      height: 88px;
-      margin: 0 0 30px;
+      width: 86px;
+      height: 86px;
+      margin-bottom: 28px;
       border-radius: 24px;
-      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.34);
+      box-shadow: 0 18px 50px rgba(0, 0, 0, 0.35);
     }
 
-    .hero h1 {
+    h1 {
       margin: 0;
-      font-size: clamp(54px, 8.6vw, 104px);
+      font-size: clamp(54px, 8vw, 100px);
       line-height: 0.9;
       letter-spacing: -0.085em;
-      font-weight: 800;
+      font-weight: 850;
     }
 
-    .hero h1 span {
+    h1 span {
       color: var(--accent);
     }
 
-    .hero p {
+    .hero-copy p {
       margin: 28px 0 0;
       max-width: 470px;
       color: var(--muted);
@@ -272,8 +233,8 @@
     .hero-actions {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
       gap: 18px;
+      flex-wrap: wrap;
       margin-top: 34px;
     }
 
@@ -286,57 +247,37 @@
       border-radius: 999px;
       font-size: 15px;
       font-weight: 800;
-      letter-spacing: -0.01em;
     }
 
     .button-primary {
       background: var(--accent);
       color: #111214;
-      box-shadow: 0 14px 38px rgba(249, 183, 10, 0.18);
+      box-shadow: 0 14px 36px rgba(249, 183, 10, 0.18);
     }
 
-    .button-link {
+    .button-secondary {
       color: var(--text);
+      border-bottom: 1px solid rgba(245, 245, 247, 0.36);
+      border-radius: 0;
+      padding-left: 0;
+      padding-right: 0;
+    }
+
+    .hero-phone {
       position: relative;
-    }
-
-    .button-link::after {
-      content: "";
-      position: absolute;
-      left: 22px;
-      right: 22px;
-      bottom: 8px;
-      height: 1px;
-      background: rgba(245, 245, 247, 0.35);
-    }
-
-    .hero-phone-wrap {
+      width: min(360px, 78vw);
       justify-self: center;
-      width: min(380px, 78vw);
-      position: relative;
     }
 
-    .hero-phone-wrap::before {
-      content: "";
-      position: absolute;
-      inset: 8% 8% 2%;
-      border-radius: 46px;
-      background: rgba(249, 183, 10, 0.12);
-      filter: blur(48px);
-      transform: translateY(18px);
-      pointer-events: none;
-    }
-
-    .phone-frame {
-      position: relative;
+    .phone {
       overflow: hidden;
-      border-radius: 46px;
-      border: 1px solid rgba(255, 255, 255, 0.16);
-      background: #090a0c;
-      box-shadow: var(--shadow);
+      border-radius: 44px;
+      background: #08090B;
+      border: 1px solid rgba(255, 255, 255, 0.14);
+      box-shadow: 0 32px 90px rgba(0, 0, 0, 0.48);
     }
 
-    .phone-frame img {
+    .phone img {
       width: 100%;
       height: auto;
     }
@@ -349,20 +290,19 @@
       display: grid;
       grid-template-columns: repeat(3, 1fr);
       gap: 18px;
-      margin-top: 36px;
+      margin-top: 34px;
     }
 
     .step {
-      padding: 28px;
-      border-radius: var(--radius);
+      padding: 26px;
+      border-radius: 26px;
       background: rgba(29, 31, 35, 0.72);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
     .step h3 {
       margin: 0;
-      color: var(--text);
-      font-size: clamp(34px, 4.2vw, 54px);
+      font-size: clamp(36px, 5vw, 56px);
       line-height: 0.95;
       letter-spacing: -0.07em;
     }
@@ -371,12 +311,11 @@
       margin: 16px 0 0;
       color: var(--muted);
       font-size: 17px;
-      line-height: 1.45;
       letter-spacing: -0.02em;
     }
 
     .screenshots {
-      padding-top: 74px;
+      padding: 78px 0;
     }
 
     .screenshots-header {
@@ -384,16 +323,11 @@
       margin: 0 auto 34px;
     }
 
-    .rail-wrap {
-      width: 100%;
-      overflow: hidden;
-    }
-
     .screenshot-rail {
       display: flex;
       gap: 22px;
       overflow-x: auto;
-      padding: 10px max(20px, calc((100vw - var(--max)) / 2)) 34px;
+      padding: 8px max(20px, calc((100vw - var(--max)) / 2)) 34px;
       scroll-snap-type: x proximity;
       scrollbar-width: thin;
       scrollbar-color: rgba(249, 183, 10, 0.45) rgba(255, 255, 255, 0.06);
@@ -415,33 +349,34 @@
 
     .shot {
       flex: 0 0 min(245px, 68vw);
+      margin: 0;
       scroll-snap-align: start;
     }
 
-    .shot-button {
+    .shot button {
+      display: block;
       width: 100%;
-      margin: 0;
       padding: 0;
+      margin: 0;
       border: 0;
       background: transparent;
       color: inherit;
-      cursor: zoom-in;
-      font: inherit;
       text-align: left;
+      cursor: zoom-in;
     }
 
-    .shot-image {
+    .shot-frame {
       overflow: hidden;
       border-radius: 34px;
-      background: #090a0c;
+      background: #08090B;
       border: 1px solid rgba(255, 255, 255, 0.13);
       box-shadow: 0 24px 65px rgba(0, 0, 0, 0.34);
-      transition: transform 220ms ease, border-color 220ms ease;
+      transition: transform 200ms ease, border-color 200ms ease;
     }
 
-    .shot-button:hover .shot-image {
+    .shot button:hover .shot-frame {
       transform: translateY(-4px);
-      border-color: var(--border-strong);
+      border-color: rgba(249, 183, 10, 0.24);
     }
 
     .shot img {
@@ -451,14 +386,14 @@
 
     .caption {
       margin-top: 13px;
-      color: var(--muted-dark);
+      color: rgba(182, 182, 189, 0.72);
       font-size: 13px;
-      font-weight: 700;
+      font-weight: 750;
       letter-spacing: 0.04em;
       text-transform: uppercase;
     }
 
-    .feature-grid {
+    .features {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 14px;
@@ -466,10 +401,10 @@
     }
 
     .feature {
-      min-height: 150px;
+      min-height: 142px;
       padding: 22px;
       border-radius: 24px;
-      background: rgba(29, 31, 35, 0.64);
+      background: rgba(29, 31, 35, 0.68);
       border: 1px solid rgba(255, 255, 255, 0.08);
     }
 
@@ -487,30 +422,24 @@
       line-height: 1.45;
     }
 
-    .trust-panel {
-      padding: clamp(32px, 6vw, 58px);
-      border-radius: calc(var(--radius) + 8px);
-      background:
-        radial-gradient(
-          circle at top right,
-          rgba(249, 183, 10, 0.09),
-          rgba(249, 183, 10, 0) 34%
-        ),
-        var(--panel);
+    .privacy-panel {
+      padding: clamp(32px, 6vw, 56px);
+      border-radius: 34px;
+      background: var(--panel);
       border: 1px solid rgba(255, 255, 255, 0.09);
       box-shadow: 0 26px 80px rgba(0, 0, 0, 0.22);
     }
 
-    .trust-list {
+    .privacy-list {
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       gap: 10px;
-      margin: 34px 0 0;
+      margin: 32px 0 0;
       padding: 0;
       list-style: none;
     }
 
-    .trust-list li {
+    .privacy-list li {
       padding: 14px 16px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.055);
@@ -518,17 +447,16 @@
       font-size: 14px;
       font-weight: 750;
       text-align: center;
-      white-space: nowrap;
     }
 
-    .tech-strip {
+    .tech-list {
       display: flex;
       flex-wrap: wrap;
       gap: 10px;
       margin-top: 32px;
     }
 
-    .tech-strip span {
+    .tech-list span {
       display: inline-flex;
       align-items: center;
       min-height: 40px;
@@ -541,7 +469,7 @@
       font-weight: 700;
     }
 
-    .faq-list {
+    .faq {
       display: grid;
       gap: 12px;
       margin-top: 32px;
@@ -571,7 +499,7 @@
       content: "+";
       float: right;
       color: var(--accent);
-      font-weight: 800;
+      font-weight: 850;
     }
 
     details[open] summary::after {
@@ -581,15 +509,15 @@
     details p {
       margin: 0;
       padding: 0 22px 22px;
-      color: var(--muted);
       max-width: 760px;
+      color: var(--muted);
     }
 
         .support {
       text-align: center;
     }
 
-    .support .section-heading,
+    .support .section-title,
     .support .section-copy {
       margin-left: auto;
       margin-right: auto;
@@ -597,7 +525,6 @@
 
     .support-links {
       display: flex;
-      align-items: center;
       justify-content: center;
       flex-wrap: wrap;
       gap: 12px;
@@ -605,31 +532,30 @@
     }
 
     .support-links a {
-      display: inline-flex;
-      align-items: center;
       min-height: 42px;
-      padding: 0 18px;
+      padding: 10px 18px;
       border-radius: 999px;
       background: rgba(255, 255, 255, 0.055);
       border: 1px solid rgba(255, 255, 255, 0.085);
-      color: var(--text);
       font-size: 14px;
       font-weight: 750;
     }
 
     .closing-line {
-      margin: 46px 0 0;
+      margin: 44px 0 0;
       color: var(--accent);
-      font-size: clamp(28px, 4vw, 48px);
+      font-size: clamp(30px, 4vw, 48px);
       line-height: 1;
       letter-spacing: -0.065em;
-      font-weight: 800;
+      font-weight: 850;
     }
 
-    .site-footer {
-      border-top: 1px solid rgba(255, 255, 255, 0.07);
+    .footer {
       padding: 28px 0;
-      color: var(--muted-dark);
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      color: rgba(182, 182, 189, 0.72);
+      font-size: 13px;
+      font-weight: 650;
     }
 
     .footer-inner {
@@ -639,17 +565,15 @@
       align-items: center;
       justify-content: space-between;
       gap: 18px;
-      font-size: 13px;
-      font-weight: 650;
     }
 
     .footer-links {
       display: flex;
-      align-items: center;
       gap: 18px;
+      flex-wrap: wrap;
     }
 
-    .footer-links a:hover {
+    .footer a:hover {
       color: var(--text);
     }
 
@@ -661,7 +585,7 @@
       align-items: center;
       justify-content: center;
       padding: 24px;
-      background: rgba(0, 0, 0, 0.74);
+      background: rgba(0, 0, 0, 0.76);
       backdrop-filter: blur(18px);
       -webkit-backdrop-filter: blur(18px);
     }
@@ -676,10 +600,10 @@
       max-height: 90svh;
     }
 
-    .lightbox-img-wrap {
+    .lightbox-frame {
       overflow: hidden;
       border-radius: 42px;
-      background: #090a0c;
+      background: #08090B;
       border: 1px solid rgba(255, 255, 255, 0.16);
       box-shadow: 0 40px 110px rgba(0, 0, 0, 0.62);
     }
@@ -699,12 +623,11 @@
       height: 44px;
       border: 1px solid rgba(255, 255, 255, 0.16);
       border-radius: 999px;
-      background: rgba(29, 31, 35, 0.92);
+      background: rgba(29, 31, 35, 0.94);
       color: var(--text);
       cursor: pointer;
       font-size: 24px;
       line-height: 1;
-      font-weight: 500;
       box-shadow: 0 12px 34px rgba(0, 0, 0, 0.34);
     }
 
@@ -714,16 +637,8 @@
         text-align: center;
       }
 
-      .hero-copy {
-        margin: 0 auto;
-      }
-
-      .hero-icon {
-        margin-left: auto;
-        margin-right: auto;
-      }
-
-      .hero p {
+      .hero-icon,
+      .hero-copy p {
         margin-left: auto;
         margin-right: auto;
       }
@@ -733,19 +648,15 @@
       }
 
       .steps,
-      .feature-grid,
-      .trust-list {
+      .features,
+      .privacy-list {
         grid-template-columns: 1fr;
-      }
-
-      .trust-list li {
-        white-space: normal;
       }
     }
 
     @media (max-width: 720px) {
-      :root {
-        --nav-height: 66px;
+      .nav {
+        height: 64px;
       }
 
       .nav-inner,
@@ -761,25 +672,20 @@
 
       .hero {
         min-height: auto;
-        padding-top: calc(var(--nav-height) + 46px);
+        padding: 104px 0 56px;
       }
 
-      .hero h1 {
-        font-size: clamp(50px, 15vw, 78px);
-      }
-
-      .hero-phone-wrap {
-        width: min(330px, 82vw);
+      h1 {
+        font-size: clamp(50px, 15vw, 76px);
       }
 
       .section,
-      .section-compact {
+      .screenshots {
         padding: 58px 0;
       }
 
-      .step,
-      .feature {
-        padding: 22px;
+      .shot {
+        flex-basis: min(230px, 72vw);
       }
 
       .screenshot-rail {
@@ -788,24 +694,21 @@
         padding-right: 14px;
       }
 
-      .shot {
-        flex-basis: min(230px, 72vw);
-      }
-
       .footer-inner {
-        flex-direction: column;
         align-items: flex-start;
+        flex-direction: column;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
       *,
       *::before,
       *::after {
-        scroll-behaviour: auto !important;
-        transition-duration: 0.001ms !important;
-        animation-duration: 0.001ms !important;
-        animation-iteration-count: 1 !important;
+        transition: none !important;
       }
     }
   </style>
@@ -814,10 +717,10 @@
 <body>
   <a class="skip-link" href="#main">Skip to content</a>
 
-  <header class="site-nav" aria-label="Main navigation">
+  <header class="nav" aria-label="Main navigation">
     <div class="nav-inner">
       <a class="brand" href="#" aria-label="Twigged home">
-        <img src="assets/icon.png" alt="" width="34" height="34" />
+        <img src="assets/icon.png" alt="" width="34" height="34">
         <span>Twigged</span>
       </a>
 
@@ -834,17 +737,11 @@
     <section class="hero" aria-labelledby="hero-title">
       <div class="hero-inner">
         <div class="hero-copy">
-          <img
-            class="hero-icon"
-            src="assets/icon.png"
-            alt="Twigged app icon"
-            width="88"
-            height="88"
-          />
+          <img class="hero-icon" src="assets/icon.png" alt="Twigged app icon" width="86" height="86">
 
           <h1 id="hero-title">
-            Remember where<br />
-            the things that<br />
+            Remember where<br>
+            the things that<br>
             <span>matter</span> are.
           </h1>
 
@@ -852,31 +749,23 @@
 
           <div class="hero-actions">
             <a class="button button-primary" href="#support">Coming Soon</a>
-            <a class="button button-link" href="#screenshots">See it in action</a>
+            <a class="button button-secondary" href="#screenshots">See it in action</a>
           </div>
         </div>
 
-        <div class="hero-phone-wrap" aria-label="Twigged app preview">
-          <div class="phone-frame">
-            <img
-              src="assets/1.png"
-              alt="Twigged home screen showing the main voice memory interface"
-              width="900"
-              height="1800"
-            />
+        <div class="hero-phone">
+          <div class="phone">
+            <img src="assets/1.png" alt="Twigged home screen showing the main voice memory interface" width="900" height="1800">
           </div>
         </div>
       </div>
     </section>
-
-        <section class="section section-compact how" id="how" aria-labelledby="how-title">
+    <section class="section how" id="how" aria-labelledby="how-title">
       <p class="eyebrow">How it works</p>
-      <h2 class="section-heading" id="how-title">Tell. Ask. Find.</h2>
-      <p class="section-copy">
-        A calm way to remember where the everyday things are.
-      </p>
+      <h2 class="section-title" id="how-title">Tell. Ask. Find.</h2>
+      <p class="section-copy">A calm way to remember where the everyday things are.</p>
 
-      <div class="steps" aria-label="Three steps">
+      <div class="steps" aria-label="Three simple steps">
         <article class="step">
           <h3>Tell.</h3>
           <p>Tell Twigged where something is.</p>
@@ -897,358 +786,52 @@
     <section class="screenshots" id="screenshots" aria-labelledby="screenshots-title">
       <div class="screenshots-header">
         <p class="eyebrow">Screenshots</p>
-        <h2 class="section-heading" id="screenshots-title">
-          See Twigged in action.
-        </h2>
-        <p class="section-copy">
-          Ten simple moments. One calm way to remember.
-        </p>
+        <h2 class="section-title" id="screenshots-title">See Twigged in action.</h2>
+        <p class="section-copy">Ten simple moments. One calm way to remember.</p>
       </div>
 
-      <div class="rail-wrap">
-        <div class="screenshot-rail" aria-label="Twigged screenshot gallery">
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/1.png" data-alt="Twigged home screen">
-              <span class="shot-image">
-                <img src="assets/1.png" alt="Twigged home screen" width="900" height="1800" />
-              </span>
-              <figcaption class="caption">01 Home</figcaption>
-            </button>
-          </figure>
+      <div class="screenshot-rail" aria-label="Twigged screenshot gallery">
+        <figure class="shot">
+          <button type="button" data-full="assets/1.png" data-alt="Twigged home screen">
+            <span class="shot-frame">
+              <img src="assets/1.png" alt="Twigged home screen" width="900" height="1800">
+            </span>
+            <figcaption class="caption">01 Home</figcaption>
+          </button>
+        </figure>
 
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/2.png" data-alt="Twigged listening screen">
-              <span class="shot-image">
-                <img src="assets/2.png" alt="Twigged listening screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">02 Listening</figcaption>
-            </button>
-          </figure>
+        <figure class="shot">
+          <button type="button" data-full="assets/2.png" data-alt="Twigged listening screen">
+            <span class="shot-frame">
+              <img src="assets/2.png" alt="Twigged listening screen" width="900" height="1800" loading="lazy">
+            </span>
+            <figcaption class="caption">02 Listening</figcaption>
+          </button>
+        </figure>
 
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/3.png" data-alt="Twigged saved confirmation screen">
-              <span class="shot-image">
-                <img src="assets/3.png" alt="Twigged saved confirmation screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">03 Saved</figcaption>
-            </button>
-          </figure>
+        <figure class="shot">
+          <button type="button" data-full="assets/3.png" data-alt="Twigged saved confirmation screen">
+            <span class="shot-frame">
+              <img src="assets/3.png" alt="Twigged saved confirmation screen" width="900" height="1800" loading="lazy">
+            </span>
+            <figcaption class="caption">03 Saved</figcaption>
+          </button>
+        </figure>
 
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/4.png" data-alt="Twigged ask screen">
-              <span class="shot-image">
-                <img src="assets/4.png" alt="Twigged ask screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">04 Ask</figcaption>
-            </button>
-          </figure>
+        <figure class="shot">
+          <button type="button" data-full="assets/4.png" data-alt="Twigged ask screen">
+            <span class="shot-frame">
+              <img src="assets/4.png" alt="Twigged ask screen" width="900" height="1800" loading="lazy">
+            </span>
+            <figcaption class="caption">04 Ask</figcaption>
+          </button>
+        </figure>
 
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/5.png" data-alt="Twigged answer screen">
-              <span class="shot-image">
-                <img src="assets/5.png" alt="Twigged answer screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">05 Answer</figcaption>
-            </button>
-          </figure>
-
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/6.png" data-alt="Twigged saved items screen">
-              <span class="shot-image">
-                <img src="assets/6.png" alt="Twigged saved items screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">06 Saved Items</figcaption>
-            </button>
-          </figure>
-
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/7.png" data-alt="Twigged review screen">
-              <span class="shot-image">
-                <img src="assets/7.png" alt="Twigged review screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">07 Review</figcaption>
-            </button>
-          </figure>
-
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/8.png" data-alt="Twigged edit screen">
-              <span class="shot-image">
-                <img src="assets/8.png" alt="Twigged edit screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">08 Edit</figcaption>
-            </button>
-          </figure>
-
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/9.png" data-alt="Twigged manage screen">
-              <span class="shot-image">
-                <img src="assets/9.png" alt="Twigged manage screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">09 Manage</figcaption>
-            </button>
-          </figure>
-
-          <figure class="shot">
-            <button class="shot-button" type="button" data-full="assets/10.png" data-alt="Twigged done screen">
-              <span class="shot-image">
-                <img src="assets/10.png" alt="Twigged done screen" width="900" height="1800" loading="lazy" />
-              </span>
-              <figcaption class="caption">10 Done</figcaption>
-            </button>
-          </figure>
-        </div>
-      </div>
-    </section>
-
-    <section class="section section-compact" id="why" aria-labelledby="why-title">
-      <p class="eyebrow">Why Twigged</p>
-      <h2 class="section-heading" id="why-title">
-        Built for remembering, not managing.
-      </h2>
-      <p class="section-copy">
-        No clutter. No system to learn. Just say it once and find it later.
-      </p>
-
-      <div class="feature-grid" aria-label="Twigged features">
-        <article class="feature">
-          <h3>Voice-first</h3>
-          <p>Save what matters by speaking naturally.</p>
-        </article>
-
-        <article class="feature">
-          <h3>Natural language</h3>
-          <p>Ask the way you would ask a person.</p>
-        </article>
-
-        <article class="feature">
-          <h3>Type instead</h3>
-          <p>Use text whenever speaking is not right.</p>
-        </article>
-
-        <article class="feature">
-          <h3>Simple interface</h3>
-          <p>One calm place for saving and finding.</p>
-        </article>
-
-        <article class="feature">
-          <h3>Designed for accessibility</h3>
-          <p>Clear answers, large controls and a quiet layout.</p>
-        </article>
-      </div>
-    </section>
-
-        <section class="section section-compact" id="privacy" aria-labelledby="privacy-title">
-      <div class="trust-panel">
-        <p class="eyebrow">Privacy</p>
-        <h2 class="section-heading" id="privacy-title">
-          Your memories belong to you.
-        </h2>
-        <p class="section-copy">
-          Twigged is designed to remember useful everyday things without turning your life into data for someone else.
-        </p>
-
-        <ul class="trust-list" aria-label="Privacy promises">
-          <li>No accounts.</li>
-          <li>No advertising.</li>
-          <li>No subscriptions.</li>
-          <li>Everything stays on your device.</li>
-          <li>Works offline after information has been saved.</li>
-        </ul>
-      </div>
-    </section>
-
-    <section class="section section-compact" aria-labelledby="tech-title">
-      <p class="eyebrow">Apple technologies</p>
-      <h2 class="section-heading" id="tech-title">
-        Built for iPhone, the Apple way.
-      </h2>
-      <p class="section-copy">
-        Understated technology, focused on making memory feel effortless.
-      </p>
-
-      <div class="tech-strip" aria-label="Apple technologies used by Twigged">
-        <span>Apple Foundation Models</span>
-        <span>Apple Speech Recognition</span>
-        <span>SwiftData</span>
-        <span>SwiftUI</span>
-        <span>Siri App Intents</span>
-      </div>
-    </section>
-
-    <section class="section section-compact" id="faq" aria-labelledby="faq-title">
-      <p class="eyebrow">FAQ</p>
-      <h2 class="section-heading" id="faq-title">
-        Simple answers.
-      </h2>
-
-      <div class="faq-list">
-        <details>
-          <summary>Does Twigged need an internet connection?</summary>
-          <p>
-            Twigged can work offline after information has been saved. Some voice recognition features may depend on device settings and Apple system availability.
-          </p>
-        </details>
-
-        <details>
-          <summary>Does Twigged store my information online?</summary>
-          <p>
-            No. Saved information stays on your device. Twigged does not use accounts, advertising or online storage.
-          </p>
-        </details>
-
-        <details>
-          <summary>Can I type instead of speaking?</summary>
-          <p>
-            Yes. Twigged is voice-first, but you can type instead whenever that feels better.
-          </p>
-        </details>
-
-        <details>
-          <summary>Can I use Siri?</summary>
-          <p>
-            Yes. Twigged supports Siri App Intents so you can save and find items using Siri.
-          </p>
-        </details>
-
-        <details>
-          <summary>Does Twigged support other languages?</summary>
-          <p>
-            Version 1.0 supports English only. Additional languages are planned.
-          </p>
-        </details>
-      </div>
-    </section>
-    <section class="section section-compact support" id="support" aria-labelledby="support-title">
-      <p class="eyebrow">Support</p>
-
-      <h2 class="section-heading" id="support-title">
-        We're here to help.
-      </h2>
-
-      <p class="section-copy">
-        If you have a question, suggestion or need support, we'd love to hear from you.
-      </p>
-
-      <div class="support-links">
-        <a href="mailto:mitchellmaker.apps@gmail.com">
-          mitchellmaker.apps@gmail.com
-        </a>
-
-        <a href="privacy.html">
-          Privacy Policy
-        </a>
-      </div>
-
-      <p class="closing-line">
-        Remember once.<br>
-        Find it later.
-      </p>
-    </section>
-
-  </main>
-
-  <footer class="site-footer">
-    <div class="footer-inner">
-      <div>
-        © 2026 Twigged. All rights reserved.
-      </div>
-
-      <nav class="footer-links" aria-label="Footer">
-        <a href="#how">How it works</a>
-        <a href="#screenshots">Screenshots</a>
-        <a href="privacy.html">Privacy</a>
-        <a href="#support">Support</a>
-      </nav>
-    </div>
-  </footer>
-
-  <div
-    class="lightbox"
-    id="lightbox"
-    aria-hidden="true"
-    role="dialog"
-    aria-modal="true"
-    aria-label="Screenshot preview"
-  >
-    <div class="lightbox-panel">
-
-      <button
-        class="lightbox-close"
-        type="button"
-        aria-label="Close preview"
-      >
-        ×
-      </button>
-
-      <div class="lightbox-img-wrap">
-        <img
-          id="lightbox-image"
-          src=""
-          alt=""
-        >
-      </div>
-
-    </div>
-  </div>
-
-<script>
-(() => {
-
-const lightbox = document.getElementById('lightbox');
-const image = document.getElementById('lightbox-image');
-const closeButton = document.querySelector('.lightbox-close');
-
-let lastTrigger = null;
-
-function closeLightbox() {
-    lightbox.setAttribute('aria-hidden','true');
-    document.body.classList.remove('lightbox-open');
-    image.src = '';
-
-    if(lastTrigger){
-        lastTrigger.focus();
-    }
-}
-
-document.querySelectorAll('.shot-button').forEach(button => {
-
-    button.addEventListener('click', () => {
-
-        lastTrigger = button;
-
-        image.src = button.dataset.full;
-        image.alt = button.dataset.alt;
-
-        lightbox.setAttribute('aria-hidden','false');
-        document.body.classList.add('lightbox-open');
-
-        closeButton.focus();
-
-    });
-
-});
-
-closeButton.addEventListener('click', closeLightbox);
-
-lightbox.addEventListener('click', e => {
-
-    if(e.target === lightbox){
-        closeLightbox();
-    }
-
-});
-
-document.addEventListener('keydown', e => {
-
-    if(e.key === 'Escape' &&
-       lightbox.getAttribute('aria-hidden') === 'false'){
-        closeLightbox();
-    }
-
-});
-
-})();
-</script>
-
-</body>
-</html>    
+        <figure class="shot">
+          <button type="button" data-full="assets/5.png" data-alt="Twigged answer screen">
+            <span class="shot-frame">
+              <img src="assets/5.png" alt="Twigged answer screen" width="900" height="1800" loading="lazy">
+            </span>
+            <figcaption class="caption">05 Answer</figcaption>
+          </button>
+        </figure>    

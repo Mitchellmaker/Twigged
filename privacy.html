@@ -1,1 +1,538 @@
 
+<!DOCTYPE html>
+<html lang="en-GB">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <meta
+    name="description"
+    content="Privacy Policy for Twigged, the voice-first memory assistant by MitchellMaker."
+  />
+
+  <title>Privacy Policy - Twigged</title>
+
+  <style>
+    :root {
+      --background: #111214;
+      --primary: #f5f5f7;
+      --secondary: #aaa7a1;
+      --accent: #f9b70a;
+      --line: rgba(245, 245, 247, 0.1);
+      --glass: rgba(27, 28, 30, 0.72);
+      --page-width: 860px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      background: var(--background);
+    }
+
+    body {
+      margin: 0;
+      overflow-x: hidden;
+      background: var(--background);
+      color: var(--primary);
+      font-family:
+        -apple-system,
+        BlinkMacSystemFont,
+        "SF Pro Display",
+        "SF Pro Text",
+        "Helvetica Neue",
+        Arial,
+        sans-serif;
+      -webkit-font-smoothing: antialiased;
+      text-rendering: optimizeLegibility;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .page {
+      min-height: 100vh;
+      overflow: hidden;
+    }
+
+    .nav-wrap {
+      position: fixed;
+      top: 16px;
+      right: 0;
+      left: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: center;
+      padding: 0 18px;
+      pointer-events: none;
+    }
+
+    .nav {
+      pointer-events: auto;
+      display: grid;
+      grid-template-columns: 46px 1fr;
+      align-items: center;
+      width: min(620px, 100%);
+      min-height: 56px;
+      padding: 5px 10px;
+      border: 1px solid rgba(245, 245, 247, 0.1);
+      border-radius: 999px;
+      background: var(--glass);
+      box-shadow:
+        0 14px 42px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.035);
+      backdrop-filter: blur(30px) saturate(140%);
+      -webkit-backdrop-filter: blur(30px) saturate(140%);
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+    }
+
+    .nav-brand img {
+      width: 31px;
+      height: 31px;
+      object-fit: contain;
+      background: transparent;
+      border: 0;
+      box-shadow: none;
+    }
+
+    .nav-links {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      align-items: center;
+      width: 100%;
+    }
+
+    .nav-links a {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 0 10px;
+      color: rgba(245, 245, 247, 0.78);
+      font-size: 16px;
+      font-weight: 600;
+      line-height: 1;
+      letter-spacing: -0.018em;
+      text-align: center;
+      transition: color 180ms ease;
+    }
+
+    .nav-links a:hover,
+    .nav-links a:focus-visible {
+      color: var(--primary);
+      outline: none;
+    }
+
+    main {
+      width: min(var(--page-width), calc(100% - 48px));
+      margin: 0 auto;
+      padding: 132px 0 72px;
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .hero {
+      padding: 18px 0 44px;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .hero h1 {
+      max-width: 760px;
+      margin: 0 0 18px;
+      font-size: clamp(50px, 8vw, 88px);
+      font-weight: 750;
+      line-height: 0.96;
+      letter-spacing: -0.062em;
+    }
+
+    .hero h1 span {
+      color: var(--accent);
+    }
+
+    .hero p {
+      max-width: 650px;
+      margin: 0;
+      color: var(--secondary);
+      font-size: clamp(18px, 2.4vw, 24px);
+      line-height: 1.4;
+      letter-spacing: -0.026em;
+    }
+
+    .policy {
+      padding-top: 20px;
+    }
+
+    .policy-section {
+      padding: 28px 0;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .policy-section h2 {
+      margin: 0 0 12px;
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 720;
+      line-height: 1.05;
+      letter-spacing: -0.045em;
+    }
+
+    .policy-section p {
+      margin: 0 0 12px;
+      color: var(--secondary);
+      font-size: 17px;
+      line-height: 1.6;
+      letter-spacing: -0.018em;
+    }
+
+    .policy-section p:last-child {
+      margin-bottom: 0;
+    }
+
+    .policy-section strong {
+      color: var(--primary);
+      font-weight: 650;
+    }
+
+    .policy-list {
+      display: grid;
+      gap: 10px;
+      margin: 16px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .policy-list li {
+      position: relative;
+      padding-left: 20px;
+      color: var(--secondary);
+      font-size: 17px;
+      line-height: 1.55;
+      letter-spacing: -0.018em;
+    }
+
+    .policy-list li::before {
+      content: "";
+      position: absolute;
+      top: 0.67em;
+      left: 0;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--accent);
+    }
+
+    .contact {
+      padding: 34px 0 0;
+      text-align: center;
+    }
+
+    .contact h2 {
+      margin: 0 0 10px;
+      font-size: clamp(34px, 5vw, 52px);
+      font-weight: 750;
+      line-height: 1;
+      letter-spacing: -0.052em;
+    }
+
+    .contact p {
+      max-width: 520px;
+      margin: 0 auto 20px;
+      color: var(--secondary);
+      font-size: 16px;
+      line-height: 1.5;
+      letter-spacing: -0.018em;
+    }
+
+    .contact-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 46px;
+      padding: 0 22px;
+      border-radius: 999px;
+      background: rgba(245, 245, 247, 0.92);
+      color: var(--background);
+      font-size: 15px;
+      font-weight: 650;
+      letter-spacing: -0.012em;
+      transition: transform 180ms ease;
+    }
+
+    .contact-button:hover,
+    .contact-button:focus-visible {
+      transform: translateY(-1px);
+      outline: none;
+    }
+
+    .footer {
+      padding: 0 24px 24px;
+      color: rgba(245, 245, 247, 0.34);
+      font-size: 13px;
+      line-height: 1.4;
+      text-align: center;
+    }
+
+    @media (max-width: 560px) {
+      .nav-wrap {
+        top: 12px;
+        padding: 0 14px;
+      }
+
+      .nav {
+        grid-template-columns: 39px 1fr;
+        min-height: 48px;
+        padding: 4px 7px;
+      }
+
+      .nav-brand {
+        width: 38px;
+        height: 38px;
+      }
+
+      .nav-brand img {
+        width: 26px;
+        height: 26px;
+      }
+
+      .nav-links a {
+        min-height: 38px;
+        padding: 0 4px;
+        font-size: 14px;
+      }
+
+      main {
+        width: calc(100% - 36px);
+        padding: 104px 0 54px;
+      }
+
+      .hero {
+        padding: 12px 0 34px;
+      }
+
+      .hero h1 {
+        margin-bottom: 16px;
+        font-size: clamp(46px, 14vw, 62px);
+      }
+
+      .hero p {
+        font-size: 17px;
+        line-height: 1.45;
+      }
+
+      .policy-section {
+        padding: 24px 0;
+      }
+
+      .policy-section h2 {
+        font-size: 30px;
+      }
+
+      .policy-section p,
+      .policy-list li {
+        font-size: 16px;
+      }
+
+      .contact {
+        padding-top: 30px;
+      }
+
+      .contact-button {
+        width: 100%;
+      }
+
+      .footer {
+        padding-bottom: 18px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html {
+        scroll-behavior: auto;
+      }
+
+      *,
+      *::before,
+      *::after {
+        transition: none !important;
+      }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="page">
+
+    <div class="nav-wrap">
+      <nav class="nav" aria-label="Privacy page navigation">
+        <a class="nav-brand" href="index.html" aria-label="Twigged home">
+          <img src="assets/icon.png" alt="" />
+        </a>
+
+        <div class="nav-links">
+          <a href="index.html">Home</a>
+          <a href="#contact">Support</a>
+        </div>
+      </nav>
+    </div>
+
+    <main>
+      <section class="hero">
+        <p class="eyebrow">Twigged</p>
+
+        <h1>
+          Privacy by<br />
+          <span>design.</span>
+        </h1>
+
+        <p>
+          Twigged is designed to help you remember where things are without collecting your personal information.
+        </p>
+      </section>
+
+      <article class="policy">
+
+        <section class="policy-section">
+          <h2>Privacy Policy</h2>
+
+          <p>
+            This Privacy Policy explains how Twigged, developed by MitchellMaker, handles information when you use the app.
+          </p>
+
+          <p>
+            <strong>Effective date:</strong> 11 July 2026
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Information we collect</h2>
+
+          <p>
+            MitchellMaker does not collect, sell, rent or share personal information through Twigged.
+          </p>
+
+          <ul class="policy-list">
+            <li>No account is required.</li>
+            <li>No advertising identifiers are collected.</li>
+            <li>No analytics or tracking services are used.</li>
+            <li>No location information is collected.</li>
+            <li>No contact information is collected by the app.</li>
+          </ul>
+        </section>
+
+        <section class="policy-section">
+          <h2>Your saved information</h2>
+
+          <p>
+            Information you save in Twigged, such as the location of an item, is stored locally on your device.
+          </p>
+
+          <p>
+            MitchellMaker cannot access, view or recover this information.
+          </p>
+
+          <p>
+            Deleting the app may also delete the information stored by the app on your device.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Voice input</h2>
+
+          <p>
+            Twigged can use Apple speech recognition services to turn spoken words into text.
+          </p>
+
+          <p>
+            Speech processing is handled by Apple and may take place on your device or through Apple services, depending on your device, language and system settings.
+          </p>
+
+          <p>
+            MitchellMaker does not receive or store your voice recordings.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Typed input</h2>
+
+          <p>
+            You can use typed input instead of voice input. Typed information is processed by the app and stored locally on your device when you choose to save it.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Third-party services</h2>
+
+          <p>
+            Twigged does not include third-party advertising, analytics or tracking software.
+          </p>
+
+          <p>
+            Apple system services used by Twigged are governed by Apple's own privacy policies and device settings.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Children's privacy</h2>
+
+          <p>
+            Twigged does not knowingly collect personal information from children or any other users.
+          </p>
+        </section>
+
+        <section class="policy-section">
+          <h2>Changes to this policy</h2>
+
+          <p>
+            This Privacy Policy may be updated if Twigged's features or legal obligations change. Any revised policy will be published on this page with an updated effective date.
+          </p>
+        </section>
+
+        <section id="contact" class="contact">
+          <h2>Questions?</h2>
+
+          <p>
+            Contact MitchellMaker if you have any questions about Twigged or this Privacy Policy.
+          </p>
+
+          <a
+            class="contact-button"
+            href="mailto:Mitchellmaker.apps@gmail.com"
+          >
+            Email Support
+          </a>
+        </section>
+
+      </article>
+    </main>
+
+    <footer class="footer">
+      © 2026 MitchellMaker. Twigged.
+    </footer>
+
+  </div>
+</body>
+</html>

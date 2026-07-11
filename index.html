@@ -199,59 +199,58 @@
       letter-spacing: -0.024em;
     }
 
-    /* =========================
-       SECTION 2 - SCREENSHOTS
-    ========================= */
+   /* =========================
+   SECTION 2 - SCREENSHOTS
+========================= */
 
-    .screenshots {
-      padding: 20px 0 34px;
-    }
+.screenshots {
+  padding: 20px 0 34px;
+}
 
-    .screenshots-heading {
-      width: min(var(--page-width), calc(100% - 48px));
-      margin: 0 auto 14px;
-    }
+.screenshots-heading {
+  width: min(var(--page-width), calc(100% - 48px));
+  margin: 0 auto 14px;
+}
 
-    .carousel {
-      display: flex;
-      gap: 16px;
-      overflow-x: auto;
-      padding: 0 0 14px;
-      scroll-padding-inline: calc(50vw - (min(300px, 70vw) / 2));
-      scroll-snap-type: x mandatory;
-      scrollbar-width: none;
-      overscroll-behavior-inline: contain;
-      -webkit-overflow-scrolling: touch;
-      cursor: grab;
-      user-select: none;
-     touch-action: pan-y pinch-zoom;
-    }
+.carousel {
+  display: flex;
+  gap: 16px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 0 24px 14px;
+  scroll-padding-left: 24px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  user-select: none;
+  touch-action: auto;
+}
 
-    .carousel.dragging {
-      cursor: grabbing;
-      scroll-snap-type: none;
-    }
+.carousel.dragging {
+  cursor: grabbing;
+  scroll-snap-type: none;
+}
 
-    .carousel::-webkit-scrollbar {
-      display: none;
-    }
+.carousel::-webkit-scrollbar {
+  display: none;
+}
 
-    .carousel::before,
-    .carousel::after {
-      content: "";
-      flex: 0 0 calc(50vw - (min(300px, 70vw) / 2));
-    }
+.carousel::before,
+.carousel::after {
+  display: none;
+}
 
-    .carousel img {
-      flex: 0 0 auto;
-      width: min(300px, 70vw);
-      border-radius: 34px;
-      scroll-snap-align: center;
-      scroll-snap-stop: always;
-      pointer-events: none;
-      -webkit-user-drag: none;
-    }
-
+.carousel img {
+  flex: 0 0 auto;
+  width: min(300px, 70vw);
+  border-radius: 34px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+  pointer-events: none;
+  -webkit-user-drag: none;
+}
     /* =========================
        SECTIONS 3, 4, 5
        TELL / ASK / FIND

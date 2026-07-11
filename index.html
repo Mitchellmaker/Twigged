@@ -17,8 +17,8 @@
       --primary: #f5f5f7;
       --secondary: #aaa7a1;
       --accent: #f9b70a;
-      --line: rgba(245, 245, 247, 0.11);
-      --glass: rgba(28, 29, 31, 0.76);
+      --line: rgba(245, 245, 247, 0.1);
+      --glass: rgba(25, 26, 28, 0.72);
       --page-width: 1180px;
     }
 
@@ -73,10 +73,11 @@
     }
 
     .eyebrow {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       color: var(--accent);
       font-size: 12px;
       font-weight: 700;
+      line-height: 1;
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
@@ -87,7 +88,7 @@
 
     .nav-wrap {
       position: fixed;
-      top: 18px;
+      top: 16px;
       right: 0;
       left: 0;
       z-index: 100;
@@ -100,37 +101,39 @@
     .nav {
       pointer-events: auto;
       display: grid;
-      grid-template-columns: 44px 1fr;
+      grid-template-columns: 46px 1fr;
       align-items: center;
       width: min(760px, 100%);
-      min-height: 58px;
-      padding: 7px 12px;
-      border: 1px solid rgba(245, 245, 247, 0.12);
+      min-height: 56px;
+      padding: 5px 10px;
+      border: 1px solid rgba(245, 245, 247, 0.09);
       border-radius: 999px;
       background: var(--glass);
-      box-shadow: 0 14px 50px rgba(0, 0, 0, 0.18);
-      backdrop-filter: blur(24px) saturate(130%);
-      -webkit-backdrop-filter: blur(24px) saturate(130%);
+      box-shadow:
+        0 12px 42px rgba(0, 0, 0, 0.16),
+        inset 0 1px 0 rgba(255, 255, 255, 0.025);
+      backdrop-filter: blur(28px) saturate(135%);
+      -webkit-backdrop-filter: blur(28px) saturate(135%);
     }
 
     .nav-brand {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 44px;
-      height: 44px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
     }
 
     .nav-brand img {
-      width: 32px;
-      height: 32px;
+      width: 31px;
+      height: 31px;
       object-fit: contain;
     }
 
     .nav-links {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: center;
       width: 100%;
     }
@@ -139,12 +142,13 @@
       display: flex;
       align-items: center;
       justify-content: center;
-      min-height: 42px;
-      padding: 0 8px;
-      color: rgba(245, 245, 247, 0.76);
+      min-height: 44px;
+      padding: 0 10px;
+      color: rgba(245, 245, 247, 0.78);
       font-size: 16px;
       font-weight: 600;
-      letter-spacing: -0.02em;
+      line-height: 1;
+      letter-spacing: -0.018em;
       text-align: center;
       transition:
         color 180ms ease,
@@ -162,30 +166,30 @@
     ========================= */
 
     .hero {
-      padding: 118px 24px 34px;
+      padding: 104px 24px 24px;
     }
 
     .hero-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: min(920px, 100%);
+      width: min(900px, 100%);
       margin: 0 auto;
       text-align: center;
     }
 
     .hero-logo {
-      width: clamp(250px, 42vw, 490px);
-      margin: 0 auto 22px;
+      width: clamp(270px, 43vw, 510px);
+      margin: 0 auto 16px;
     }
 
     .hero h1 {
-      max-width: 900px;
+      max-width: 820px;
       margin: 0;
-      font-size: clamp(50px, 7vw, 100px);
+      font-size: clamp(46px, 6.4vw, 88px);
       font-weight: 750;
-      line-height: 0.94;
-      letter-spacing: -0.068em;
+      line-height: 0.96;
+      letter-spacing: -0.062em;
     }
 
     .hero h1 span {
@@ -194,26 +198,27 @@
 
     .hero-copy {
       max-width: 540px;
-      margin: 24px 0 24px;
+      margin: 20px 0;
       color: var(--secondary);
-      font-size: clamp(18px, 2vw, 25px);
-      line-height: 1.32;
-      letter-spacing: -0.03em;
+      font-size: clamp(18px, 1.85vw, 24px);
+      line-height: 1.34;
+      letter-spacing: -0.026em;
     }
 
     .hero-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 48px;
-      padding: 0 24px;
-      border: 1px solid rgba(245, 245, 247, 0.14);
+      min-height: 46px;
+      padding: 0 22px;
+      border: 1px solid rgba(245, 245, 247, 0.12);
       border-radius: 999px;
-      background: rgba(245, 245, 247, 0.08);
+      background: rgba(245, 245, 247, 0.065);
       color: var(--primary);
       font-size: 15px;
       font-weight: 600;
-      letter-spacing: -0.015em;
+      line-height: 1;
+      letter-spacing: -0.012em;
       transition:
         transform 180ms ease,
         background 180ms ease;
@@ -221,7 +226,7 @@
 
     .hero-button:hover,
     .hero-button:focus-visible {
-      background: rgba(245, 245, 247, 0.12);
+      background: rgba(245, 245, 247, 0.1);
       transform: translateY(-1px);
       outline: none;
     }
@@ -231,20 +236,20 @@
     ========================= */
 
     .screenshots {
-      padding: 34px 0 54px;
+      padding: 28px 0 38px;
     }
 
     .screenshots-heading {
       width: min(var(--page-width), calc(100% - 48px));
-      margin: 0 auto 18px;
+      margin: 0 auto 14px;
     }
 
     .carousel {
       display: flex;
-      gap: 18px;
+      gap: 14px;
       overflow-x: auto;
-      padding: 0 0 18px;
-      scroll-padding-inline: calc(50vw - (min(350px, 74vw) / 2));
+      padding: 0 0 14px;
+      scroll-padding-inline: calc(50vw - (min(280px, 68vw) / 2));
       scroll-snap-type: x mandatory;
       scrollbar-width: none;
       overscroll-behavior-inline: contain;
@@ -258,38 +263,38 @@
     .carousel::before,
     .carousel::after {
       content: "";
-      flex: 0 0 calc(50vw - (min(350px, 74vw) / 2));
+      flex: 0 0 calc(50vw - (min(280px, 68vw) / 2));
     }
 
     .carousel img {
       flex: 0 0 auto;
-      width: min(350px, 74vw);
-      border-radius: 38px;
+      width: min(280px, 68vw);
+      border-radius: 34px;
       scroll-snap-align: center;
       scroll-snap-stop: always;
     }
 
     /* =========================
-       SECTION 3 - TELL
+       SECTION 3 - TELL / ASK / FIND
     ========================= */
 
     .experience {
-      padding: 8px 24px 20px;
+      padding: 0 24px;
     }
 
     .experience-item {
       display: grid;
-      grid-template-columns: minmax(280px, 430px) minmax(280px, 480px);
+      grid-template-columns: minmax(270px, 410px) minmax(280px, 460px);
       align-items: center;
       justify-content: center;
-      gap: clamp(40px, 7vw, 90px);
-      width: min(1040px, 100%);
+      gap: clamp(26px, 5vw, 64px);
+      width: min(1000px, 100%);
       margin: 0 auto;
-      padding: 38px 0;
+      padding: 24px 0;
     }
 
     .experience-item.reverse {
-      grid-template-columns: minmax(280px, 480px) minmax(280px, 430px);
+      grid-template-columns: minmax(280px, 460px) minmax(270px, 410px);
     }
 
     .experience-item.reverse .experience-phone {
@@ -307,72 +312,68 @@
     }
 
     .experience-phone img {
-      width: min(390px, 82vw);
-      max-height: 720px;
+      width: min(400px, 82vw);
+      max-height: 680px;
       object-fit: contain;
     }
 
     .experience-copy {
-      max-width: 460px;
+      max-width: 440px;
+    }
+
+    .experience-copy .eyebrow {
+      color: var(--accent);
     }
 
     .experience-copy h2 {
-      margin: 0 0 10px;
-      font-size: clamp(52px, 6.5vw, 92px);
+      margin: 0 0 8px;
+      font-size: clamp(48px, 6vw, 82px);
       font-weight: 750;
-      line-height: 0.92;
-      letter-spacing: -0.067em;
+      line-height: 0.94;
+      letter-spacing: -0.061em;
     }
 
-    .experience-copy p {
-      max-width: 420px;
+    .experience-copy p:not(.eyebrow) {
+      max-width: 400px;
       margin: 0;
       color: var(--secondary);
-      font-size: clamp(19px, 2vw, 28px);
-      line-height: 1.26;
-      letter-spacing: -0.035em;
+      font-size: clamp(18px, 1.8vw, 25px);
+      line-height: 1.3;
+      letter-spacing: -0.03em;
     }
-
-    /* =========================
-       SECTION 4 - ASK
-    ========================= */
-
-    /* Uses the shared .experience-item styles above. */
-
-    /* =========================
-       SECTION 5 - FIND
-    ========================= */
-
-    /* Uses the shared .experience-item styles above. */
 
     /* =========================
        SECTION 6 - PRIVACY
     ========================= */
 
     .privacy {
-      padding: 54px 24px 58px;
+      padding: 40px 24px 44px;
     }
 
     .privacy-inner {
-      width: min(870px, 100%);
+      width: min(840px, 100%);
       margin: 0 auto;
     }
 
+    .privacy .eyebrow {
+      color: var(--accent);
+    }
+
     .privacy h2 {
-      max-width: 820px;
-      margin: 0 0 18px;
-      font-size: clamp(52px, 7vw, 98px);
+      max-width: 790px;
+      margin: 0 0 14px;
+      font-size: clamp(48px, 6.5vw, 88px);
       font-weight: 750;
-      line-height: 0.94;
-      letter-spacing: -0.068em;
+      line-height: 0.96;
+      letter-spacing: -0.062em;
     }
 
     .privacy-intro {
-      margin: 0 0 30px;
+      margin: 0 0 20px;
       color: var(--secondary);
-      font-size: clamp(19px, 2vw, 27px);
-      line-height: 1.3;
-      letter-spacing: -0.03em;
+      font-size: clamp(18px, 1.9vw, 24px);
+      line-height: 1.34;
+      letter-spacing: -0.026em;
     }
 
     .privacy-list {
@@ -381,13 +382,13 @@
 
     .privacy-list p {
       margin: 0;
-      padding: 16px 0;
+      padding: 13px 0;
       border-bottom: 1px solid var(--line);
       color: var(--primary);
-      font-size: clamp(20px, 2.4vw, 31px);
+      font-size: clamp(19px, 2.1vw, 28px);
       font-weight: 550;
-      line-height: 1.14;
-      letter-spacing: -0.04em;
+      line-height: 1.2;
+      letter-spacing: -0.035em;
     }
 
     /* =========================
@@ -395,63 +396,63 @@
     ========================= */
 
     .support {
-      padding: 50px 24px 64px;
+      padding: 36px 24px 48px;
     }
 
     .support-inner {
-      width: min(720px, 100%);
+      width: min(700px, 100%);
       margin: 0 auto;
-      padding: 42px 24px;
-      border: 1px solid rgba(245, 245, 247, 0.09);
-      border-radius: 30px;
-      background: rgba(245, 245, 247, 0.025);
+      padding: 34px 22px;
+      border: 1px solid rgba(245, 245, 247, 0.075);
+      border-radius: 28px;
+      background: rgba(245, 245, 247, 0.018);
       text-align: center;
     }
 
     .support h2 {
-      margin: 0 0 12px;
-      font-size: clamp(42px, 5.5vw, 68px);
+      margin: 0 0 10px;
+      font-size: clamp(40px, 5vw, 62px);
       font-weight: 750;
-      line-height: 0.96;
-      letter-spacing: -0.06em;
+      line-height: 0.98;
+      letter-spacing: -0.055em;
     }
 
     .support p {
       max-width: 430px;
-      margin: 0 auto 24px;
+      margin: 0 auto 20px;
       color: var(--secondary);
-      font-size: 17px;
+      font-size: 16px;
       line-height: 1.42;
-      letter-spacing: -0.025em;
+      letter-spacing: -0.022em;
     }
 
     .support-actions {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 10px;
+      gap: 9px;
     }
 
     .support-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 46px;
-      padding: 0 21px;
-      border: 1px solid rgba(245, 245, 247, 0.12);
+      min-height: 44px;
+      padding: 0 19px;
+      border: 1px solid rgba(245, 245, 247, 0.1);
       border-radius: 999px;
-      background: rgba(245, 245, 247, 0.07);
+      background: rgba(245, 245, 247, 0.05);
       color: var(--primary);
       font-size: 14px;
       font-weight: 600;
-      letter-spacing: -0.015em;
+      letter-spacing: -0.012em;
       transition:
         transform 180ms ease,
         background 180ms ease;
     }
 
     .support-button.primary {
-      background: var(--primary);
+      background: rgba(245, 245, 247, 0.92);
       color: var(--background);
     }
 
@@ -466,9 +467,10 @@
     ========================= */
 
     .footer {
-      padding: 0 24px 34px;
-      color: rgba(245, 245, 247, 0.38);
+      padding: 0 24px 28px;
+      color: rgba(245, 245, 247, 0.34);
       font-size: 13px;
+      line-height: 1.4;
       text-align: center;
     }
 
@@ -480,8 +482,8 @@
       .experience-item,
       .experience-item.reverse {
         grid-template-columns: 1fr;
-        gap: 6px;
-        padding: 34px 0;
+        gap: 0;
+        padding: 22px 0 26px;
         text-align: center;
       }
 
@@ -491,16 +493,16 @@
       }
 
       .experience-copy {
-        max-width: 520px;
-        margin: 0 auto;
+        max-width: 500px;
+        margin: -4px auto 0;
       }
 
-      .experience-copy p {
+      .experience-copy p:not(.eyebrow) {
         margin: 0 auto;
       }
 
       .experience-phone img {
-        width: min(420px, 84vw);
+        width: min(420px, 86vw);
       }
     }
 
@@ -514,14 +516,14 @@
       }
 
       .nav-wrap {
-        top: 14px;
+        top: 12px;
         padding: 0 14px;
       }
 
       .nav {
         grid-template-columns: 42px 1fr;
-        min-height: 56px;
-        padding: 6px 9px;
+        min-height: 54px;
+        padding: 5px 8px;
       }
 
       .nav-brand {
@@ -541,43 +543,43 @@
       }
 
       .hero {
-        padding: 102px 18px 26px;
+        padding: 92px 18px 20px;
       }
 
       .hero-logo {
-        width: min(300px, 78vw);
-        margin-bottom: 15px;
+        width: min(305px, 80vw);
+        margin-bottom: 12px;
       }
 
       .hero h1 {
         max-width: 350px;
-        font-size: clamp(48px, 14vw, 64px);
-        line-height: 0.92;
+        font-size: clamp(44px, 13vw, 60px);
+        line-height: 0.94;
       }
 
       .hero-copy {
         max-width: 330px;
-        margin: 18px 0 20px;
+        margin: 16px 0 18px;
         font-size: 17px;
         line-height: 1.34;
       }
 
       .hero-button {
-        min-height: 46px;
-        padding: 0 21px;
+        min-height: 44px;
+        padding: 0 20px;
       }
 
       .screenshots {
-        padding: 28px 0 28px;
+        padding: 24px 0;
       }
 
       .screenshots-heading {
         width: calc(100% - 32px);
-        margin-bottom: 13px;
+        margin-bottom: 12px;
       }
 
       .carousel {
-        gap: 14px;
+        gap: 12px;
         scroll-padding-inline: 10vw;
       }
 
@@ -587,19 +589,18 @@
       }
 
       .carousel img {
-        width: 80vw;
-        max-width: 340px;
-        border-radius: 32px;
+        width: 78vw;
+        max-width: 336px;
+        border-radius: 31px;
       }
 
       .experience {
-        padding: 0 18px 8px;
+        padding: 0 18px;
       }
 
       .experience-item,
       .experience-item.reverse {
-        gap: 0;
-        padding: 24px 0 28px;
+        padding: 18px 0 22px;
       }
 
       .experience-phone img {
@@ -608,55 +609,55 @@
       }
 
       .experience-copy {
-        margin-top: -8px;
+        margin-top: -10px;
       }
 
       .experience-copy h2 {
-        margin-bottom: 7px;
-        font-size: clamp(48px, 14vw, 66px);
+        margin-bottom: 6px;
+        font-size: clamp(46px, 13vw, 62px);
       }
 
-      .experience-copy p {
+      .experience-copy p:not(.eyebrow) {
         max-width: 330px;
         font-size: 17px;
-        line-height: 1.3;
+        line-height: 1.31;
       }
 
       .privacy {
-        padding: 38px 18px 42px;
+        padding: 30px 18px 34px;
       }
 
       .privacy h2 {
         max-width: 360px;
-        margin-bottom: 14px;
-        font-size: clamp(48px, 14vw, 66px);
+        margin-bottom: 12px;
+        font-size: clamp(46px, 13vw, 62px);
       }
 
       .privacy-intro {
-        margin-bottom: 20px;
+        margin-bottom: 16px;
         font-size: 17px;
       }
 
       .privacy-list p {
-        padding: 14px 0;
+        padding: 12px 0;
         font-size: 19px;
       }
 
       .support {
-        padding: 34px 18px 48px;
+        padding: 28px 18px 40px;
       }
 
       .support-inner {
-        padding: 34px 20px;
-        border-radius: 26px;
+        padding: 30px 19px;
+        border-radius: 24px;
       }
 
       .support h2 {
-        font-size: 43px;
+        font-size: 41px;
       }
 
       .support p {
-        margin-bottom: 20px;
+        margin-bottom: 18px;
         font-size: 16px;
       }
 
@@ -718,7 +719,7 @@
 
           <img
             class="hero-logo"
-           src="assets/hero.png"
+            src="assets/hero.png"
             alt="Twigged"
           />
 

@@ -529,10 +529,6 @@
         line-height: 1.34;
       }
 
-      .screenshots {
-        padding: 20px 0 24px;
-      }
-
      .screenshots {
   padding: 20px 0 24px;
 }
@@ -543,11 +539,17 @@
 }
 
 .carousel {
+  --mobile-card-width: min(78vw, 336px);
+
   display: flex;
   gap: 12px;
   overflow-x: auto;
   overflow-y: visible;
-  padding: 0 16px 14px;
+  padding-top: 0;
+  padding-right: calc((100vw - var(--mobile-card-width)) / 2);
+  padding-bottom: 14px;
+  padding-left: calc((100vw - var(--mobile-card-width)) / 2);
+  scroll-padding-inline: calc((100vw - var(--mobile-card-width)) / 2);
   scroll-snap-type: x mandatory;
   scrollbar-width: none;
   overscroll-behavior-x: contain;
@@ -559,12 +561,18 @@
   display: none;
 }
 
+.carousel::before,
+.carousel::after {
+  display: none;
+  content: none;
+}
+
 .carousel img {
-  flex: 0 0 78vw;
-  width: 78vw;
+  flex: 0 0 var(--mobile-card-width);
+  width: var(--mobile-card-width);
   max-width: 336px;
   border-radius: 31px;
-  scroll-snap-align: start;
+  scroll-snap-align: center;
   scroll-snap-stop: always;
 }
       .experience {

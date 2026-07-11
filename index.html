@@ -533,28 +533,40 @@
         padding: 20px 0 24px;
       }
 
-      .screenshots-heading {
-        width: calc(100% - 32px);
-        margin-bottom: 12px;
-      }
+     .screenshots {
+  padding: 20px 0 24px;
+}
 
-      .carousel {
-        gap: 12px;
-        scroll-padding-inline: calc(50vw - (78vw / 2));
-        cursor: auto;
-      }
+.screenshots-heading {
+  width: calc(100% - 32px);
+  margin-bottom: 12px;
+}
 
-      .carousel::before,
-      .carousel::after {
-        flex-basis: calc(50vw - (78vw / 2));
-      }
+.carousel {
+  display: flex;
+  gap: 12px;
+  overflow-x: auto;
+  overflow-y: visible;
+  padding: 0 16px 14px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  -webkit-overflow-scrolling: touch;
+  cursor: auto;
+}
 
-      .carousel img {
-        width: 78vw;
-        max-width: 336px;
-        border-radius: 31px;
-      }
+.carousel::-webkit-scrollbar {
+  display: none;
+}
 
+.carousel img {
+  flex: 0 0 78vw;
+  width: 78vw;
+  max-width: 336px;
+  border-radius: 31px;
+  scroll-snap-align: start;
+  scroll-snap-stop: always;
+}
       .experience {
         padding: 0 18px;
       }

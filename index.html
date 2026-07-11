@@ -287,10 +287,10 @@
       grid-template-columns: minmax(270px, 410px) minmax(280px, 460px);
       align-items: center;
       justify-content: center;
-      gap: clamp(26px, 5vw, 64px);
+      gap: clamp(12px, 2vw, 32px);
       width: min(1000px, 100%);
       margin: 0 auto;
-      padding: 24px 0;
+      padding: 8px 0;
     }
 
     .experience-item.reverse {
@@ -595,32 +595,33 @@
       }
 
       .experience {
-        padding: 0 18px;
-      }
+  padding: 0 16px;
+}
 
-      .experience-item,
-      .experience-item.reverse {
-        padding: 18px 0 22px;
-      }
+.experience-item,
+.experience-item.reverse {
+  gap: 6px;
+  padding: 4px 0 10px;
+}
 
-      .experience-phone img {
-        width: min(410px, 94vw);
-        max-height: none;
-      }
+.experience-phone img {
+  width: min(390px, 92vw);
+  max-height: none;
+}
 
-      .experience-copy {
-        margin-top: -10px;
-      }
+.experience-copy {
+  margin-top: -18px;
+}
 
-      .experience-copy h2 {
-        margin-bottom: 6px;
-        font-size: clamp(46px, 13vw, 62px);
-      }
+.experience-copy h2 {
+  margin-bottom: 2px;
+  font-size: clamp(46px, 13vw, 62px);
+}
 
       .experience-copy p:not(.eyebrow) {
         max-width: 330px;
         font-size: 17px;
-        line-height: 1.31;
+        line-height: 1.24;
       }
 
       .privacy {

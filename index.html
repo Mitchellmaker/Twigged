@@ -6,20 +6,48 @@
 
   <meta
     name="description"
-    content="Twigged is a voice-first memory assistant. Tell Twigged where something is and ask naturally later."
+    content="Twigged is a private, voice-first memory app for iPhone and iPad. Save where things are, ask naturally, and find them later."
   />
+  <meta name="theme-color" content="#111214" />
+  <meta name="color-scheme" content="dark" />
 
-  <title>Twigged</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Twigged" />
+  <meta
+    property="og:description"
+    content="Remember where the things that matter are."
+  />
+  <meta property="og:image" content="assets/social-card.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Twigged" />
+  <meta
+    name="twitter:description"
+    content="Remember where the things that matter are."
+  />
+  <meta name="twitter:image" content="assets/social-card.png" />
+
+  <link rel="icon" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
+
+  <!-- Replace YOUR_APP_ID before publishing. -->
+  <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID" />
+
+  <title>Twigged — Remember where things are</title>
 
   <style>
     :root {
       --background: #111214;
+      --surface: #1b1c1e;
+      --surface-light: #252629;
       --primary: #f5f5f7;
       --secondary: #aaa7a1;
       --accent: #f9b70a;
+      --accent-dark: #1a1404;
       --line: rgba(245, 245, 247, 0.1);
-      --glass: rgba(27, 28, 30, 0.7);
+      --glass: rgba(27, 28, 30, 0.76);
       --page-width: 1180px;
+      --content-width: 920px;
     }
 
     * {
@@ -27,7 +55,7 @@
     }
 
     html {
-      scroll-behavior: smooth;
+      scroll-behaviour: smooth;
       background: var(--background);
     }
 
@@ -63,6 +91,31 @@
       -webkit-tap-highlight-color: transparent;
     }
 
+    button {
+      font: inherit;
+    }
+
+    :focus-visible {
+      outline: 3px solid var(--accent);
+      outline-offset: 4px;
+    }
+
+    .skip-link {
+      position: fixed;
+      top: 10px;
+      left: 10px;
+      z-index: 1000;
+      padding: 12px 16px;
+      border-radius: 12px;
+      background: var(--primary);
+      color: var(--background);
+      transform: translateY(-150%);
+    }
+
+    .skip-link:focus {
+      transform: translateY(0);
+    }
+
     .page {
       overflow: hidden;
     }
@@ -71,15 +124,29 @@
       margin: 0 0 10px;
       color: var(--accent);
       font-size: 12px;
-      font-weight: 700;
+      font-weight: 750;
       line-height: 1;
       letter-spacing: 0.14em;
       text-transform: uppercase;
     }
 
-    /* =========================
-       SECTION 0 - NAVIGATION
-    ========================= */
+    .section-heading {
+      margin: 0;
+      font-size: clamp(44px, 6vw, 78px);
+      font-weight: 760;
+      line-height: 0.97;
+      letter-spacing: -0.058em;
+    }
+
+    .section-copy {
+      margin: 16px 0 0;
+      color: var(--secondary);
+      font-size: clamp(18px, 1.8vw, 23px);
+      line-height: 1.4;
+      letter-spacing: -0.024em;
+    }
+
+    /* Navigation */
 
     .nav-wrap {
       position: fixed;
@@ -98,14 +165,14 @@
       display: grid;
       grid-template-columns: 46px 1fr;
       align-items: center;
-      width: min(760px, 100%);
+      width: min(780px, 100%);
       min-height: 56px;
       padding: 5px 10px;
-      border: 1px solid rgba(245, 245, 247, 0.1);
+      border: 1px solid var(--line);
       border-radius: 999px;
       background: var(--glass);
       box-shadow:
-        0 14px 42px rgba(0, 0, 0, 0.2),
+        0 14px 42px rgba(0, 0, 0, 0.22),
         inset 0 1px 0 rgba(255, 255, 255, 0.035);
       backdrop-filter: blur(30px) saturate(140%);
       -webkit-backdrop-filter: blur(30px) saturate(140%);
@@ -117,6 +184,7 @@
       justify-content: center;
       width: 46px;
       height: 46px;
+      border-radius: 50%;
     }
 
     .nav-brand img {
@@ -129,7 +197,6 @@
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
       align-items: center;
-      width: 100%;
     }
 
     .nav-links a {
@@ -138,10 +205,10 @@
       justify-content: center;
       min-height: 44px;
       padding: 0 10px;
+      border-radius: 999px;
       color: rgba(245, 245, 247, 0.78);
-      font-size: 16px;
-      font-weight: 600;
-      line-height: 1;
+      font-size: 15px;
+      font-weight: 650;
       letter-spacing: -0.018em;
       text-align: center;
       transition:
@@ -149,39 +216,36 @@
         background 180ms ease;
     }
 
-    .nav-links a:hover,
-    .nav-links a:focus-visible {
+    .nav-links a:hover {
+      background: rgba(245, 245, 247, 0.055);
       color: var(--primary);
-      outline: none;
     }
 
-    /* =========================
-       SECTION 1 - HERO
-    ========================= */
+    /* Hero */
 
-   .hero {
-  padding: 92px 24px 18px;
-}
+    .hero {
+      padding: 104px 24px 46px;
+    }
 
     .hero-inner {
       display: flex;
       flex-direction: column;
       align-items: center;
-      width: min(900px, 100%);
+      width: min(920px, 100%);
       margin: 0 auto;
       text-align: center;
     }
 
     .hero-logo {
       width: clamp(270px, 43vw, 510px);
-      margin: 0 auto 10px;
+      margin: 0 auto 12px;
     }
 
     .hero h1 {
-      max-width: 790px;
+      max-width: 820px;
       margin: 0;
       font-size: clamp(44px, 6vw, 82px);
-      font-weight: 750;
+      font-weight: 760;
       line-height: 0.97;
       letter-spacing: -0.06em;
     }
@@ -190,71 +254,146 @@
       color: var(--accent);
     }
 
-   .hero-copy {
-  max-width: 540px;
-  margin: 14px 0 24px;
-  color: var(--secondary);
-  font-size: clamp(18px, 1.8vw, 23px);
-  line-height: 1.35;
-  letter-spacing: -0.024em;
-}
+    .hero-copy {
+      max-width: 590px;
+      margin: 18px 0 0;
+      color: var(--secondary);
+      font-size: clamp(18px, 1.8vw, 23px);
+      line-height: 1.4;
+      letter-spacing: -0.024em;
+    }
 
-   /* =========================
-   SECTION 2 - SCREENSHOTS
-========================= */
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 12px;
+      margin-top: 26px;
+    }
 
-.screenshots {
-  padding: 20px 0 34px;
-}
+    .app-store-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 52px;
+      padding: 0 24px;
+      border-radius: 999px;
+      background: var(--accent);
+      color: var(--accent-dark);
+      font-size: 16px;
+      font-weight: 750;
+      letter-spacing: -0.018em;
+      transition:
+        transform 180ms ease,
+        filter 180ms ease;
+    }
 
-.screenshots-heading {
-  width: min(var(--page-width), calc(100% - 48px));
-  margin: 0 auto 14px;
-}
+    .app-store-button:hover {
+      transform: translateY(-1px);
+      filter: brightness(1.04);
+    }
 
-.carousel {
-  display: flex;
-  gap: 16px;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding: 0 24px 14px;
-  scroll-padding-left: 24px;
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  cursor: grab;
-  user-select: none;
-  touch-action: auto;
-}
+    .purchase-summary {
+      margin: 16px 0 0;
+      color: rgba(245, 245, 247, 0.52);
+      font-size: 14px;
+      line-height: 1.45;
+    }
 
-.carousel.dragging {
-  cursor: grabbing;
-  scroll-snap-type: none;
-}
+    /* Screenshots */
 
-.carousel::-webkit-scrollbar {
-  display: none;
-}
+    .screenshots {
+      padding: 34px 0 56px;
+    }
 
-.carousel::before,
-.carousel::after {
-  display: none;
-}
+    .screenshots-heading {
+      width: min(var(--page-width), calc(100% - 48px));
+      margin: 0 auto 16px;
+    }
 
-.carousel img {
-  flex: 0 0 auto;
-  width: min(300px, 70vw);
-  border-radius: 34px;
-  scroll-snap-align: start;
-  scroll-snap-stop: always;
-  pointer-events: none;
-  -webkit-user-drag: none;
-}
-    /* =========================
-       SECTIONS 3, 4, 5
-       TELL / ASK / FIND
-    ========================= */
+    .carousel-shell {
+      position: relative;
+    }
+
+    .carousel {
+      display: flex;
+      gap: 16px;
+      overflow-x: auto;
+      overflow-y: visible;
+      padding: 0 24px 16px;
+      scroll-padding-left: 24px;
+      scroll-snap-type: x mandatory;
+      scrollbar-width: none;
+      overscroll-behavior-x: contain;
+      -webkit-overflow-scrolling: touch;
+      cursor: grab;
+      user-select: none;
+    }
+
+    .carousel.dragging {
+      cursor: grabbing;
+      scroll-snap-type: none;
+    }
+
+    .carousel::-webkit-scrollbar {
+      display: none;
+    }
+
+    .carousel-card {
+      flex: 0 0 auto;
+      width: min(300px, 70vw);
+      margin: 0;
+      scroll-snap-align: start;
+      scroll-snap-stop: always;
+    }
+
+    .carousel-card img {
+      width: 100%;
+      border-radius: 34px;
+      pointer-events: none;
+      -webkit-user-drag: none;
+    }
+
+    .carousel-controls {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 8px;
+    }
+
+    .carousel-button {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 46px;
+      height: 46px;
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      background: rgba(245, 245, 247, 0.05);
+      color: var(--primary);
+      cursor: pointer;
+      transition:
+        background 180ms ease,
+        opacity 180ms ease;
+    }
+
+    .carousel-button:hover:not(:disabled) {
+      background: rgba(245, 245, 247, 0.1);
+    }
+
+    .carousel-button:disabled {
+      cursor: default;
+      opacity: 0.3;
+    }
+
+    .carousel-hint {
+      margin: 10px 0 0;
+      color: rgba(245, 245, 247, 0.4);
+      font-size: 13px;
+      text-align: center;
+    }
+
+    /* Tell / Ask / Find */
 
     .experience {
       padding: 0 24px;
@@ -262,17 +401,17 @@
 
     .experience-item {
       display: grid;
-      grid-template-columns: minmax(280px, 400px) minmax(280px, 440px);
+      grid-template-columns: minmax(280px, 400px) minmax(280px, 450px);
       align-items: center;
       justify-content: center;
-      gap: clamp(16px, 2.6vw, 42px);
-      width: min(980px, 100%);
+      gap: clamp(20px, 3vw, 50px);
+      width: min(1000px, 100%);
       margin: 0 auto;
-      padding: 4px 0 10px;
+      padding: 18px 0 28px;
     }
 
     .experience-item.reverse {
-      grid-template-columns: minmax(280px, 440px) minmax(280px, 400px);
+      grid-template-columns: minmax(280px, 450px) minmax(280px, 400px);
     }
 
     .experience-item.reverse .experience-phone {
@@ -296,53 +435,166 @@
     }
 
     .experience-copy {
-      max-width: 420px;
+      max-width: 430px;
     }
 
     .experience-copy h2 {
-      margin: 0 0 8px;
+      margin: 0 0 10px;
       font-size: clamp(46px, 5.8vw, 78px);
-      font-weight: 750;
+      font-weight: 760;
       line-height: 0.95;
       letter-spacing: -0.058em;
     }
 
     .experience-copy p:not(.eyebrow) {
-      max-width: 390px;
+      max-width: 410px;
       margin: 0;
       color: var(--secondary);
-      font-size: clamp(18px, 1.75vw, 24px);
-      line-height: 1.32;
-      letter-spacing: -0.028em;
+      font-size: clamp(18px, 1.75vw, 23px);
+      line-height: 1.4;
+      letter-spacing: -0.024em;
     }
 
-    /* =========================
-       SECTION 6 - PRIVACY
-    ========================= */
+    /* Saved Items and Siri */
 
-    .privacy {
-      padding: 30px 24px 38px;
+    .features {
+      padding: 66px 24px;
     }
 
-    .privacy-inner {
-      width: min(820px, 100%);
+    .features-inner {
+      width: min(var(--page-width), 100%);
       margin: 0 auto;
     }
 
-    .privacy h2 {
+    .features-heading {
       max-width: 760px;
-      margin: 0 0 12px;
-      font-size: clamp(46px, 6.2vw, 82px);
+      margin-bottom: 28px;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 18px;
+    }
+
+    .feature-card {
+      overflow: hidden;
+      border: 1px solid var(--line);
+      border-radius: 34px;
+      background:
+        radial-gradient(
+          circle at top,
+          rgba(249, 183, 10, 0.08),
+          transparent 45%
+        ),
+        var(--surface);
+    }
+
+    .feature-card-copy {
+      padding: 30px 30px 8px;
+    }
+
+    .feature-card h3 {
+      margin: 0 0 10px;
+      font-size: clamp(30px, 3.5vw, 46px);
       font-weight: 750;
-      line-height: 0.97;
-      letter-spacing: -0.06em;
+      line-height: 1;
+      letter-spacing: -0.048em;
+    }
+
+    .feature-card p:not(.eyebrow) {
+      margin: 0;
+      color: var(--secondary);
+      font-size: 17px;
+      line-height: 1.45;
+      letter-spacing: -0.018em;
+    }
+
+    .feature-card img {
+      width: min(390px, 92%);
+      max-height: 530px;
+      margin: 20px auto 0;
+      object-fit: contain;
+      object-position: bottom;
+    }
+
+    /* Purchase */
+
+    .purchase {
+      padding: 70px 24px;
+    }
+
+    .purchase-inner {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) minmax(260px, 390px);
+      align-items: center;
+      gap: clamp(30px, 6vw, 80px);
+      width: min(1040px, 100%);
+      margin: 0 auto;
+      padding: clamp(30px, 5vw, 58px);
+      border: 1px solid var(--line);
+      border-radius: 38px;
+      background:
+        radial-gradient(
+          circle at 20% 0,
+          rgba(249, 183, 10, 0.1),
+          transparent 38%
+        ),
+        var(--surface);
+    }
+
+    .purchase-copy {
+      max-width: 590px;
+    }
+
+    .purchase-list {
+      display: grid;
+      gap: 12px;
+      margin: 24px 0 0;
+      padding: 0;
+      list-style: none;
+    }
+
+    .purchase-list li {
+      position: relative;
+      padding-left: 28px;
+      color: var(--primary);
+      font-size: 17px;
+      line-height: 1.4;
+    }
+
+    .purchase-list li::before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      color: var(--accent);
+      content: "✓";
+      font-weight: 800;
+    }
+
+    .purchase-image img {
+      width: min(360px, 100%);
+      max-height: 600px;
+      margin: 0 auto;
+      object-fit: contain;
+    }
+
+    /* Privacy */
+
+    .privacy {
+      padding: 70px 24px 54px;
+    }
+
+    .privacy-inner {
+      width: min(860px, 100%);
+      margin: 0 auto;
     }
 
     .privacy-intro {
-      margin: 0 0 16px;
+      margin: 18px 0 18px;
       color: var(--secondary);
       font-size: clamp(18px, 1.8vw, 23px);
-      line-height: 1.35;
+      line-height: 1.4;
       letter-spacing: -0.024em;
     }
 
@@ -352,107 +604,149 @@
 
     .privacy-list p {
       margin: 0;
-      padding: 12px 0;
+      padding: 13px 0;
       border-bottom: 1px solid var(--line);
       color: var(--primary);
-      font-size: clamp(19px, 2vw, 27px);
-      font-weight: 550;
-      line-height: 1.2;
-      letter-spacing: -0.034em;
+      font-size: clamp(18px, 2vw, 25px);
+      font-weight: 560;
+      line-height: 1.25;
+      letter-spacing: -0.03em;
     }
 
-    /* =========================
-       SECTION 7 - SUPPORT
-    ========================= */
+    .privacy-link {
+      display: inline-flex;
+      margin-top: 24px;
+      color: var(--accent);
+      font-size: 15px;
+      font-weight: 700;
+    }
+
+    /* Support */
 
     .support {
-      padding: 26px 24px 32px;
+      padding: 42px 24px 44px;
     }
 
     .support-inner {
-      width: min(660px, 100%);
+      width: min(760px, 100%);
       margin: 0 auto;
-      padding: 28px 20px;
-      border-top: 1px solid rgba(245, 245, 247, 0.08);
-      border-bottom: 1px solid rgba(245, 245, 247, 0.08);
       text-align: center;
     }
 
     .support h2 {
-      margin: 0 0 8px;
-      font-size: clamp(38px, 4.8vw, 58px);
-      font-weight: 750;
+      margin: 0 0 10px;
+      font-size: clamp(40px, 5vw, 62px);
+      font-weight: 760;
       line-height: 0.98;
       letter-spacing: -0.052em;
     }
 
-    .support p {
-      max-width: 420px;
-      margin: 0 auto 18px;
+    .support-intro {
+      max-width: 480px;
+      margin: 0 auto 26px;
       color: var(--secondary);
+      font-size: 17px;
+      line-height: 1.45;
+    }
+
+    .faq {
+      display: grid;
+      gap: 10px;
+      margin: 0 auto 28px;
+      text-align: left;
+    }
+
+    .faq details {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      background: rgba(245, 245, 247, 0.035);
+    }
+
+    .faq summary {
+      padding: 17px 20px;
+      color: var(--primary);
       font-size: 16px;
-      line-height: 1.42;
-      letter-spacing: -0.02em;
+      font-weight: 680;
+      cursor: pointer;
+    }
+
+    .faq details p {
+      margin: 0;
+      padding: 0 20px 18px;
+      color: var(--secondary);
+      font-size: 15px;
+      line-height: 1.5;
     }
 
     .support-actions {
       display: flex;
       flex-wrap: wrap;
       justify-content: center;
-      gap: 9px;
+      gap: 10px;
     }
 
     .support-button {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      min-height: 44px;
-      padding: 0 19px;
-      border: 1px solid rgba(245, 245, 247, 0.1);
+      min-height: 46px;
+      padding: 0 20px;
+      border: 1px solid var(--line);
       border-radius: 999px;
       background: rgba(245, 245, 247, 0.045);
       color: var(--primary);
       font-size: 14px;
-      font-weight: 600;
-      letter-spacing: -0.012em;
+      font-weight: 650;
       transition:
         transform 180ms ease,
         background 180ms ease;
     }
 
     .support-button.primary {
-      background: rgba(245, 245, 247, 0.92);
+      border-color: transparent;
+      background: rgba(245, 245, 247, 0.94);
       color: var(--background);
     }
 
-    .support-button:hover,
-    .support-button:focus-visible {
+    .support-button:hover {
       transform: translateY(-1px);
-      outline: none;
+      background: rgba(245, 245, 247, 0.09);
     }
 
-    /* =========================
-       SECTION 8 - FOOTER
-    ========================= */
+    .support-button.primary:hover {
+      background: var(--primary);
+    }
+
+    /* Footer */
 
     .footer {
-      padding: 0 24px 22px;
-      color: rgba(245, 245, 247, 0.34);
+      padding: 12px 24px 24px;
+      color: rgba(245, 245, 247, 0.38);
       font-size: 13px;
-      line-height: 1.4;
+      line-height: 1.5;
       text-align: center;
     }
 
-    /* =========================
-       TABLET
-    ========================= */
+    .footer-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 18px;
+      margin-bottom: 10px;
+    }
+
+    .footer a:hover {
+      color: var(--primary);
+    }
+
+    /* Tablet */
 
     @media (max-width: 820px) {
       .experience-item,
       .experience-item.reverse {
         grid-template-columns: 1fr;
-        gap: 2px;
-        padding: 16px 0 20px;
+        gap: 6px;
+        padding: 22px 0 32px;
         text-align: center;
       }
 
@@ -462,7 +756,7 @@
       }
 
       .experience-copy {
-        max-width: 500px;
+        max-width: 520px;
         margin: 0 auto;
       }
 
@@ -473,11 +767,29 @@
       .experience-phone img {
         width: min(400px, 84vw);
       }
+
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .purchase-inner {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+
+      .purchase-copy {
+        margin: 0 auto;
+      }
+
+      .purchase-list {
+        width: fit-content;
+        margin-right: auto;
+        margin-left: auto;
+        text-align: left;
+      }
     }
 
-    /* =========================
-       MOBILE
-    ========================= */
+    /* Mobile */
 
     @media (max-width: 560px) {
       .nav-wrap {
@@ -504,147 +816,129 @@
       .nav-links a {
         min-height: 38px;
         padding: 0 3px;
-        font-size: 13px;
+        font-size: 12px;
       }
 
       .hero {
-        padding: 88px 18px 8px;
+        padding: 90px 18px 34px;
       }
 
       .hero-logo {
         width: min(300px, 80vw);
-        margin-bottom: 11px;
       }
 
       .hero h1 {
-        max-width: 350px;
+        max-width: 360px;
         font-size: clamp(42px, 12.5vw, 57px);
         line-height: 0.95;
       }
 
       .hero-copy {
-        max-width: 330px;
-        margin-top: 15px;
+        max-width: 340px;
         font-size: 17px;
-        line-height: 1.34;
       }
 
-     .screenshots {
-  padding: 20px 0 24px;
-}
+      .hero-actions {
+        width: 100%;
+      }
 
-.screenshots-heading {
-  width: calc(100% - 32px);
-  margin-bottom: 12px;
-}
+      .app-store-button {
+        width: 100%;
+        max-width: 340px;
+      }
 
-.carousel {
-  --mobile-card-width: min(78vw, 336px);
+      .screenshots {
+        padding: 28px 0 42px;
+      }
 
-  display: flex;
-  gap: 12px;
-  overflow-x: auto;
-  overflow-y: visible;
-  padding-top: 0;
-  padding-right: calc((100vw - var(--mobile-card-width)) / 2);
-  padding-bottom: 14px;
-  padding-left: calc((100vw - var(--mobile-card-width)) / 2);
-  scroll-padding-inline: calc((100vw - var(--mobile-card-width)) / 2);
-  scroll-snap-type: x mandatory;
-  scrollbar-width: none;
-  overscroll-behavior-x: contain;
-  -webkit-overflow-scrolling: touch;
-  cursor: auto;
-}
+      .screenshots-heading {
+        width: calc(100% - 32px);
+      }
 
-.carousel::-webkit-scrollbar {
-  display: none;
-}
+      .carousel {
+        --mobile-card-width: min(78vw, 336px);
+        gap: 12px;
+        padding-right: calc((100vw - var(--mobile-card-width)) / 2);
+        padding-left: calc((100vw - var(--mobile-card-width)) / 2);
+        scroll-padding-inline: calc(
+          (100vw - var(--mobile-card-width)) / 2
+        );
+      }
 
-.carousel::before,
-.carousel::after {
-  display: none;
-  content: none;
-}
+      .carousel-card {
+        width: var(--mobile-card-width);
+        scroll-snap-align: center;
+      }
 
-.carousel img {
-  flex: 0 0 var(--mobile-card-width);
-  width: var(--mobile-card-width);
-  max-width: 336px;
-  border-radius: 31px;
-  scroll-snap-align: center;
-  scroll-snap-stop: always;
-}
+      .carousel-card img {
+        border-radius: 31px;
+      }
+
       .experience {
         padding: 0 18px;
       }
 
       .experience-item,
       .experience-item.reverse {
-        gap: 4px;
-        width: 100%;
-        padding: 8px 0 14px;
+        padding: 12px 0 22px;
       }
 
       .experience-phone img {
         width: min(310px, 76vw);
       }
 
-      .experience-copy {
-        max-width: 360px;
-      }
-
-      .experience-copy .eyebrow {
-        margin-bottom: 7px;
-      }
-
       .experience-copy h2 {
-        margin-bottom: 5px;
         font-size: clamp(44px, 12.5vw, 58px);
-        line-height: 0.95;
       }
 
       .experience-copy p:not(.eyebrow) {
-        max-width: 320px;
+        max-width: 330px;
         font-size: 17px;
-        line-height: 1.29;
+      }
+
+      .features,
+      .purchase,
+      .privacy,
+      .support {
+        padding-right: 18px;
+        padding-left: 18px;
+      }
+
+      .features {
+        padding-top: 48px;
+        padding-bottom: 48px;
+      }
+
+      .feature-card-copy {
+        padding: 25px 22px 6px;
+      }
+
+      .purchase {
+        padding-top: 46px;
+        padding-bottom: 46px;
+      }
+
+      .purchase-inner {
+        padding: 28px 20px;
+        border-radius: 30px;
       }
 
       .privacy {
-        padding: 22px 18px 30px;
+        padding-top: 48px;
+        padding-bottom: 38px;
       }
 
-      .privacy h2 {
-        max-width: 350px;
-        margin-bottom: 10px;
-        font-size: clamp(44px, 12.5vw, 58px);
-      }
-
-      .privacy-intro {
-        margin-bottom: 14px;
-        font-size: 17px;
+      .section-heading {
+        font-size: clamp(42px, 12.5vw, 58px);
       }
 
       .privacy-list p {
-        padding: 11px 0;
-        font-size: 19px;
+        padding: 12px 0;
+        font-size: 18px;
       }
 
       .support {
-        padding: 22px 18px 26px;
-      }
-
-      .support-inner {
-        padding: 26px 0;
-      }
-
-      .support h2 {
-        font-size: 40px;
-      }
-
-      .support p {
-        margin-bottom: 17px;
-        font-size: 16px;
+        padding-top: 34px;
       }
 
       .support-actions {
@@ -654,25 +948,19 @@
       .support-button {
         width: 100%;
       }
-
-      .footer {
-        padding-bottom: 18px;
-      }
     }
 
-    /* =========================
-       ACCESSIBILITY
-    ========================= */
+    /* Accessibility */
 
     @media (prefers-reduced-motion: reduce) {
       html {
-        scroll-behavior: auto;
+        scroll-behaviour: auto;
       }
 
       *,
       *::before,
       *::after {
-        scroll-behavior: auto !important;
+        scroll-behaviour: auto !important;
         transition: none !important;
       }
     }
@@ -680,181 +968,421 @@
 </head>
 
 <body>
-  <div class="page">
+  <a class="skip-link" href="#main-content">Skip to content</a>
 
-    <!-- =========================
-    SECTION 0 - NAVIGATION
-    ========================= -->
-    <div class="nav-wrap">
+  <div class="page">
+    <header class="nav-wrap">
       <nav class="nav" aria-label="Main navigation">
         <a class="nav-brand" href="#top" aria-label="Twigged home">
           <img src="assets/icon.png" alt="" />
         </a>
 
         <div class="nav-links">
-          <a href="#screenshots">Screenshots</a>
-          <a href="privacy.html">Privacy</a>
+          <a href="#how-it-works">How it works</a>
+          <a href="#privacy">Privacy</a>
           <a href="#support">Support</a>
         </div>
       </nav>
-    </div>
+    </header>
 
-    <main>
-
-      <!-- =========================
-      SECTION 1 - HERO
-      ========================= -->
+    <main id="main-content">
       <section id="top" class="hero">
         <div class="hero-inner">
-
           <img
             class="hero-logo"
             src="assets/hero.png"
             alt="Twigged"
+            fetchpriority="high"
           />
 
           <h1>
-            Remember where<br />
-            the things that<br />
+            Remember where the things that
             <span>matter</span> are.
           </h1>
 
           <p class="hero-copy">
-            Tell Twigged where something is.<br />
-            Ask naturally later.
+            Tell Twigged where something is. Ask naturally and hear the
+            answer later.
           </p>
 
+          <div class="hero-actions">
+            <!-- Replace YOUR_APP_ID with Twigged's App Store app ID. -->
+            <a
+              class="app-store-button"
+              href="https://apps.apple.com/app/idYOUR_APP_ID"
+              target="_blank"
+              rel="noreferrer"
+            >
+              View on the App Store
+            </a>
+          </div>
+
+          <p class="purchase-summary">
+            Free to download. Six successful saves included.<br />
+            One lifetime purchase unlocks unlimited saving.
+          </p>
         </div>
       </section>
 
-      <!-- =========================
-      SECTION 2 - SCREENSHOTS
-      ========================= -->
       <section
         id="screenshots"
         class="screenshots"
         aria-labelledby="screenshots-title"
       >
         <div class="screenshots-heading">
-          <p id="screenshots-title" class="eyebrow">Screenshots</p>
+          <p class="eyebrow">Inside Twigged</p>
+          <h2 id="screenshots-title" class="section-heading">
+            Simple by design.
+          </h2>
         </div>
 
-        <div class="carousel" aria-label="Twigged screenshot gallery">
-          <img src="assets/1.png" alt="Twigged app screenshot 1" />
-          <img src="assets/2.png" alt="Twigged app screenshot 2" />
-          <img src="assets/3.png" alt="Twigged app screenshot 3" />
-          <img src="assets/4.png" alt="Twigged app screenshot 4" />
-          <img src="assets/5.png" alt="Twigged app screenshot 5" />
-          <img src="assets/6.png" alt="Twigged app screenshot 6" />
-          <img src="assets/7.png" alt="Twigged app screenshot 7" />
-          <img src="assets/8.png" alt="Twigged app screenshot 8" />
-          <img src="assets/9.png" alt="Twigged app screenshot 9" />
-          <img src="assets/10.png" alt="Twigged app screenshot 10" />
+        <div class="carousel-shell">
+          <div
+            id="screenshot-carousel"
+            class="carousel"
+            tabindex="0"
+            aria-label="Twigged screenshot gallery"
+          >
+            <figure class="carousel-card">
+              <img
+                src="assets/1.png"
+                alt="Twigged microphone home screen"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/2.png"
+                alt="Twigged listening to a spoken request"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/3.png"
+                alt="Twigged confirming a saved item"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/4.png"
+                alt="Twigged finding a saved item"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/5.png"
+                alt="Twigged showing items saved in a place"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/6.png"
+                alt="Twigged Saved Items screen"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/7.png"
+                alt="Searching saved items in Twigged"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/8.png"
+                alt="Editing a saved item in Twigged"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/9.png"
+                alt="Using Twigged with Siri"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+
+            <figure class="carousel-card">
+              <img
+                src="assets/10.png"
+                alt="Twigged lifetime unlock screen"
+                loading="lazy"
+                decoding="async"
+              />
+            </figure>
+          </div>
+
+          <div class="carousel-controls" aria-label="Screenshot controls">
+            <button
+              class="carousel-button"
+              id="carousel-previous"
+              type="button"
+              aria-label="Previous screenshot"
+              aria-controls="screenshot-carousel"
+            >
+              ←
+            </button>
+
+            <button
+              class="carousel-button"
+              id="carousel-next"
+              type="button"
+              aria-label="Next screenshot"
+              aria-controls="screenshot-carousel"
+            >
+              →
+            </button>
+          </div>
+
+          <p class="carousel-hint">
+            Swipe, drag, or use the arrow keys to explore.
+          </p>
         </div>
       </section>
 
-      <!-- =========================
-      SECTION 3 - TELL
-      ========================= -->
-      <section class="experience" aria-labelledby="tell-title">
-        <div class="experience-item">
+      <div id="how-it-works">
+        <section class="experience" aria-labelledby="tell-title">
+          <div class="experience-item">
+            <div class="experience-phone">
+              <img
+                src="assets/tell.png"
+                alt="Twigged remembering that a passport is in the safe"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
 
-          <div class="experience-phone">
+            <div class="experience-copy">
+              <p class="eyebrow">Tell</p>
+              <h2 id="tell-title">Tell.</h2>
+              <p>
+                Tap the microphone and say, “My passport is in the safe.”
+                Twigged saves the item and where it is.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="experience" aria-labelledby="ask-title">
+          <div class="experience-item reverse">
+            <div class="experience-phone">
+              <img
+                src="assets/ask.png"
+                alt="Asking Twigged where a passport is"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <div class="experience-copy">
+              <p class="eyebrow">Ask</p>
+              <h2 id="ask-title">Ask.</h2>
+              <p>
+                Ask, “Where is my passport?” or “What’s in the safe?”
+                whenever you need to remember.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="experience" aria-labelledby="find-title">
+          <div class="experience-item">
+            <div class="experience-phone">
+              <img
+                src="assets/find.png"
+                alt="Twigged showing and speaking where the passport is"
+                loading="lazy"
+                decoding="async"
+              />
+            </div>
+
+            <div class="experience-copy">
+              <p class="eyebrow">Find</p>
+              <h2 id="find-title">Find.</h2>
+              <p>
+                Twigged gives you a clear answer on screen and speaks it
+                back to you.
+              </p>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="features" aria-labelledby="features-title">
+        <div class="features-inner">
+          <div class="features-heading">
+            <p class="eyebrow">More ways to remember</p>
+            <h2 id="features-title" class="section-heading">
+              Your memories stay manageable.
+            </h2>
+          </div>
+
+          <div class="feature-grid">
+            <article class="feature-card">
+              <div class="feature-card-copy">
+                <p class="eyebrow">Saved Items</p>
+                <h3>Everything in one place.</h3>
+                <p>
+                  Browse and search your saved items. Edit a memory when
+                  something moves, or delete it when you no longer need it.
+                </p>
+              </div>
+
+              <img
+                src="assets/saved.png"
+                alt="Browsing Saved Items in Twigged"
+                loading="lazy"
+                decoding="async"
+              />
+            </article>
+
+            <article class="feature-card">
+              <div class="feature-card-copy">
+                <p class="eyebrow">Siri and Shortcuts</p>
+                <h3>Start with your voice.</h3>
+                <p>
+                  Say “Hey Siri, Twigged,” then save something or ask where
+                  it is using Twigged’s Siri and Shortcuts integration.
+                </p>
+              </div>
+
+              <img
+                src="assets/siri.png"
+                alt="Using Twigged through Siri"
+                loading="lazy"
+                decoding="async"
+              />
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="purchase" aria-labelledby="purchase-title">
+        <div class="purchase-inner">
+          <div class="purchase-copy">
+            <p class="eyebrow">One simple purchase</p>
+
+            <h2 id="purchase-title" class="section-heading">
+              Try it free. Unlock it forever.
+            </h2>
+
+            <p class="section-copy">
+              Your first six successful saves are free. Unlock unlimited
+              saving with one lifetime purchase.
+            </p>
+
+            <ul class="purchase-list">
+              <li>No subscription.</li>
+              <li>No advertising.</li>
+              <li>Restore your purchase through Apple.</li>
+              <li>
+                Finding, browsing, editing and deleting remain available
+                after your free saves are used.
+              </li>
+            </ul>
+          </div>
+
+          <div class="purchase-image">
             <img
-              src="assets/tell.png"
-              alt="Twigged remembering that glasses are on the bedside table"
+              src="assets/paywall.png"
+              alt="Twigged Unlock Unlimited screen"
+              loading="lazy"
+              decoding="async"
             />
           </div>
-
-          <div class="experience-copy">
-            <p class="eyebrow">Tell</p>
-            <h2 id="tell-title">Tell.</h2>
-            <p>Tell Twigged where something is.</p>
-          </div>
-
         </div>
       </section>
 
-      <!-- =========================
-      SECTION 4 - ASK
-      ========================= -->
-      <section class="experience" aria-labelledby="ask-title">
-        <div class="experience-item reverse">
-
-          <div class="experience-phone">
-            <img
-              src="assets/ask.png"
-              alt="Asking Twigged where the glasses are"
-            />
-          </div>
-
-          <div class="experience-copy">
-            <p class="eyebrow">Ask</p>
-            <h2 id="ask-title">Ask.</h2>
-            <p>Ask naturally whenever you need it.</p>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- =========================
-      SECTION 5 - FIND
-      ========================= -->
-      <section class="experience" aria-labelledby="find-title">
-        <div class="experience-item">
-
-          <div class="experience-phone">
-            <img
-              src="assets/find.png"
-              alt="Twigged showing that the glasses are on the bedside table"
-            />
-          </div>
-
-          <div class="experience-copy">
-            <p class="eyebrow">Find</p>
-            <h2 id="find-title">Find.</h2>
-            <p>Twigged gives you a clear answer.</p>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- =========================
-      SECTION 6 - PRIVACY
-      ========================= -->
-      <section id="privacy" class="privacy">
+      <section id="privacy" class="privacy" aria-labelledby="privacy-title">
         <div class="privacy-inner">
-
           <p class="eyebrow">Privacy</p>
 
-          <h2>Your memories belong to you.</h2>
+          <h2 id="privacy-title" class="section-heading">
+            Your saved items belong to you.
+          </h2>
 
           <p class="privacy-intro">
-            Twigged is quiet by design.
+            Twigged does not operate an advertising network, tracking
+            service or user-account system.
           </p>
 
           <div class="privacy-list">
-            <p>No accounts.</p>
+            <p>No Twigged account required.</p>
+            <p>No tracking.</p>
             <p>No advertising.</p>
-            <p>No subscriptions.</p>
-            <p>Everything stays on your device.</p>
-            <p>Works offline after information has been saved.</p>
+            <p>Your saved items are stored locally on your device.</p>
+            <p>Twigged does not collect your saved items.</p>
+            <p>
+              Voice input is processed using Apple’s speech-recognition
+              technology.
+            </p>
+            <p>Purchases are handled securely by Apple.</p>
+            <p>Your saved items remain available offline.</p>
           </div>
 
+          <a class="privacy-link" href="privacy.html">
+            Read the full privacy policy →
+          </a>
         </div>
       </section>
 
-      <!-- =========================
-      SECTION 7 - SUPPORT
-      ========================= -->
-      <section id="support" class="support">
+      <section id="support" class="support" aria-labelledby="support-title">
         <div class="support-inner">
+          <h2 id="support-title">Support</h2>
 
-          <h2>Support</h2>
-
-          <p>
-            Need help with Twigged, or want to contact the maker?
+          <p class="support-intro">
+            Need help with Twigged, your microphone permissions or a
+            purchase? Start here or contact the maker.
           </p>
+
+          <div class="faq">
+            <details>
+              <summary>How do the six free saves work?</summary>
+              <p>
+                Twigged includes six successful saves. Failed,
+                misunderstood or cancelled attempts do not use a free save.
+              </p>
+            </details>
+
+            <details>
+              <summary>How do I restore my lifetime purchase?</summary>
+              <p>
+                Open the Unlock Unlimited screen and select Restore
+                Purchases. Use the same Apple Account that made the original
+                purchase.
+              </p>
+            </details>
+
+            <details>
+              <summary>Where are my saved items stored?</summary>
+              <p>
+                Saved items are held locally by Twigged on your device.
+                Deleting the app also removes its local app data from that
+                device.
+              </p>
+            </details>
+          </div>
 
           <div class="support-actions">
             <a
@@ -864,65 +1392,149 @@
               Email Support
             </a>
 
+            <!-- Replace YOUR_APP_ID with Twigged's App Store app ID. -->
+            <a
+              class="support-button"
+              href="https://apps.apple.com/app/idYOUR_APP_ID"
+              target="_blank"
+              rel="noreferrer"
+            >
+              App Store
+            </a>
+
             <a class="support-button" href="#top">
               Back to top
             </a>
           </div>
-
         </div>
       </section>
-
     </main>
 
-    <!-- =========================
-    SECTION 8 - FOOTER
-    ========================= -->
     <footer class="footer">
-      © 2026 MitchellMaker. Twigged.
-    </footer>
+      <div class="footer-links">
+        <a href="privacy.html">Privacy</a>
+        <a href="#support">Support</a>
+        <a href="mailto:Mitchellmaker.apps@gmail.com">Contact</a>
+      </div>
 
+      <div>© 2026 MitchellMaker. Twigged.</div>
+    </footer>
   </div>
 
   <script>
     const carousel = document.querySelector(".carousel");
+    const previousButton = document.querySelector("#carousel-previous");
+    const nextButton = document.querySelector("#carousel-next");
 
-    if (carousel && window.matchMedia("(pointer: fine)").matches) {
-      let isDragging = false;
-      let startX = 0;
-      let startScrollLeft = 0;
+    if (carousel && previousButton && nextButton) {
+      const cards = Array.from(
+        carousel.querySelectorAll(".carousel-card")
+      );
 
-      carousel.addEventListener("pointerdown", (event) => {
-        isDragging = true;
-        startX = event.clientX;
-        startScrollLeft = carousel.scrollLeft;
-        carousel.classList.add("dragging");
-        carousel.setPointerCapture(event.pointerId);
-      });
+      const cardStep = () => {
+        const firstCard = cards[0];
 
-      carousel.addEventListener("pointermove", (event) => {
-        if (!isDragging) return;
-
-        const distance = event.clientX - startX;
-        carousel.scrollLeft = startScrollLeft - distance;
-      });
-
-      const stopDragging = (event) => {
-        if (!isDragging) return;
-
-        isDragging = false;
-        carousel.classList.remove("dragging");
-
-        if (carousel.hasPointerCapture(event.pointerId)) {
-          carousel.releasePointerCapture(event.pointerId);
+        if (!firstCard) {
+          return carousel.clientWidth;
         }
+
+        const styles = window.getComputedStyle(carousel);
+        const gap = Number.parseFloat(styles.columnGap || styles.gap) || 0;
+
+        return firstCard.getBoundingClientRect().width + gap;
       };
 
-      carousel.addEventListener("pointerup", stopDragging);
-      carousel.addEventListener("pointercancel", stopDragging);
-      carousel.addEventListener("lostpointercapture", () => {
-        isDragging = false;
-        carousel.classList.remove("dragging");
+      const updateControls = () => {
+        const maximumScroll =
+          carousel.scrollWidth - carousel.clientWidth;
+
+        previousButton.disabled = carousel.scrollLeft <= 2;
+        nextButton.disabled =
+          carousel.scrollLeft >= maximumScroll - 2;
+      };
+
+      const scrollByCard = (direction) => {
+        carousel.scrollBy({
+          left: cardStep() * direction,
+          behavior: window.matchMedia(
+            "(prefers-reduced-motion: reduce)"
+          ).matches
+            ? "auto"
+            : "smooth"
+        });
+      };
+
+      previousButton.addEventListener("click", () => {
+        scrollByCard(-1);
       });
+
+      nextButton.addEventListener("click", () => {
+        scrollByCard(1);
+      });
+
+      carousel.addEventListener("keydown", (event) => {
+        if (event.key === "ArrowLeft") {
+          event.preventDefault();
+          scrollByCard(-1);
+        }
+
+        if (event.key === "ArrowRight") {
+          event.preventDefault();
+          scrollByCard(1);
+        }
+      });
+
+      carousel.addEventListener("scroll", updateControls, {
+        passive: true
+      });
+
+      window.addEventListener("resize", updateControls);
+
+      if (window.matchMedia("(pointer: fine)").matches) {
+        let isDragging = false;
+        let startX = 0;
+        let startScrollLeft = 0;
+
+        carousel.addEventListener("pointerdown", (event) => {
+          isDragging = true;
+          startX = event.clientX;
+          startScrollLeft = carousel.scrollLeft;
+          carousel.classList.add("dragging");
+          carousel.setPointerCapture(event.pointerId);
+        });
+
+        carousel.addEventListener("pointermove", (event) => {
+          if (!isDragging) {
+            return;
+          }
+
+          const distance = event.clientX - startX;
+          carousel.scrollLeft = startScrollLeft - distance;
+        });
+
+        const stopDragging = (event) => {
+          if (!isDragging) {
+            return;
+          }
+
+          isDragging = false;
+          carousel.classList.remove("dragging");
+
+          if (carousel.hasPointerCapture(event.pointerId)) {
+            carousel.releasePointerCapture(event.pointerId);
+          }
+        };
+
+        carousel.addEventListener("pointerup", stopDragging);
+        carousel.addEventListener("pointercancel", stopDragging);
+
+        carousel.addEventListener("lostpointercapture", () => {
+          isDragging = false;
+          carousel.classList.remove("dragging");
+        });
+      }
+
+      updateControls();
     }
   </script>
 </body>

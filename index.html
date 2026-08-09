@@ -6,7 +6,7 @@
 
   <meta
     name="description"
-    content="Twigged is a private, voice-first memory app for iPhone and iPad. Save where things are, ask naturally, and find them later."
+    content="Twigged is a private, voice-first memory app for iPhone. Save where things are, ask naturally, and find them later."
   />
   <meta name="theme-color" content="#111214" />
   <meta name="color-scheme" content="dark" />
@@ -30,9 +30,6 @@
   <link rel="icon" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
-  <!-- Replace YOUR_APP_ID before publishing. -->
-  <meta name="apple-itunes-app" content="app-id=YOUR_APP_ID" />
-
   <title>Twigged — Remember where things are</title>
 
   <style>
@@ -55,7 +52,7 @@
     }
 
     html {
-      scroll-behaviour: smooth;
+      scroll-behavior: smooth;
       background: var(--background);
     }
 
@@ -118,6 +115,12 @@
 
     .page {
       overflow: hidden;
+    }
+
+    #how-it-works,
+    #privacy,
+    #support {
+      scroll-margin-top: 84px;
     }
 
     .eyebrow {
@@ -954,13 +957,13 @@
 
     @media (prefers-reduced-motion: reduce) {
       html {
-        scroll-behaviour: auto;
+        scroll-behavior: auto;
       }
 
       *,
       *::before,
       *::after {
-        scroll-behaviour: auto !important;
+        scroll-behavior: auto !important;
         transition: none !important;
       }
     }
@@ -1001,19 +1004,16 @@
           </h1>
 
           <p class="hero-copy">
-            Tell Twigged where something is. Ask naturally and hear the
-            answer later.
+            Tell Twigged where something is using your voice. Ask naturally
+            and find it later.
           </p>
 
           <div class="hero-actions">
-            <!-- Replace YOUR_APP_ID with Twigged's App Store app ID. -->
             <a
               class="app-store-button"
-              href="https://apps.apple.com/app/idYOUR_APP_ID"
-              target="_blank"
-              rel="noreferrer"
+              href="#how-it-works"
             >
-              View on the App Store
+              See how Twigged works
             </a>
           </div>
 
@@ -1262,8 +1262,8 @@
                 <p class="eyebrow">Siri and Shortcuts</p>
                 <h3>Start with your voice.</h3>
                 <p>
-                  Say “Hey Siri, Twigged,” then save something or ask where
-                  it is using Twigged’s Siri and Shortcuts integration.
+                  Use Siri and Twigged’s App Shortcuts for supported voice
+                  actions.
                 </p>
               </div>
 
@@ -1390,16 +1390,6 @@
               href="mailto:Mitchellmaker.apps@gmail.com"
             >
               Email Support
-            </a>
-
-            <!-- Replace YOUR_APP_ID with Twigged's App Store app ID. -->
-            <a
-              class="support-button"
-              href="https://apps.apple.com/app/idYOUR_APP_ID"
-              target="_blank"
-              rel="noreferrer"
-            >
-              App Store
             </a>
 
             <a class="support-button" href="#top">
